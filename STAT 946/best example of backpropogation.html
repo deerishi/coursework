@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<!-- saved from url=(0071)http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/ -->
+<html lang="en" class="wf-proximanova1-n7-active wf-active"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>A Step by Step Backpropagation Example – Matt Mazur</title>
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="http://mattmazur.com/xmlrpc.php">
+<!--[if lt IE 9]>
+<script src="https://s0.wp.com/wp-content/themes/pub/publish/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+
+<script id="twitter-wjs" src="./best example of backpropogation_files/widgets.js"></script><script src="./best example of backpropogation_files/webfont.js" type="text/javascript" async=""></script><script type="text/javascript">
+  WebFontConfig = {"typekit":{"id":"ich1dxo"}};
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = 'http://s1.wp.com/wp-content/plugins/custom-fonts/js/webfont.js?m=1438023897g';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+	})();
+</script><style id="jetpack-custom-fonts-css">.wf-active .site-title{font-family:"proxima-nova-1","proxima-nova-2",sans-serif;font-style:normal;font-weight:700}.wf-active th{font-weight:700;font-family:"proxima-nova-1","proxima-nova-2",sans-serif;font-style:normal}.wf-active .single .format-aside h1.entry-title, .wf-active .single .format-chat h1.entry-title, .wf-active .single .format-gallery h1.entry-title, .wf-active .single .format-image h1.entry-title, .wf-active .single .format-link h1.entry-title, .wf-active .single .format-quote h1.entry-title, .wf-active .single .format-status h1.entry-title{font-family:"proxima-nova-1","proxima-nova-2",sans-serif;font-style:normal;font-weight:700}.wf-active h1, .wf-active h2, .wf-active h3, .wf-active h4, .wf-active h5, .wf-active h6{font-weight:700;font-family:"proxima-nova-1","proxima-nova-2",sans-serif;font-style:normal}.wf-active h1{font-style:normal;font-weight:700}.wf-active h2{font-style:normal;font-weight:700}.wf-active h3{font-style:normal;font-weight:700}.wf-active h4, .wf-active h5, .wf-active h6{font-weight:700;font-style:normal}</style>
+		<script src="./best example of backpropogation_files/remote-login.php" type="text/javascript"></script>
+		<script type="text/javascript">
+		/* <![CDATA[ */
+			if ( 'function' === typeof WPRemoteLogin ) {
+				document.cookie = "wordpress_test_cookie=test; path=/";
+				if ( document.cookie.match( /(;|^)\s*wordpress_test_cookie\=/ ) ) {
+					WPRemoteLogin();
+				}
+			}
+		/* ]]> */
+		</script>
+		<link rel="alternate" type="application/rss+xml" title="Matt Mazur » Feed" href="http://mattmazur.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Matt Mazur » Comments Feed" href="http://mattmazur.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Matt Mazur » A Step by Step Backpropagation Example Comments Feed" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/feed/">
+<script type="text/javascript">
+/* <![CDATA[ */
+function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!='function'){window.onload=func;}else{window.onload=function(){oldonload();func();}}}
+/* ]]> */
+</script>
+<link rel="stylesheet" id="all-css-0" href="./best example of backpropogation_files/saved_resource" type="text/css" media="all">
+<script type="text/javascript">
+/* <![CDATA[ */
+var LoggedOutFollow = {"invalid_email":"Your subscription did not succeed, please try again with a valid email address."};
+/* ]]> */
+</script>
+<style type="text/css">.tk-proxima-nova{font-family:"proxima-nova-1","proxima-nova-2",sans-serif;}</style><link rel="stylesheet" href="./best example of backpropogation_files/l" media="all"><script type="text/javascript" src="./best example of backpropogation_files/saved_resource(1)"></script>
+<link rel="stylesheet" id="all-css-0" href="./best example of backpropogation_files/style.css" type="text/css" media="all">
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s2.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563g&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://matthewmazur.wordpress.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Introducing ABTestCalculator.com, an Open Source A/B Test Significance Calculator" href="http://mattmazur.com/2015/02/27/introducing-abtestcalculator-com-an-open-source-ab-test-significance-calculator/">
+<link rel="next" title="TetriNET Bot Source Code Published on Github" href="http://mattmazur.com/2015/04/09/tetrinet-bot-source-code-published-on-github/">
+<meta name="generator" content="WordPress.com">
+<link rel="canonical" href="./best example of backpropogation_files/best example of backpropogation.html">
+<link rel="shortlink" href="http://wp.me/p3COlO-12u">
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=json&url=http%3A%2F%2Fmattmazur.com%2F2015%2F03%2F17%2Fa-step-by-step-backpropagation-example%2F&for=wpcom-auto-discovery"><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=xml&url=http%3A%2F%2Fmattmazur.com%2F2015%2F03%2F17%2Fa-step-by-step-backpropagation-example%2F&for=wpcom-auto-discovery">
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Step by Step Backpropagation Example">
+<meta property="og:url" content="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/">
+<meta property="og:description" content="Background Backpropagation is a common method for training a neural network. There is no shortage of papers online that attempt to explain how backpropagation works, but few that include an example...">
+<meta property="article:published_time" content="2015-03-17T09:00:00+00:00">
+<meta property="article:modified_time" content="2015-07-23T19:21:09+00:00">
+<meta property="og:site_name" content="Matt Mazur">
+<meta property="og:image" content="https://matthewmazur.files.wordpress.com/2018/03/output_1_backprop-4.png">
+<meta property="og:image:width" content="649">
+<meta property="og:image:height" content="318">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:site" content="@mhmazur">
+<meta name="twitter:image" content="https://matthewmazur.files.wordpress.com/2018/03/neural_network-7.png?w=240">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@mhmazur">
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom">
+<link rel="shortcut icon" type="image/x-icon" href="http://s2.wp.com/i/favicon.ico?m=1405977958g" sizes="16x16 24x24 32x32 48x48">
+<link rel="icon" type="image/x-icon" href="http://s2.wp.com/i/favicon.ico?m=1405977958g" sizes="16x16 24x24 32x32 48x48">
+<link rel="apple-touch-icon-precomposed" href="http://s0.wp.com/i/webclip.png?m=1391188133g">
+<link rel="openid.server" href="http://matthewmazur.wordpress.com/?openidserver=1">
+<link rel="openid.delegate" href="http://matthewmazur.wordpress.com/">
+<link rel="search" type="application/opensearchdescription+xml" href="http://mattmazur.com/osd.xml" title="Matt Mazur">
+<link rel="search" type="application/opensearchdescription+xml" href="https://wordpress.com/opensearch.xml" title="WordPress.com">
+<meta name="application-name" content="Matt Mazur"><meta name="msapplication-window" content="width=device-width;height=device-height"><meta name="msapplication-task" content="name=Subscribe;action-uri=http://mattmazur.com/feed/;icon-uri=http://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=http://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=http://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=http://s2.wp.com/i/favicon.ico"><meta name="title" content="A Step by Step Backpropagation Example | Matt Mazur on WordPress.com">
+<meta name="description" content="Background Backpropagation is a common method for training a neural network. There is no shortage of papers online that attempt to explain how backpropagation works, but few that include an example with actual numbers. This post is my attempt to explain how it works with a concrete example that folks can compare their own calculations…">
+<style type="text/css" id="syntaxhighlighteranchor"></style>
+		<link rel="stylesheet" id="custom-css-css" type="text/css" href="./best example of backpropogation_files/saved_resource(2)">
+		<link rel="stylesheet" type="text/css" id="gravatar-card-css" href="./best example of backpropogation_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="./best example of backpropogation_files/services.css"><script type="text/javascript" charset="utf-8" async="" src="./best example of backpropogation_files/timeline.15ca66e7cea0d973c001aadc88ba3868.js"></script></head>
+
+<body class="single single-post postid-3998 single-format-standard mp6 customizer-styles-applied highlander-enabled highlander-light">
+<div id="page" class="hfeed site">
+	<header id="masthead" class="site-header" role="banner">
+					<a class="site-logo" href="http://mattmazur.com/" title="Matt Mazur" rel="home">
+				<img class="no-grav" src="./best example of backpropogation_files/saved_resource(3)" height="100" width="100" alt="Matt Mazur">
+			</a>
+				<hgroup>
+			<h1 class="site-title"><a href="http://mattmazur.com/" title="Matt Mazur" rel="home">Matt Mazur</a></h1>
+			<h2 class="site-description"></h2>
+		</hgroup>
+
+		<nav role="navigation" class="site-navigation main-navigation">
+			<h1 class="assistive-text">Menu</h1>
+			<div class="assistive-text skip-link"><a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/#content" title="Skip to content">Skip to content</a></div>
+
+			<div class="menu"><ul><li><a href="http://mattmazur.com/">Home</a></li><li class="page_item page-item-2"><a href="http://mattmazur.com/about/">About</a></li><li class="page_item page-item-2873"><a href="http://mattmazur.com/archives/">Archives</a></li><li class="page_item page-item-2793"><a href="http://mattmazur.com/contact/">Contact</a></li><li class="page_item page-item-2779 page_item_has_children"><a href="http://mattmazur.com/projects/">Projects</a></li></ul></div>
+		</nav><!-- .site-navigation .main-navigation -->
+
+			</header><!-- #masthead .site-header -->
+
+	<div id="main" class="site-main">
+
+		<div id="primary" class="content-area">
+			<div id="content" class="site-content" role="main">
+
+			
+				
+<article id="post-3998" class="post-3998 post type-post status-publish format-standard hentry category-machine-learning tag-ai tag-backpropagation tag-machine-learning-2 tag-neural-networks">
+	<header class="entry-header">
+		<h1 class="entry-title">A Step by Step Backpropagation&nbsp;Example</h1>
+	</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<h2>Background</h2>
+<p>Backpropagation is a common method for training a neural network. There is <a href="https://www.google.com/search?q=backpropagation+algorithm">no shortage of papers</a> online that attempt to explain how backpropagation works, but few that include an example with actual numbers. This post is my attempt to explain how it works with a concrete example that folks can compare their own calculations to in order to ensure they understand backpropagation correctly.</p>
+<p>If this kind of thing interests you, you should <a href="http://www.emergentmind.com/newsletter">sign up for my newsletter</a> where I post about AI-related projects that I’m working on.</p>
+<h2>Backpropagation in Python</h2>
+<p>You can play around with a Python script that I wrote that implements the backpropagation algorithm in <a href="https://github.com/mattm/simple-neural-network">this Github repo</a>.</p>
+<h2>Overview</h2>
+<p>For this tutorial, we’re going to use a neural network with two inputs, two hidden neurons, two output neurons. Additionally, the hidden and output neurons will include a bias.</p>
+<p>Here’s the basic structure:</p>
+<p><img class="alignnone size-full wp-image-4035 noborder" src="./best example of backpropogation_files/neural_network-7.png" alt="neural_network (7)"></p>
+<p>In order to have some numbers to work with, here’s are the <span style="color:#ff0000;">initial weights</span>, <span style="color:#ff6600;">the biases</span>, and <span style="color:#0000ff;">training inputs/outputs</span>:</p>
+<p><img class="alignnone size-full wp-image-4036 noborder" src="./best example of backpropogation_files/neural_network-9.png" alt="neural_network (9)"></p>
+<p>The goal of backpropagation is to optimize the weights so that the neural network can learn how to correctly map arbitrary inputs to outputs.</p>
+<p>For the rest of this tutorial we’re going to work with a single training set: given inputs 0.05 and 0.10, we want the neural network to output 0.01 and 0.99.</p>
+<h2>The Forward Pass</h2>
+<p>To begin, lets see what the neural network currently predicts given the weights and biases above and inputs of 0.05 and 0.10. To do this we’ll feed those inputs forward though the network.</p>
+<p>We figure out the <em>total net input</em> to each hidden layer neuron, <em>squash</em> the total net input using an <em>activation function</em> (here we use the <em>logistic function</em>), then repeat the process with the output layer neurons.</p>
+<div class="tip">Total net input is also referred to as just <i>net input</i> by <a href="http://web.cs.swarthmore.edu/~meeden/cs81/s10/BackPropDeriv.pdf">some sources</a>.</div>
+<p>Here’s how we calculate the total net input for <img src="./best example of backpropogation_files/latex.php" alt="h_1" title="h_1" class="latex">:</p>
+<p><img src="./best example of backpropogation_files/latex(1).php" alt="net_{h1} = w_1 * i_1 + w_2 * i_2 + b_1 * 1" title="net_{h1} = w_1 * i_1 + w_2 * i_2 + b_1 * 1" class="latex"></p>
+<p><img src="./best example of backpropogation_files/latex(2).php" alt="net_{h1} = 0.15 * 0.05 + 0.2 * 0.1 + 0.35 * 1 = 0.3775" title="net_{h1} = 0.15 * 0.05 + 0.2 * 0.1 + 0.35 * 1 = 0.3775" class="latex"></p>
+<p>We then squash it using the logistic function to get the output of <img src="./best example of backpropogation_files/latex.php" alt="h_1" title="h_1" class="latex">:</p>
+<p><img src="./best example of backpropogation_files/latex(3).php" alt="out_{h1} = \frac{1}{1+e^{-net_{h1}}} = \frac{1}{1+e^{-0.3775}} = 0.593269992" title="out_{h1} = \frac{1}{1+e^{-net_{h1}}} = \frac{1}{1+e^{-0.3775}} = 0.593269992" class="latex"></p>
+<p>Carrying out the same process for <img src="./best example of backpropogation_files/latex(4).php" alt="h_2" title="h_2" class="latex"> we get:</p>
+<p><img src="./best example of backpropogation_files/latex(5).php" alt="out_{h2} = 0.596884378" title="out_{h2} = 0.596884378" class="latex"></p>
+<p>We repeat this process for the output layer neurons, using the output from the hidden layer neurons as inputs.</p>
+<p>Here’s the output for <img src="./best example of backpropogation_files/latex(6).php" alt="o_1" title="o_1" class="latex">:</p>
+<p><img src="./best example of backpropogation_files/latex(7).php" alt="net_{o1} = w_5 * out_{h1} + w_6 * out_{h2} + b_2 * 1" title="net_{o1} = w_5 * out_{h1} + w_6 * out_{h2} + b_2 * 1" class="latex"></p>
+<p><img src="./best example of backpropogation_files/latex(8).php" alt="net_{o1} = 0.4 * 0.593269992 + 0.45 * 0.596884378 + 0.6 * 1 = 1.105905967" title="net_{o1} = 0.4 * 0.593269992 + 0.45 * 0.596884378 + 0.6 * 1 = 1.105905967" class="latex"></p>
+<p><img src="./best example of backpropogation_files/latex(9).php" alt="out_{o1} = \frac{1}{1+e^{-net_{h1}}} = \frac{1}{1+e^{-1.105905967}} = 0.75136507" title="out_{o1} = \frac{1}{1+e^{-net_{h1}}} = \frac{1}{1+e^{-1.105905967}} = 0.75136507" class="latex"></p>
+<p>And carrying out the same process for <img src="./best example of backpropogation_files/latex(10).php" alt="o_2" title="o_2" class="latex"> we get:</p>
+<p><img src="./best example of backpropogation_files/latex(11).php" alt="out_{o2} = 0.772928465" title="out_{o2} = 0.772928465" class="latex"></p>
+<h3>Calculating the Total Error</h3>
+<p>We can now calculate the error for each output neuron using the <a href="http://en.wikipedia.org/wiki/Backpropagation#Derivation">squared error function</a> and sum them to get the total error:</p>
+<p><img src="./best example of backpropogation_files/latex(12).php" alt="E_{total} = \sum \frac{1}{2}(target - output)^{2}" title="E_{total} = \sum \frac{1}{2}(target - output)^{2}" class="latex"></p>
+<div class="tip"><a href="http://www.amazon.com/Introduction-Math-Neural-Networks-Heaton-ebook/dp/B00845UQL6/ref=sr_1_1?ie=UTF8&qid=1426296804&sr=8-1&keywords=neural+network">Some sources</a> refer to the target as the <i>ideal</i> and the output as the <i>actual</i>.</div>
+<div class="tip">The <img src="./best example of backpropogation_files/latex(13).php" alt="\frac{1}{2}" title="\frac{1}{2}" class="latex"> is included so that exponent is cancelled when we differentiate later on. The result is eventually multiplied by a learning rate anyway so it doesn’t matter that we introduce a constant here [<a href="http://en.wikipedia.org/wiki/Backpropagation#Derivation">1</a>].</div>
+<p>For example, the target output for <img src="./best example of backpropogation_files/latex(6).php" alt="o_1" title="o_1" class="latex"> is 0.01 but the neural network output 0.75136507, therefore its error is:</p>
+<p><img src="./best example of backpropogation_files/latex(14).php" alt="E_{o1} = \frac{1}{2}(target_{o1} - out_{o1})^{2} = \frac{1}{2}(0.01 - 0.75136507)^{2} = 0.274811083" title="E_{o1} = \frac{1}{2}(target_{o1} - out_{o1})^{2} = \frac{1}{2}(0.01 - 0.75136507)^{2} = 0.274811083" class="latex"></p>
+<p>Repeating this process for <img src="./best example of backpropogation_files/latex(10).php" alt="o_2" title="o_2" class="latex"> we get:</p>
+<p><img src="./best example of backpropogation_files/latex(15).php" alt="E_{o2} = 0.023560026" title="E_{o2} = 0.023560026" class="latex"></p>
+<p>The total error for the neural network is the sum of these errors:</p>
+<p><img src="./best example of backpropogation_files/latex(16).php" alt="E_{total} = E_{o1} + E_{o2} = 0.274811083 + 0.023560026 = 0.298371109" title="E_{total} = E_{o1} + E_{o2} = 0.274811083 + 0.023560026 = 0.298371109" class="latex"></p>
+<h2>The Backwards Pass</h2>
+<p>Our goal with backpropagation is to update each of the weights in the network so that they cause the actual output to be closer the target output, thereby minimizing the error for each output neuron and the network as a whole.</p>
+<h3>Output Layer</h3>
+<p>Consider <img src="./best example of backpropogation_files/latex(17).php" alt="w_5" title="w_5" class="latex">. We want to know how much a change in <img src="./best example of backpropogation_files/latex(17).php" alt="w_5" title="w_5" class="latex"> affects the total error, aka <img src="./best example of backpropogation_files/latex(18).php" alt="\frac{\partial E_{total}}{\partial w_{5}}" title="\frac{\partial E_{total}}{\partial w_{5}}" class="latex">.</p>
+<div class="tip"><img src="./best example of backpropogation_files/latex(19).php" alt="\frac{\partial E_{total}}{\partial w_{5}}" title="\frac{\partial E_{total}}{\partial w_{5}}" class="latex"> is read as “the partial derivative of <img src="./best example of backpropogation_files/latex(20).php" alt="E_{total}" title="E_{total}" class="latex"> with respect to <img src="./best example of backpropogation_files/latex(21).php" alt="w_{5}" title="w_{5}" class="latex">“. You can also say “the gradient with respect to <img src="./best example of backpropogation_files/latex(21).php" alt="w_{5}" title="w_{5}" class="latex">“.</div>
+<p>By applying the <a href="http://en.wikipedia.org/wiki/Chain_rule">chain rule</a> we know that:</p>
+<p><img src="./best example of backpropogation_files/latex(22).php" alt="\frac{\partial E_{total}}{\partial w_{5}} = \frac{\partial E_{total}}{\partial out_{o1}} * \frac{\partial out_{o1}}{\partial net_{o1}} * \frac{\partial net_{o1}}{\partial w_{5}}" title="\frac{\partial E_{total}}{\partial w_{5}} = \frac{\partial E_{total}}{\partial out_{o1}} * \frac{\partial out_{o1}}{\partial net_{o1}} * \frac{\partial net_{o1}}{\partial w_{5}}" class="latex"></p>
+<p>Visually, here’s what we’re doing:</p>
+<p><img class="alignnone size-full wp-image-4133 noborder" src="./best example of backpropogation_files/output_1_backprop-4.png" alt="output_1_backprop (4)"></p>
+<p>We need to figure out each piece in this equation.</p>
+<p>First, how much does the total error change with respect to the output?</p>
+<p><img src="./best example of backpropogation_files/latex(23).php" alt="E_{total} = \frac{1}{2}(target_{o1} - out_{o1})^{2} + \frac{1}{2}(target_{o2} - out_{o2})^{2}" title="E_{total} = \frac{1}{2}(target_{o1} - out_{o1})^{2} + \frac{1}{2}(target_{o2} - out_{o2})^{2}" class="latex"></p>
+<p><img src="./best example of backpropogation_files/latex(24).php" alt="\frac{\partial E_{total}}{\partial out_{o1}} = 2 * \frac{1}{2}(target_{o1} - out_{o1})^{2 - 1} * -1 + 0" title="\frac{\partial E_{total}}{\partial out_{o1}} = 2 * \frac{1}{2}(target_{o1} - out_{o1})^{2 - 1} * -1 + 0" class="latex"></p>
+<p><img src="./best example of backpropogation_files/latex(25).php" alt="\frac{\partial E_{total}}{\partial out_{o1}} = -(target_{o1} - out_{o1}) = -(0.01 - 0.75136507) = 0.74136507" title="\frac{\partial E_{total}}{\partial out_{o1}} = -(target_{o1} - out_{o1}) = -(0.01 - 0.75136507) = 0.74136507" class="latex"></p>
+<div class="tip"><img src="./best example of backpropogation_files/latex(26).php" alt="-(target - out)" title="-(target - out)" class="latex"> is sometimes expressed as <img src="./best example of backpropogation_files/latex(27).php" alt="out - target" title="out - target" class="latex"></div>
+<div class="tip">When we take the partial derivative of the total error with respect to <img src="./best example of backpropogation_files/latex(28).php" alt="out_{o1}" title="out_{o1}" class="latex">, the quantity <img src="./best example of backpropogation_files/latex(29).php" alt="\frac{1}{2}(target_{o2} - out_{o2})^{2}" title="\frac{1}{2}(target_{o2} - out_{o2})^{2}" class="latex"> becomes zero because <img src="./best example of backpropogation_files/latex(28).php" alt="out_{o1}" title="out_{o1}" class="latex"> does not affect it which means we’re taking the derivative of a constant which is zero.</div>
+<p>Next, how much does the output of <img src="./best example of backpropogation_files/latex(6).php" alt="o_1" title="o_1" class="latex"> change with respect to its total net input?</p>
+<p>The partial <a href="http://en.wikipedia.org/wiki/Logistic_function#Derivative">derivative of the logistic function</a> is the output multiplied by 1 minus the output:</p>
+<p><img src="./best example of backpropogation_files/latex(30).php" alt="out_{o1} = \frac{1}{1+e^{-net_{o1}}}" title="out_{o1} = \frac{1}{1+e^{-net_{o1}}}" class="latex"></p>
+<p><img src="./best example of backpropogation_files/latex(31).php" alt="\frac{\partial out_{o1}}{\partial net_{o1}} = out_{o1}(1 - out_{o1}) = 0.75136507(1 - 0.75136507) = 0.186815602" title="\frac{\partial out_{o1}}{\partial net_{o1}} = out_{o1}(1 - out_{o1}) = 0.75136507(1 - 0.75136507) = 0.186815602" class="latex"></p>
+<p>Finally, how much does the total net input of <img src="./best example of backpropogation_files/latex(32).php" alt="o1" title="o1" class="latex"> change with respect to <img src="./best example of backpropogation_files/latex(17).php" alt="w_5" title="w_5" class="latex">?</p>
+<p><img src="./best example of backpropogation_files/latex(7).php" alt="net_{o1} = w_5 * out_{h1} + w_6 * out_{h2} + b_2 * 1" title="net_{o1} = w_5 * out_{h1} + w_6 * out_{h2} + b_2 * 1" class="latex"></p>
+<p><img src="./best example of backpropogation_files/latex(33).php" alt="\frac{\partial net_{o1}}{\partial w_{5}} = 1 * out_{h1} * w_5^{(1 - 1)} + 0 + 0 = out_{h1} = 0.593269992" title="\frac{\partial net_{o1}}{\partial w_{5}} = 1 * out_{h1} * w_5^{(1 - 1)} + 0 + 0 = out_{h1} = 0.593269992" class="latex"></p>
+<p>Putting it all together:</p>
+<p><img src="./best example of backpropogation_files/latex(34).php" alt="\frac{\partial E_{total}}{\partial w_{5}} = \frac{\partial E_{total}}{\partial out_{o1}} * \frac{\partial out_{o1}}{\partial net_{o1}} * \frac{\partial net_{o1}}{\partial w_{5}}" title="\frac{\partial E_{total}}{\partial w_{5}} = \frac{\partial E_{total}}{\partial out_{o1}} * \frac{\partial out_{o1}}{\partial net_{o1}} * \frac{\partial net_{o1}}{\partial w_{5}}" class="latex"></p>
+<p><img src="./best example of backpropogation_files/latex(35).php" alt="\frac{\partial E_{total}}{\partial w_{5}} = 0.74136507 * 0.186815602 * 0.593269992 = 0.082167041" title="\frac{\partial E_{total}}{\partial w_{5}} = 0.74136507 * 0.186815602 * 0.593269992 = 0.082167041" class="latex"></p>
+<div class="tip">
+<p>You’ll often see this calculation combined in the form of the <a href="http://en.wikipedia.org/wiki/Delta_rule">delta rule</a>:</p>
+<p><img src="./best example of backpropogation_files/latex(36).php" alt="\frac{\partial E_{total}}{\partial w_{5}} = -(target_{o1} - out_{o1}) * out_{o1}(1 - out_{o1}) * out_{h1}" title="\frac{\partial E_{total}}{\partial w_{5}} = -(target_{o1} - out_{o1}) * out_{o1}(1 - out_{o1}) * out_{h1}" class="latex"></p>
+<p>Alternatively, we have <img src="./best example of backpropogation_files/latex(37).php" alt="\frac{\partial E_{total}}{\partial out_{o1}}" title="\frac{\partial E_{total}}{\partial out_{o1}}" class="latex"> and <img src="./best example of backpropogation_files/latex(38).php" alt="\frac{\partial out_{o1}}{\partial net_{o1}}" title="\frac{\partial out_{o1}}{\partial net_{o1}}" class="latex"> which can be written as <img src="./best example of backpropogation_files/latex(39).php" alt="\frac{\partial E_{total}}{\partial net_{o1}}" title="\frac{\partial E_{total}}{\partial net_{o1}}" class="latex">, aka <img src="./best example of backpropogation_files/latex(40).php" alt="\delta_{o1}" title="\delta_{o1}" class="latex"> (the Greek letter delta) aka the <i>node delta</i>. We can use this to rewrite the calculation above:</p>
+<p><img src="./best example of backpropogation_files/latex(41).php" alt="\delta_{o1} = \frac{\partial E_{total}}{\partial out_{o1}} * \frac{\partial out_{o1}}{\partial net_{o1}} = \frac{\partial E_{total}}{\partial net_{o1}}" title="\delta_{o1} = \frac{\partial E_{total}}{\partial out_{o1}} * \frac{\partial out_{o1}}{\partial net_{o1}} = \frac{\partial E_{total}}{\partial net_{o1}}" class="latex"></p>
+<p><img src="./best example of backpropogation_files/latex(42).php" alt="\delta_{o1} = -(target_{o1} - out_{o1}) * out_{o1}(1 - out_{o1})" title="\delta_{o1} = -(target_{o1} - out_{o1}) * out_{o1}(1 - out_{o1})" class="latex"></p>
+<p>Therefore:</p>
+<p><img src="./best example of backpropogation_files/latex(43).php" alt="\frac{\partial E_{total}}{\partial w_{5}} = \delta_{o1} out_{h1}" title="\frac{\partial E_{total}}{\partial w_{5}} = \delta_{o1} out_{h1}" class="latex"></p>
+<p>Some sources extract the negative sign from <img src="./best example of backpropogation_files/latex(44).php" alt="\delta" title="\delta" class="latex"> so it would be written as:</p>
+<p><img src="./best example of backpropogation_files/latex(45).php" alt="\frac{\partial E_{total}}{\partial w_{5}} = -\delta_{o1} out_{h1}" title="\frac{\partial E_{total}}{\partial w_{5}} = -\delta_{o1} out_{h1}" class="latex"></p>
+</div>
+<p>To decrease the error, we then subtract this value from the current weight (optionally multiplied by some learning rate, eta, which we’ll set to 0.5):</p>
+<p><img src="./best example of backpropogation_files/latex(46).php" alt="w_5^{+} = w_5 - \eta * \frac{\partial E_{total}}{\partial w_{5}} = 0.4 - 0.5 * 0.082167041 = 0.35891648" title="w_5^{+} = w_5 - \eta * \frac{\partial E_{total}}{\partial w_{5}} = 0.4 - 0.5 * 0.082167041 = 0.35891648" class="latex"></p>
+<div class="tip"><a href="http://en.wikipedia.org/wiki/Delta_rule">Some</a> <a href="http://aima.cs.berkeley.edu/">sources</a> use <img src="./best example of backpropogation_files/latex(47).php" alt="\alpha" title="\alpha" class="latex"> (alpha) to represent the learning rate, <a href="https://www4.rgu.ac.uk/files/chapter3%20-%20bp.pdf">others use</a> <img src="./best example of backpropogation_files/latex(48).php" alt="\eta" title="\eta" class="latex"> (eta), and <a href="http://web.cs.swarthmore.edu/~meeden/cs81/s10/BackPropDeriv.pdf">others</a> even use <img src="./best example of backpropogation_files/latex(49).php" alt="\epsilon" title="\epsilon" class="latex"> (epsilon).</div>
+<p>We can repeat this process to get the new weights <img src="./best example of backpropogation_files/latex(50).php" alt="w_6" title="w_6" class="latex">, <img src="./best example of backpropogation_files/latex(51).php" alt="w_7" title="w_7" class="latex">, and <img src="./best example of backpropogation_files/latex(52).php" alt="w_8" title="w_8" class="latex">:</p>
+<p><img src="./best example of backpropogation_files/latex(53).php" alt="w_6^{+} = 0.408666186" title="w_6^{+} = 0.408666186" class="latex"></p>
+<p><img src="./best example of backpropogation_files/latex(54).php" alt="w_7^{+} = 0.511301270" title="w_7^{+} = 0.511301270" class="latex"></p>
+<p><img src="./best example of backpropogation_files/latex(55).php" alt="w_8^{+} = 0.561370121" title="w_8^{+} = 0.561370121" class="latex"></p>
+<p>We perform the actual updates in the neural network <i>after</i> we have the new weights leading into the hidden layer neurons (ie, we use the original weights, not the updated weights, when we continue the backpropagation algorithm below).</p>
+<h3>Hidden Layer</h3>
+<p>Next, we’ll continue the backwards pass by calculating new values for <img src="./best example of backpropogation_files/latex(56).php" alt="w_1" title="w_1" class="latex">, <img src="./best example of backpropogation_files/latex(57).php" alt="w_2" title="w_2" class="latex">, <img src="./best example of backpropogation_files/latex(58).php" alt="w_3" title="w_3" class="latex">, and <img src="./best example of backpropogation_files/latex(59).php" alt="w_4" title="w_4" class="latex">.</p>
+<p>Big picture, here’s what we need to figure out:</p>
+<p><img src="./best example of backpropogation_files/latex(60).php" alt="\frac{\partial E_{total}}{\partial w_{1}} = \frac{\partial E_{total}}{\partial out_{h1}} * \frac{\partial out_{h1}}{\partial net_{h1}} * \frac{\partial net_{h1}}{\partial w_{1}}" title="\frac{\partial E_{total}}{\partial w_{1}} = \frac{\partial E_{total}}{\partial out_{h1}} * \frac{\partial out_{h1}}{\partial net_{h1}} * \frac{\partial net_{h1}}{\partial w_{1}}" class="latex"></p>
+<p>Visually:</p>
+<p><a href="https://matthewmazur.files.wordpress.com/2015/03/nn-calculation.png"><img class="alignnone size-full wp-image-4261" src="./best example of backpropogation_files/nn-calculation.png" alt="nn-calculation"></a></p>
+<p>We’re going to use a similar process as we did for the output layer, but slightly different to account for the fact that the output of each hidden layer neuron contributes to the output (and therefore error) of multiple output neurons. We know that <img src="./best example of backpropogation_files/latex(61).php" alt="out_{h1}" title="out_{h1}" class="latex"> affects both <img src="./best example of backpropogation_files/latex(62).php" alt="out_{o1}" title="out_{o1}" class="latex"> and <img src="./best example of backpropogation_files/latex(63).php" alt="out_{o2}" title="out_{o2}" class="latex"> therefore the <img src="./best example of backpropogation_files/latex(64).php" alt="\frac{\partial E_{total}}{\partial out_{h1}}" title="\frac{\partial E_{total}}{\partial out_{h1}}" class="latex"> needs to take into consideration its effect on the both output neurons:</p>
+<p><img src="./best example of backpropogation_files/latex(65).php" alt="\frac{\partial E_{total}}{\partial out_{h1}} = \frac{\partial E_{o1}}{\partial out_{h1}} + \frac{\partial E_{o2}}{\partial out_{h1}}" title="\frac{\partial E_{total}}{\partial out_{h1}} = \frac{\partial E_{o1}}{\partial out_{h1}} + \frac{\partial E_{o2}}{\partial out_{h1}}" class="latex"></p>
+<p>Starting with <img src="./best example of backpropogation_files/latex(66).php" alt="\frac{\partial E_{o1}}{\partial out_{h1}}" title="\frac{\partial E_{o1}}{\partial out_{h1}}" class="latex">:</p>
+<p><img src="./best example of backpropogation_files/latex(67).php" alt="\frac{\partial E_{o1}}{\partial out_{h1}} = \frac{\partial E_{o1}}{\partial net_{o1}} * \frac{\partial net_{o1}}{\partial out_{h1}}" title="\frac{\partial E_{o1}}{\partial out_{h1}} = \frac{\partial E_{o1}}{\partial net_{o1}} * \frac{\partial net_{o1}}{\partial out_{h1}}" class="latex"></p>
+<p>We can calculate <img src="./best example of backpropogation_files/latex(68).php" alt="\frac{\partial E_{o1}}{\partial net_{o1}}" title="\frac{\partial E_{o1}}{\partial net_{o1}}" class="latex"> using values we calculated earlier:</p>
+<p><img src="./best example of backpropogation_files/latex(69).php" alt="\frac{\partial E_{o1}}{\partial net_{o1}} = \frac{\partial E_{o1}}{\partial out_{o1}} * \frac{\partial out_{o1}}{\partial net_{o1}} = 0.74136507 * 0.186815602 = 0.138498562" title="\frac{\partial E_{o1}}{\partial net_{o1}} = \frac{\partial E_{o1}}{\partial out_{o1}} * \frac{\partial out_{o1}}{\partial net_{o1}} = 0.74136507 * 0.186815602 = 0.138498562" class="latex"></p>
+<p>And <img src="./best example of backpropogation_files/latex(70).php" alt="\frac{\partial net_{o1}}{\partial out_{h1}}" title="\frac{\partial net_{o1}}{\partial out_{h1}}" class="latex"> is equal to <img src="./best example of backpropogation_files/latex(17).php" alt="w_5" title="w_5" class="latex">:</p>
+<p><img src="./best example of backpropogation_files/latex(7).php" alt="net_{o1} = w_5 * out_{h1} + w_6 * out_{h2} + b_2 * 1" title="net_{o1} = w_5 * out_{h1} + w_6 * out_{h2} + b_2 * 1" class="latex"></p>
+<p><img src="./best example of backpropogation_files/latex(71).php" alt="\frac{\partial net_{o1}}{\partial out_{h1}} = w_5 = 0.40" title="\frac{\partial net_{o1}}{\partial out_{h1}} = w_5 = 0.40" class="latex"></p>
+<p>Plugging them in:</p>
+<p><img src="./best example of backpropogation_files/latex(72).php" alt="\frac{\partial E_{o1}}{\partial out_{h1}} = \frac{\partial E_{o1}}{\partial net_{o1}} * \frac{\partial net_{o1}}{\partial out_{h1}} = 0.138498562 * 0.40 = 0.055399425" title="\frac{\partial E_{o1}}{\partial out_{h1}} = \frac{\partial E_{o1}}{\partial net_{o1}} * \frac{\partial net_{o1}}{\partial out_{h1}} = 0.138498562 * 0.40 = 0.055399425" class="latex"></p>
+<p>Following the same process for <img src="./best example of backpropogation_files/latex(73).php" alt="\frac{\partial E_{o2}}{\partial out_{o1}}" title="\frac{\partial E_{o2}}{\partial out_{o1}}" class="latex">, we get:</p>
+<p><img src="./best example of backpropogation_files/latex(74).php" alt="\frac{\partial E_{o2}}{\partial out_{h1}} = -0.019049119" title="\frac{\partial E_{o2}}{\partial out_{h1}} = -0.019049119" class="latex"></p>
+<p>Therefore:</p>
+<p><img src="./best example of backpropogation_files/latex(75).php" alt="\frac{\partial E_{total}}{\partial out_{h1}} = \frac{\partial E_{o1}}{\partial out_{h1}} + \frac{\partial E_{o2}}{\partial out_{h1}} = 0.055399425 + -0.019049119 = 0.036350306" title="\frac{\partial E_{total}}{\partial out_{h1}} = \frac{\partial E_{o1}}{\partial out_{h1}} + \frac{\partial E_{o2}}{\partial out_{h1}} = 0.055399425 + -0.019049119 = 0.036350306" class="latex"></p>
+<p>Now that we have <img src="./best example of backpropogation_files/latex(64).php" alt="\frac{\partial E_{total}}{\partial out_{h1}}" title="\frac{\partial E_{total}}{\partial out_{h1}}" class="latex">, we need to figure out <img src="./best example of backpropogation_files/latex(76).php" alt="\frac{\partial out_{h1}}{\partial net_{h1}}" title="\frac{\partial out_{h1}}{\partial net_{h1}}" class="latex"> and then <img src="./best example of backpropogation_files/latex(77).php" alt="\frac{\partial net_{h1}}{\partial w}" title="\frac{\partial net_{h1}}{\partial w}" class="latex"> for each weight:</p>
+<p><img src="./best example of backpropogation_files/latex(78).php" alt="out_{h1} = \frac{1}{1+e^{-net_{h1}}}" title="out_{h1} = \frac{1}{1+e^{-net_{h1}}}" class="latex"></p>
+<p><img src="./best example of backpropogation_files/latex(79).php" alt="\frac{\partial out_{h1}}{\partial net_{h1}} = out_{h1}(1 - out_{h1}) = 0.59326999(1 - 0.59326999 ) = 0.241300709" title="\frac{\partial out_{h1}}{\partial net_{h1}} = out_{h1}(1 - out_{h1}) = 0.59326999(1 - 0.59326999 ) = 0.241300709" class="latex"></p>
+<p>We calculate the partial derivative of the total net input to <img src="./best example of backpropogation_files/latex.php" alt="h_1" title="h_1" class="latex"> with respect to <img src="./best example of backpropogation_files/latex(56).php" alt="w_1" title="w_1" class="latex"> the same as we did for the output neuron:</p>
+<p><img src="./best example of backpropogation_files/latex(1).php" alt="net_{h1} = w_1 * i_1 + w_2 * i_2 + b_1 * 1" title="net_{h1} = w_1 * i_1 + w_2 * i_2 + b_1 * 1" class="latex"></p>
+<p><img src="./best example of backpropogation_files/latex(80).php" alt="\frac{\partial net_{h1}}{\partial w_1} = i_1 = 0.05" title="\frac{\partial net_{h1}}{\partial w_1} = i_1 = 0.05" class="latex"></p>
+<p>Putting it all together:</p>
+<p><img src="./best example of backpropogation_files/latex(60).php" alt="\frac{\partial E_{total}}{\partial w_{1}} = \frac{\partial E_{total}}{\partial out_{h1}} * \frac{\partial out_{h1}}{\partial net_{h1}} * \frac{\partial net_{h1}}{\partial w_{1}}" title="\frac{\partial E_{total}}{\partial w_{1}} = \frac{\partial E_{total}}{\partial out_{h1}} * \frac{\partial out_{h1}}{\partial net_{h1}} * \frac{\partial net_{h1}}{\partial w_{1}}" class="latex"></p>
+<p><img src="./best example of backpropogation_files/latex(81).php" alt="\frac{\partial E_{total}}{\partial w_{1}} = 0.036350306 * 0.241300709 * 0.05 = 0.000438568" title="\frac{\partial E_{total}}{\partial w_{1}} = 0.036350306 * 0.241300709 * 0.05 = 0.000438568" class="latex"></p>
+<div class="tip">
+<p>You might also see this written as:</p>
+<p><img src="./best example of backpropogation_files/latex(82).php" alt="\frac{\partial E_{total}}{\partial w_{1}} = (\sum\limits_{o}{\frac{\partial E_{total}}{\partial out_{o}} * \frac{\partial out_{o}}{\partial net_{o}} * \frac{\partial net_{o}}{\partial out_{h1}}}) * \frac{\partial out_{h1}}{\partial net_{h1}} * \frac{\partial net_{h1}}{\partial w_{1}}" title="\frac{\partial E_{total}}{\partial w_{1}} = (\sum\limits_{o}{\frac{\partial E_{total}}{\partial out_{o}} * \frac{\partial out_{o}}{\partial net_{o}} * \frac{\partial net_{o}}{\partial out_{h1}}}) * \frac{\partial out_{h1}}{\partial net_{h1}} * \frac{\partial net_{h1}}{\partial w_{1}}" class="latex"></p>
+<p><img src="./best example of backpropogation_files/latex(83).php" alt="\frac{\partial E_{total}}{\partial w_{1}} = (\sum\limits_{o}{\delta_{o} * w_{ho}}) * out_{h1}(1 - out_{h1}) * i_{1}" title="\frac{\partial E_{total}}{\partial w_{1}} = (\sum\limits_{o}{\delta_{o} * w_{ho}}) * out_{h1}(1 - out_{h1}) * i_{1}" class="latex"></p>
+<p><img src="./best example of backpropogation_files/latex(84).php" alt="\frac{\partial E_{total}}{\partial w_{1}} = \delta_{h1}i_{1}" title="\frac{\partial E_{total}}{\partial w_{1}} = \delta_{h1}i_{1}" class="latex"></p>
+</div>
+<p>We can now update <img src="./best example of backpropogation_files/latex(56).php" alt="w_1" title="w_1" class="latex">:</p>
+<p><img src="./best example of backpropogation_files/latex(85).php" alt="w_1^{+} = w_1 - \eta * \frac{\partial E_{total}}{\partial w_{1}} = 0.15 - 0.5 * 0.000438568 = 0.149780716" title="w_1^{+} = w_1 - \eta * \frac{\partial E_{total}}{\partial w_{1}} = 0.15 - 0.5 * 0.000438568 = 0.149780716" class="latex"></p>
+<p>Repeating this for <img src="./best example of backpropogation_files/latex(57).php" alt="w_2" title="w_2" class="latex">, <img src="./best example of backpropogation_files/latex(58).php" alt="w_3" title="w_3" class="latex">, and <img src="./best example of backpropogation_files/latex(59).php" alt="w_4" title="w_4" class="latex"></p>
+<p><img src="./best example of backpropogation_files/latex(86).php" alt="w_2^{+} = 0.19956143" title="w_2^{+} = 0.19956143" class="latex"></p>
+<p><img src="./best example of backpropogation_files/latex(87).php" alt="w_3^{+} = 0.24975114" title="w_3^{+} = 0.24975114" class="latex"></p>
+<p><img src="./best example of backpropogation_files/latex(88).php" alt="w_4^{+} = 0.29950229" title="w_4^{+} = 0.29950229" class="latex"></p>
+<p>Finally, we’ve updated all of our weights! When we fed forward the 0.05 and 0.1 inputs originally, the error on the network was 0.298371109. After this first round of backpropagation, the total error is now down to 0.291027924. It might not seem like much, but after repeating this process 10,000 times, for example, the error plummets to 0.000035085. At this point, when we feed forward 0.05 and 0.1, the two outputs neurons generate 0.015912196 (vs 0.01 actual) and 0.984065734 (vs 0.99 actual).</p>
+<p>If you’ve made it this far and found any errors in any of the above or can think of any ways to make it clearer for future readers, don’t hesitate to <a href="http://mattmazur.com/contact/">drop me a note</a>. Thanks!</p>
+<div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-3998" class="share-twitter sd-button share-icon" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?share=twitter&nb=1" target="_blank" title="Click to share on Twitter"><span>Twitter<span class="share-count">155</span></span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-3998" class="share-facebook sd-button share-icon" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?share=facebook&nb=1" target="_blank" title="Share on Facebook"><span>Facebook<span class="share-count">65</span></span></a></li><li class="share-end"></li></ul></div></div></div><div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-loaded" id="like-post-wrapper-53579024-3998-562320e0b150a" data-src="//widgets.wp.com/likes/#blog_id=53579024&amp;post_id=3998&amp;origin=matthewmazur.wordpress.com&amp;obj_id=53579024-3998-562320e0b150a" data-name="like-post-frame-53579024-3998-562320e0b150a"><h3 class="sd-title">Like this:</h3><div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px; display: none;"><span class="button"><span>Like</span></span> <span class="loading">Loading...</span></div><iframe class="post-likes-widget jetpack-likes-widget" name="like-post-frame-53579024-3998-562320e0b150a" height="55px" width="100%" frameborder="0" src="./best example of backpropogation_files/saved_resource.html"></iframe><span class="sd-text-color"></span><a class="sd-link-color"></a></div>
+<div id="jp-relatedposts" class="jp-relatedposts" style="display: block;">
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+<div class="jp-relatedposts-items jp-relatedposts-items-minimal"><p class="jp-relatedposts-post jp-relatedposts-post0" data-post-id="1188" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="http://mattmazur.com/2009/10/13/experimenting-with-a-neural-network-based-poker-bot/" title="Experimenting with a Neural Network-based Poker Bot
+
+This is post #11 in an ongoing series of articles about my work as a poker bot developer.At one point or another most poker bot developers have an epiphany. Their eyes open wide and they excitedly shout to the next stranger they see: &quot;I&#39;ll do it with a neural network!&quot;…" rel="nofollow" data-origin="3998" data-position="0">Experimenting with a Neural Network-based Poker Bot</a></span><span class="jp-relatedposts-post-context">In "Poker Bot"</span></p><p class="jp-relatedposts-post jp-relatedposts-post1" data-post-id="3888" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="http://mattmazur.com/2014/10/15/emergent-mind-10/" title="Emergent Mind #10
+
+Check out my latest Emergent Mind project, Visualizing a Neural Network with Backpropagation. This one has been sitting mostly-finished on my computer for way too long so I&#39;m happy to finally get it out there :)" rel="nofollow" data-origin="3998" data-position="1">Emergent Mind #10</a></span><span class="jp-relatedposts-post-context">In "Emergent Mind"</span></p><p class="jp-relatedposts-post jp-relatedposts-post2" data-post-id="1519" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="http://mattmazur.com/2010/12/10/poker-bot-preflop-strategy-explained/" title="Poker Bot Preflop Strategy Explained
+
+This is post #19 in an ongoing series of articles about my work as a poker bot developer. When I first attempted to build a poker bot, I tried long and hard to come up with a single algorithm that given your two hole cards and the situation would spit…" rel="nofollow" data-origin="3998" data-position="2">Poker Bot Preflop Strategy Explained</a></span><span class="jp-relatedposts-post-context">In "Poker Bot"</span></p></div></div></div>			</div><!-- .entry-content -->
+
+	<footer class="entry-meta">
+		Posted on <a href="./best example of backpropogation_files/best example of backpropogation.html" title="5:00 am" rel="bookmark"><time class="entry-date" datetime="2015-03-17T05:00:00+00:00" pubdate="">March 17, 2015</time></a><span class="byline"> by <span class="author vcard"><a class="url fn n" href="http://mattmazur.com/author/mhmazur/" title="View all posts by Mazur" rel="author">Mazur</a></span></span>.		This entry was posted in <a href="http://mattmazur.com/category/machine-learning/" rel="category tag">Machine Learning</a> and tagged <a href="http://mattmazur.com/tag/ai/" rel="tag">ai</a>, <a href="http://mattmazur.com/tag/backpropagation/" rel="tag">backpropagation</a>, <a href="http://mattmazur.com/tag/machine-learning-2/" rel="tag">machine learning</a>, <a href="http://mattmazur.com/tag/neural-networks/" rel="tag">neural networks</a>. Bookmark the <a href="./best example of backpropogation_files/best example of backpropogation.html" title="Permalink to A Step by Step Backpropagation Example" rel="bookmark">permalink</a>.
+			</footer><!-- .entry-meta -->
+</article><!-- #post-3998 -->
+
+					<nav role="navigation" id="nav-below" class="site-navigation post-navigation">
+		<h1 class="assistive-text">Post navigation</h1>
+
+	
+		<div class="nav-previous"><a href="http://mattmazur.com/2015/02/27/introducing-abtestcalculator-com-an-open-source-ab-test-significance-calculator/" rel="prev"><span class="meta-nav">←</span> Introducing ABTestCalculator.com, an Open Source A/B Test Significance&nbsp;Calculator</a></div>		<div class="nav-next"><a href="http://mattmazur.com/2015/04/09/tetrinet-bot-source-code-published-on-github/" rel="next">TetriNET Bot Source Code Published on&nbsp;Github <span class="meta-nav">→</span></a></div>
+	
+	</nav><!-- #nav-below -->
+	
+				
+	<div id="comments" class="comments-area">
+
+	
+			<h2 class="comments-title">
+			42 thoughts on “<span>A Step by Step Backpropagation&nbsp;Example</span>”		</h2>
+
+		
+		<ol class="commentlist">
+			
+	<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-15881">
+		<article id="comment-15881" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/79bf282d81154242b7ebe115443bdccc" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-79bf282d81154242b7ebe115443bdccc-0">					<cite class="fn">hmc</cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-15881"><time pubdate="" datetime="2015-05-19T17:29:27+00:00">
+					May 19, 2015 at 5:29 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hello Matt,<br>
+It’s about three things.<br>
+When you say </p>
+<p>Following the same proccess for DEo2/Douto2, we get:<br>
+DEo2/Douth1 = -0.019049119</p>
+<p>no should be<br>
+… DEo2/Douth2, we get:                      // h2<br>
+DEo2/Douth2 = -0.019049119 ?          // h2</p>
+<p>And in the end, when update w1+<br>
+0.000364723 this value no should<br>
+be 0.000438568 and result change<br>
+a little.</p>
+<p>And finally<br>
+Thanks for the explanation. Very illustrative.</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=15881#respond" onclick="return addComment.moveForm( &quot;comment-15881&quot;, &quot;15881&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to hmc">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class="children">
+
+	<li class="comment byuser comment-author-mhmazur comment-author-is-site-member bypostauthor odd alt depth-2 highlander-comment" id="li-comment-16156">
+		<article id="comment-16156" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/36410bc698c05fe9cc30bca18d8e96ed" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-36410bc698c05fe9cc30bca18d8e96ed-0">					<cite class="fn"><a href="http://www.mattmazur.com/" rel="external nofollow" class="url">Mazur</a></cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-16156"><time pubdate="" datetime="2015-06-11T14:32:39+00:00">
+					June 11, 2015 at 2:32 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hey HMC, in that part of the writeup we’re figuring out how to update w1. The output of h2 doesn’t affect w1 so I don’t think it would be included in any of the calculations; we’re only looking at h1 there. Thoughts?</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=16156#respond" onclick="return addComment.moveForm( &quot;comment-16156&quot;, &quot;16156&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to Mazur">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li class="comment byuser comment-author-robfelty even thread-odd thread-alt depth-1 highlander-comment" id="li-comment-15927">
+		<article id="comment-15927" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/661d979019ad8fc4e3b2ea296e4f7974" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-661d979019ad8fc4e3b2ea296e4f7974-0">					<cite class="fn"><a href="http://robfelty.com/" rel="external nofollow" class="url">robfelty</a></cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-15927"><time pubdate="" datetime="2015-05-22T18:56:19+00:00">
+					May 22, 2015 at 6:56 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Nice work Matt! I love the visualizations. I have hard copies of the original neural network papers from the 80’s if you are interested some time.</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=15927#respond" onclick="return addComment.moveForm( &quot;comment-15927&quot;, &quot;15927&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to robfelty">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+
+	<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-16479">
+		<article id="comment-16479" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/e8fca90b337d71fafd7c0ede311ef617" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-e8fca90b337d71fafd7c0ede311ef617-0">					<cite class="fn">Katie</cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-16479"><time pubdate="" datetime="2015-07-03T01:05:20+00:00">
+					July 3, 2015 at 1:05 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Great post Matt!  I’ve been checking out neural network tutorials on the net and really appreciate how your post actually walks through how to derive the deltas used in backpropagation (other similar tutorials all tended to just give the formula, sometimes not terribly clearly).  It really sets your post apart from the others.  A couple questions from a newbie trying to self-teach:</p>
+<p>1. Is there a typo in the diagram illustrating the delta on w1?  It shows partial(E_total)/partial(out_h1) = partial(E_o1)/partial(out_h1) + partial(E_o2)/partial(out_h2).  Should that out_h2 in the last denominator actually be out_h1?</p>
+<p>2. What are some typical expectations of the number of training runs needed to train up a network?  Say with an eta of 0.5 as you used in your example, you casually mentioned 10k runs – is this a typical number?  I ask as I’m trying to train a network on a trivially simple problem as an exercise but it just doesn’t seem to learn correctly, and it would be useful to identify if I’m just not giving it enough training runs, or if there’s something fundamentally wrong in my implementation.  Apologies if this question is beyond the scope of your post, but none of the tutorials I’ve found seem to have any info on typical training run lengths, and yours was the only one that seemed interested in using actual numbers to illustrate!</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=16479#respond" onclick="return addComment.moveForm( &quot;comment-16479&quot;, &quot;16479&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to Katie">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class="children">
+
+	<li class="comment byuser comment-author-mhmazur comment-author-is-site-member bypostauthor even depth-2 highlander-comment" id="li-comment-16492">
+		<article id="comment-16492" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/36410bc698c05fe9cc30bca18d8e96ed" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-36410bc698c05fe9cc30bca18d8e96ed-1">					<cite class="fn"><a href="http://www.mattmazur.com/" rel="external nofollow" class="url">Mazur</a></cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-16492"><time pubdate="" datetime="2015-07-03T11:57:44+00:00">
+					July 3, 2015 at 11:57 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hey Katie, thank you for the kudos and the pointing out the problem with that diagram. You were correct, it should have been h1 in the denominator. I updated the diagram.</p>
+<p>As for your second question, I’m not entirely sure myself. As I understand it, there’s not even a good way to determine beforehand how many hidden layer neurons you should use; it’s something you have to figure out through trial and error. It might be the same case for eta and the number of runs. You could try asking on a forum like MathOverflow to see if anyone knows. I’d love to hear the answer if you find out.</p>
+<p>Thanks again!</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=16492#respond" onclick="return addComment.moveForm( &quot;comment-16492&quot;, &quot;16492&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to Mazur">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class="children">
+
+	<li class="comment odd alt depth-3 highlander-comment" id="li-comment-16940">
+		<article id="comment-16940" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/b2926727641e29700e261539fdeff88c" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-b2926727641e29700e261539fdeff88c-0">					<cite class="fn">Simon Vrouwenvelder</cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-16940"><time pubdate="" datetime="2015-08-02T17:51:59+00:00">
+					August 2, 2015 at 5:51 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hi Katie and Mat, </p>
+<p>There is indeed no way of knowing how much hidden neurons you will need ‘a priori’. However, there is a way to find one by trial and error.</p>
+<p>More neurons will always ensure that you will have a better fit for your specific dataset. However, all datasets contain noise, so your network will at some point start to fit the noise of your dataset. By introducing a validation dataset you will be able to find an optimum number of neurons that has the smallest error for the validation dataset while being trained  by another dataset (the ‘original’). That is the number you should use.<br>
+You may split your initial dataset in two parts (80/20, or 70/30) such that the 80% part is your training set and the 20% part is your validation dataset. </p>
+<p>This does not mean you have found the optimal neural network. You may change the activation functions on some nodes, or the topology for that matter. A method that does the latter is NEAT (Neuro Evolution of Augmented Topologies).  ANN are at some parts more of an art than science.</p>
+</div>
+
+			<div class="reply">
+							</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li class="post pingback">
+		<p><a href="http://blog.explodingads.com/?p=76312" rel="external nofollow" class="url">matt1 comments on “A Neural Network in 11 Lines of Python” | Exploding Ads</a></p>
+
+	</li><!-- #comment-## -->
+
+	<li class="comment byuser comment-author-marcospinaci even thread-odd thread-alt depth-1 highlander-comment" id="li-comment-16665">
+		<article id="comment-16665" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/4c494a517f53892c0a52a4a5d807c9f8" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-4c494a517f53892c0a52a4a5d807c9f8-0">					<cite class="fn">marcospinaci</cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-16665"><time pubdate="" datetime="2015-07-15T05:35:32+00:00">
+					July 15, 2015 at 5:35 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hi! First of all, thanks a lot for your post, I’m a newbie to NNs and it helped me greatly to understand the idea behind them. More than in the numbers, I’m interested in motivation, and there’s a point in your algorithm I don’t quite understand: biases.</p>
+<p>Now, the whole concept was new to me, but googling around I understood why in general someone would like biases, see for example the answer here:<br>
+<a href="http://stackoverflow.com/questions/2480650/role-of-bias-in-neural-networks" rel="nofollow">http://stackoverflow.com/questions/2480650/role-of-bias-in-neural-networks</a><br>
+Mathematically speaking it’s clear, in the very easy example in Stack Overflow you’d like (prior to applying the sigmoid), even with 1 input and 1 output and no hidden layers, to be allowed to use affine functions and not just linear ones, and I can see well why someone would like to do that. After all the same thing is a standard already in the much easier setting of linear regression.</p>
+<p>For a slightly more complicated NN as yours, this makes at least as much sense in hidden layers, where the values in the middle keep changing and if you’re expecting a constant value to be added to your output (or your next layer), you definitely need some bias, the value of which stays fixed.</p>
+<p>What I don’t get from your post, that seems to differ to the answer there, is that I don’t see you updating the weights in the biases; am I wrong about that? I would have expected the arrows going out of b1 and b2 to have non-constant weights, as well, which are updated in pretty much the same way as w1, …, w8. This is because in the present form, prior to applying the sigmoid, you do have an non-linear affine function, of course, say y = ax + b. But the bias (in this case b, the value of this affine function in x=0) is constant and immutable, equal to .35 and .6 whatever else happens in the NN; it seems to me that in this way you are just forcing your other weights to balance for these biases. In my intuition (at least for the last hidden layer) this helps if, by chance, your biases move you toward the “right” answer, but goes against you otherwise – and of course you cannot know that before training the network.</p>
+<p>Am I wrong about something? Is adding a constant bias always useful nevertheless? Or, on the other hand, updating their weights would lead to over-fitting? If one of these two is true, how do you prescribe the values of biases? They can’t just be any random number, I’d say that if they were much bigger than the other weights and of the “right” answer, the time required for training your NN would skyrocket…</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=16665#respond" onclick="return addComment.moveForm( &quot;comment-16665&quot;, &quot;16665&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to marcospinaci">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class="children">
+
+	<li class="comment byuser comment-author-mhmazur comment-author-is-site-member bypostauthor odd alt depth-2 highlander-comment" id="li-comment-16668">
+		<article id="comment-16668" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/36410bc698c05fe9cc30bca18d8e96ed" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-36410bc698c05fe9cc30bca18d8e96ed-2">					<cite class="fn"><a href="http://www.mattmazur.com/" rel="external nofollow" class="url">Mazur</a></cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-16668"><time pubdate="" datetime="2015-07-15T09:45:04+00:00">
+					July 15, 2015 at 9:45 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hey Marco, as far as I understand it you do not update the biases. I skimmed over the Stack Overflow post and didn’t notice them discussing it there, though might have missed it (if I did, please point me to where they say to do it). The backpropagation algorithm will automatically adjust the weights to minimize the error regardless of the initial values are for the biases. Hope this helps!</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=16668#respond" onclick="return addComment.moveForm( &quot;comment-16668&quot;, &quot;16668&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to Mazur">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class="children">
+
+	<li class="comment byuser comment-author-marcospinaci even depth-3 highlander-comment" id="li-comment-16670">
+		<article id="comment-16670" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/4c494a517f53892c0a52a4a5d807c9f8" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-4c494a517f53892c0a52a4a5d807c9f8-1">					<cite class="fn">Marco</cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-16670"><time pubdate="" datetime="2015-07-15T10:10:46+00:00">
+					July 15, 2015 at 10:10 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Thanks for the answer! I think the answers in SO somehow implicitly mean that it should be updated, because they call the weights of the bias with the same letters as the other ones, thus including them in the cycle of update. The second (less voted) answer is slightly more explicit, by citing (and more helpfully linking) a book where the author starts by using a non-biased NN with a translated sigmoid (1/(1+e^{-2s(x+t)}). But then, it says that the translation value t must be adjusted during the training, together with the weights; and to avoid this, it adds a new neuron, the bias, with its own weight, I guess implicitly meaning “so that you update it in the same way as the others”.</p>
+<p>The following SO question/answer is perhaps more explicit about the point, it doesn’t say “if” or “why” you should update those weights, but “how”, so again I think it is implicit that you should:<br>
+<a href="http://stackoverflow.com/questions/3775032/how-to-update-the-bias-in-neural-network-backpropagation" rel="nofollow">http://stackoverflow.com/questions/3775032/how-to-update-the-bias-in-neural-network-backpropagation</a></p>
+<p>Let me know if you see any flaws!</p>
+</div>
+
+			<div class="reply">
+							</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+
+	<li class="comment byuser comment-author-mhmazur comment-author-is-site-member bypostauthor odd alt depth-3 highlander-comment" id="li-comment-16672">
+		<article id="comment-16672" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/36410bc698c05fe9cc30bca18d8e96ed" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-36410bc698c05fe9cc30bca18d8e96ed-3">					<cite class="fn"><a href="http://www.mattmazur.com/" rel="external nofollow" class="url">Mazur</a></cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-16672"><time pubdate="" datetime="2015-07-15T10:43:19+00:00">
+					July 15, 2015 at 10:43 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Now that you mention it, I seem to recall reading that in some more advanced neural network algorithms the bias is indeed updated during the training. However, for a simple neural network with backpropagation like in the post above the biases are fixed.</p>
+</div>
+
+			<div class="reply">
+							</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li class="comment byuser comment-author-kevincoletta even thread-even depth-1 highlander-comment" id="li-comment-16674">
+		<article id="comment-16674" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/cf0fba5058550501b22c77e95b14ff58" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-cf0fba5058550501b22c77e95b14ff58-0">					<cite class="fn"><a href="http://kevincoletta.wordpress.com/" rel="external nofollow" class="url">kevincoletta</a></cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-16674"><time pubdate="" datetime="2015-07-15T12:56:28+00:00">
+					July 15, 2015 at 12:56 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Reblogged this on <a href="http://kevincoletta.com/2015/07/15/a-step-by-step-backpropagation-example/" rel="nofollow">Kevin Coletta</a> and commented:<br>
+Cool neural network example.</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=16674#respond" onclick="return addComment.moveForm( &quot;comment-16674&quot;, &quot;16674&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to kevincoletta">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+
+	<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-16676">
+		<article id="comment-16676" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/picture" class="avatar avatar-40" height="40" width="40">					<cite class="fn"><a href="https://www.facebook.com/app_scoped_user_id/10100942447259978/" rel="external nofollow" class="url">Ari Wilson</a></cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-16676"><time pubdate="" datetime="2015-07-15T17:20:58+00:00">
+					July 15, 2015 at 5:20 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>I’m pretty sure you update the biases as well for effective learning. At least I ran your example with a per-neuron bias (not quite the same as your network) and after 1 iteration had training error of 0.277. After 10k iterations I was down to 1.4*10^-24.</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=16676#respond" onclick="return addComment.moveForm( &quot;comment-16676&quot;, &quot;16676&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to Ari Wilson">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+
+	<li class="post pingback">
+		<p><a href="http://chris.cothrun.com/2015/07/15/bookmarks-for-july-14th-through-july-15th/" rel="external nofollow" class="url">Bookmarks for July 14th through July 15th | Chris's Digital Detritus</a></p>
+
+	</li><!-- #comment-## -->
+
+	<li class="comment byuser comment-author-russomi even thread-even depth-1 highlander-comment" id="li-comment-16688">
+		<article id="comment-16688" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/f9f07c17fd67c207f6991ac6e378be99" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-f9f07c17fd67c207f6991ac6e378be99-0">					<cite class="fn"><a href="http://russomi.wordpress.com/" rel="external nofollow" class="url">russomi</a></cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-16688"><time pubdate="" datetime="2015-07-16T05:57:43+00:00">
+					July 16, 2015 at 5:57 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Reblogged this on <a href="https://russomi.wordpress.com/2015/07/16/a-step-by-step-backpropagation-example/" rel="nofollow">russomi</a>.</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=16688#respond" onclick="return addComment.moveForm( &quot;comment-16688&quot;, &quot;16688&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to russomi">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+
+	<li class="post pingback">
+		<p><a href="http://advanceddataanalytics.net/2015/07/16/distilled-news-150/" rel="external nofollow" class="url">Distilled News | Data Analytics &amp; R</a></p>
+
+	</li><!-- #comment-## -->
+
+	<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-16702">
+		<article id="comment-16702" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/283dcd673a62a886c8a9da1a94bf52cf" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-283dcd673a62a886c8a9da1a94bf52cf-0">					<cite class="fn">Brian</cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-16702"><time pubdate="" datetime="2015-07-17T08:02:20+00:00">
+					July 17, 2015 at 8:02 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Matt…Absolutely Brilliant! Thank you…</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=16702#respond" onclick="return addComment.moveForm( &quot;comment-16702&quot;, &quot;16702&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to Brian">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+
+	<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-16728">
+		<article id="comment-16728" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/e63598f1098dafcf2b184de2bbbb21f4" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-e63598f1098dafcf2b184de2bbbb21f4-0">					<cite class="fn">nSv</cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-16728"><time pubdate="" datetime="2015-07-19T13:15:05+00:00">
+					July 19, 2015 at 1:15 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Best explanation of Backpropagation so far… Thank you</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=16728#respond" onclick="return addComment.moveForm( &quot;comment-16728&quot;, &quot;16728&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to nSv">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+
+	<li class="post pingback">
+		<p><a href="https://dineshramitc.wordpress.com/2015/07/22/a-step-by-step-backpropagation-example/" rel="external nofollow" class="url">A Step by Step Backpropagation Example | Dinesh Ram Kali.</a></p>
+
+	</li><!-- #comment-## -->
+
+	<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-16755">
+		<article id="comment-16755" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/443e519854a9d0f434bb0e7180b04024" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-443e519854a9d0f434bb0e7180b04024-0">					<cite class="fn">Lauren</cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-16755"><time pubdate="" datetime="2015-07-22T18:45:39+00:00">
+					July 22, 2015 at 6:45 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>There seems to be an error. I think a couple people pointed it out already, but I was hoping it’d be fixed because it’s leaving me rather confused.</p>
+<p>Earlier, you have dEtotal/dw1 = .000438568. Then, when you write the update for w1, the new value of w1= w1 – n (deTotal/dw1) = .15 – .5 * .000367 … implying that deTotal/dw1 is actually equal to .000367 instead of .000438568. </p>
+<p>Also, I think it’d be helpful if you showed the a couple of intermediate calculations for w2 as well, just the intermediate value of the deTotal/w2 would definitely be helpful.</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=16755#respond" onclick="return addComment.moveForm( &quot;comment-16755&quot;, &quot;16755&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to Lauren">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class="children">
+
+	<li class="comment byuser comment-author-mhmazur comment-author-is-site-member bypostauthor even depth-2 highlander-comment" id="li-comment-16766">
+		<article id="comment-16766" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/36410bc698c05fe9cc30bca18d8e96ed" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-36410bc698c05fe9cc30bca18d8e96ed-4">					<cite class="fn"><a href="http://www.mattmazur.com/" rel="external nofollow" class="url">Mazur</a></cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-16766"><time pubdate="" datetime="2015-07-23T15:25:22+00:00">
+					July 23, 2015 at 3:25 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hey Lauren, you are absolutely correct. I understand the original commenter’s last paragraph now too :). I updated the post accordingly. </p>
+<p>If you’d like to explore the other calculations, check out the Python script linked to at the top of the post. You can throw in print() and nn.inspect() calls at various places to check your work. Let me know how else I can help. </p>
+<p>Thanks again!</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=16766#respond" onclick="return addComment.moveForm( &quot;comment-16766&quot;, &quot;16766&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to Mazur">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-16788">
+		<article id="comment-16788" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/6ce3ad2ed95e439631aa8728ed7bb215" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-6ce3ad2ed95e439631aa8728ed7bb215-0">					<cite class="fn">Luffy</cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-16788"><time pubdate="" datetime="2015-07-25T04:55:58+00:00">
+					July 25, 2015 at 4:55 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>I look the delta value for output neuron and they don’t include the negative sign<br>
+Why???</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=16788#respond" onclick="return addComment.moveForm( &quot;comment-16788&quot;, &quot;16788&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to Luffy">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class="children">
+
+	<li class="comment byuser comment-author-mhmazur comment-author-is-site-member bypostauthor even depth-2 highlander-comment" id="li-comment-16792">
+		<article id="comment-16792" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/36410bc698c05fe9cc30bca18d8e96ed" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-36410bc698c05fe9cc30bca18d8e96ed-5">					<cite class="fn"><a href="http://www.mattmazur.com/" rel="external nofollow" class="url">Mazur</a></cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-16792"><time pubdate="" datetime="2015-07-25T09:32:33+00:00">
+					July 25, 2015 at 9:32 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hey Luffy, check out the blue section that starts with “You’ll often see this calculation combined in the form of the delta rule” — there’s a note at the end about different conventions for including the negative sign.</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=16792#respond" onclick="return addComment.moveForm( &quot;comment-16792&quot;, &quot;16792&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to Mazur">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-16869">
+		<article id="comment-16869" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/f25a6e8055cb2aa763c1a991305b8512" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-f25a6e8055cb2aa763c1a991305b8512-0">					<cite class="fn">Saurabh Chhabra</cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-16869"><time pubdate="" datetime="2015-07-29T00:41:41+00:00">
+					July 29, 2015 at 12:41 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Knowing hard things to a deep extent makes them easy and changes them from being hard to easy.<br>
+Awesome content.<br>
+Heads off for your knowledge and explaining capabilities.<br>
+Thanks a ton for sharing</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=16869#respond" onclick="return addComment.moveForm( &quot;comment-16869&quot;, &quot;16869&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to Saurabh Chhabra">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+
+	<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-16933">
+		<article id="comment-16933" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/48d653ba3c8477df556b61d241e3599b" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-48d653ba3c8477df556b61d241e3599b-0">					<cite class="fn">Anonymous</cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-16933"><time pubdate="" datetime="2015-08-02T08:14:54+00:00">
+					August 2, 2015 at 8:14 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hi Matt,</p>
+<p>thank you for your post!  There’s one thing I can’t understand: In the gradient descent, we want to compute each partial derivatives as we consider the output changes w.r.t to each weights (variables) but in the hidden layer the changes of one weight affects the change in the next layers. Nevertheless we are just calculating how a change in a hidden weight affects the final error assuming the next weight’s layer don’t change but we are indeed changing them. It seems strange to me. Could you clarify this for me? Thx</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=16933#respond" onclick="return addComment.moveForm( &quot;comment-16933&quot;, &quot;16933&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to Anonymous">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+
+	<li class="comment odd alt thread-odd thread-alt depth-1 highlander-comment" id="li-comment-17063">
+		<article id="comment-17063" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/54231be7f9e8f15f827bacd815587910" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-54231be7f9e8f15f827bacd815587910-0">					<cite class="fn"><a href="https://github.com/wutzebaer/Neuronal" rel="external nofollow" class="url">Peter</a></cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-17063"><time pubdate="" datetime="2015-08-11T14:44:56+00:00">
+					August 11, 2015 at 2:44 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>HI i’ve created a simple neuronal network in java:<br>
+<a href="https://github.com/wutzebaer/Neuronal" rel="nofollow">https://github.com/wutzebaer/Neuronal</a></p>
+<p>It has only 3 neurons; input hidden output</p>
+<p>When the input is &gt; 0.7 output should be 1, otherwise 0</p>
+<p>Question1:<br>
+When i set my rate to 1 it seems to divergate fast, when i choose 0.1 it does not come to a result. Why is this, i thought a smaller rate whould just take longer.</p>
+<p>Question2:<br>
+Why to i only get a 99% hit rate for such a simple problem? Is it not toal solveable by a neuronal network?</p>
+<p>Question3:<br>
+the amount of neurons per layer does not seem to have much effect, but when i choose 2 or more layers the results are worse, even when learning for a long time. Why? Warent more layers better?</p>
+<p>I’ve checked in my small project here:<br>
+<a href="https://github.com/wutzebaer/Neuronal" rel="nofollow">https://github.com/wutzebaer/Neuronal</a></p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=17063#respond" onclick="return addComment.moveForm( &quot;comment-17063&quot;, &quot;17063&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to Peter">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+
+	<li class="post pingback">
+		<p><a href="http://www.blogosfera.co.uk/how-does-rate-layer-count-affect-my-neuronal-network/" rel="external nofollow" class="url">How does rate layer count affect my neuronal network - BlogoSfera</a></p>
+
+	</li><!-- #comment-## -->
+
+	<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-17105">
+		<article id="comment-17105" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/d54f5dd56e0df2066728712fdc2b6990" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-d54f5dd56e0df2066728712fdc2b6990-0">					<cite class="fn">Russ</cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-17105"><time pubdate="" datetime="2015-08-14T06:58:20+00:00">
+					August 14, 2015 at 6:58 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hi there,</p>
+<p>This is excellent. Thank you for taking the time to explain this in such a detailed way. I wonder if it would be possible to have some clarification on a problem I have been having with backdrop? I have added an extra hidden layer with 2 neurons and a bias, so there are 12 weights (w1 to w12 plus the ones from the bias nodes) and 4 hidden nodes (h1 to h4) and I have been trying to calculate by hand the weights for w1 which is on the connection from i1 as in your diagram. The problem is I am worried I am not doing things correctly. I know there are reasons for not doing this on a problem like this, but I would just like to know how to do it in principle. </p>
+<p>Where I get a little worried is the branch from h1 as there are connections to h3 and h4 and then cross connections from h3 and h4 to o1 and o2. I have been going crazy with the chain rule and it was going quite well but I don’t think I have got the solution correct. Would it be possible to help me with a ‘quick’ solution to just w1 under these conditions. I will persevere in the mean time. Perhaps I have missed a trick somehow. </p>
+<p>Thanks again</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=17105#respond" onclick="return addComment.moveForm( &quot;comment-17105&quot;, &quot;17105&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to Russ">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class="children">
+
+	<li class="comment odd alt depth-2 highlander-comment" id="li-comment-17124">
+		<article id="comment-17124" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/d54f5dd56e0df2066728712fdc2b6990" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-d54f5dd56e0df2066728712fdc2b6990-1">					<cite class="fn">Russ</cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-17124"><time pubdate="" datetime="2015-08-15T07:57:48+00:00">
+					August 15, 2015 at 7:57 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Sorry I just calculated the answer, I am an idiot it seems! The back pass of intermediate errors was fairly obvious! Thanks again for your amazing work!</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=17124#respond" onclick="return addComment.moveForm( &quot;comment-17124&quot;, &quot;17124&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to Russ">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li class="comment byuser comment-author-katysei even thread-odd thread-alt depth-1 highlander-comment" id="li-comment-17331">
+		<article id="comment-17331" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/3b564181619e0a2c9f85df7ee98b699e" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-3b564181619e0a2c9f85df7ee98b699e-0">					<cite class="fn"><a href="http://katysei.wordpress.com/" rel="external nofollow" class="url">katysei</a></cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-17331"><time pubdate="" datetime="2015-08-28T17:16:19+00:00">
+					August 28, 2015 at 5:16 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hi mat.<br>
+do you have an example with two hidden layers?<br>
+ input-&gt;hidden-&gt;hidden-&gt;output.</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=17331#respond" onclick="return addComment.moveForm( &quot;comment-17331&quot;, &quot;17331&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to katysei">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+
+	<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-17349">
+		<article id="comment-17349" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/088810e3823c76643392b1ada52d7236" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-088810e3823c76643392b1ada52d7236-0">					<cite class="fn"><a href="http://gravatar.com/zxarukas" rel="external nofollow" class="url">zxarukas</a></cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-17349"><time pubdate="" datetime="2015-08-30T09:35:01+00:00">
+					August 30, 2015 at 9:35 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>This post is pretty awesome and quite straightforward. It helps me a lot. Thank you.</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=17349#respond" onclick="return addComment.moveForm( &quot;comment-17349&quot;, &quot;17349&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to zxarukas">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+
+	<li class="comment even thread-odd thread-alt depth-1 highlander-comment" id="li-comment-17385">
+		<article id="comment-17385" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/acb2765386ec98a5524f78e32fd5592f" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-acb2765386ec98a5524f78e32fd5592f-0">					<cite class="fn">YUTAO</cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-17385"><time pubdate="" datetime="2015-09-02T10:09:19+00:00">
+					September 2, 2015 at 10:09 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hi Mat, thank you for your work. I have a question here.</p>
+<p>In your work, the error is reduced w.r.t. one data set. When we have a bunch of data that is to say, not a single training set, how can we update the weights? </p>
+<p>I’m trying to implement the BP algorithm to a batch training problem. I have some problems how to gather the overall error of all input-output pairs and calculate the gradient.</p>
+<p>Thank you</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=17385#respond" onclick="return addComment.moveForm( &quot;comment-17385&quot;, &quot;17385&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to YUTAO">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+
+	<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-17398">
+		<article id="comment-17398" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/1bb16854d6a26540afea146b646a9eef" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-1bb16854d6a26540afea146b646a9eef-0">					<cite class="fn">Anuradha Srinivas</cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-17398"><time pubdate="" datetime="2015-09-03T13:10:37+00:00">
+					September 3, 2015 at 1:10 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>hi matt. good job. very good illustrative example.</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=17398#respond" onclick="return addComment.moveForm( &quot;comment-17398&quot;, &quot;17398&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to Anuradha Srinivas">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+
+	<li class="comment even thread-odd thread-alt depth-1 highlander-comment" id="li-comment-17415">
+		<article id="comment-17415" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/6787fef18cf2acb1e4ec7495cf4e4b83" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-6787fef18cf2acb1e4ec7495cf4e4b83-0">					<cite class="fn"><a href="http://denson-data-science.blogspot.com/" rel="external nofollow" class="url">denson smith</a></cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-17415"><time pubdate="" datetime="2015-09-04T13:35:34+00:00">
+					September 4, 2015 at 1:35 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Great tutorial!</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=17415#respond" onclick="return addComment.moveForm( &quot;comment-17415&quot;, &quot;17415&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to denson smith">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+
+	<li class="comment byuser comment-author-masterxwarez odd alt thread-even depth-1 highlander-comment" id="li-comment-17497">
+		<article id="comment-17497" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/a037d529fedb5ac41b3c4caeeb530cd7" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-a037d529fedb5ac41b3c4caeeb530cd7-0">					<cite class="fn"><a href="http://www.persianos.org/" rel="external nofollow" class="url">Master</a></cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-17497"><time pubdate="" datetime="2015-09-12T02:28:52+00:00">
+					September 12, 2015 at 2:28 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Great Article.<br>
+I tried implementing a simpler network (xor) to see how it really works.!<br>
+But I’ve been failing to no end!<br>
+I tried creating xor network using 3 methods:<br>
+I)with normal weights and biases<br>
+II)without any biases<br>
+II)biases as weights </p>
+<p>None of these work in the way they should. I am not familiar with matlab, but had a look at things that would get me going and let me code, and then started coding this.</p>
+<p>I would be grateful if you could give me a hand in this and help me find my problem.<br>
+Here is  the links to my codes :<br>
+I)   <a href="http://pastebin.com/jb2PAJ5u" rel="nofollow">http://pastebin.com/jb2PAJ5u</a><br>
+II)  <a href="http://pastebin.com/Ah09jyiw" rel="nofollow">http://pastebin.com/Ah09jyiw</a><br>
+III) <a href="http://pastebin.com/7wC5Si4V" rel="nofollow">http://pastebin.com/7wC5Si4V</a></p>
+<p>By the way, I tried explaining what  I was doing in the first version thoroughly ( the other two are the same in terms of formulation) so whoever reads the code , knows whats going on.</p>
+<p>Thank you very much again for your time and great explanation</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=17497#respond" onclick="return addComment.moveForm( &quot;comment-17497&quot;, &quot;17497&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to Master">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+
+	<li class="comment even thread-odd thread-alt depth-1 highlander-comment" id="li-comment-17518">
+		<article id="comment-17518" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/5865c8c305e29cdacac0abdccb168d91" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-5865c8c305e29cdacac0abdccb168d91-0">					<cite class="fn">Marc</cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-17518"><time pubdate="" datetime="2015-09-13T10:38:31+00:00">
+					September 13, 2015 at 10:38 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Matt, great example! This was the explanation I needed to get going!</p>
+<p>Master I also struggled with the XOR example. I tried everything that you tried plus a few other things.</p>
+<p>However I found Matt’s Emergent Mind #10, javascript visual. I built a NN with 5 hidden nodes as that example used and now the XOR is working fine.</p>
+<p>Hope that helps. </p>
+<p>Marc</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=17518#respond" onclick="return addComment.moveForm( &quot;comment-17518&quot;, &quot;17518&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to Marc">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+
+	<li class="post pingback">
+		<p><a href="http://blog.mbuffett.com/a-visual-guide-to-feed-forward-neural-networks/" rel="external nofollow" class="url">A Visual Guide to (Feed Forward) Neural Networks | mbuffett.blog()</a></p>
+
+	</li><!-- #comment-## -->
+
+	<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-17753">
+		<article id="comment-17753" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/ed7d224b7d74ed8d15ada8dfed58c0f3" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-ed7d224b7d74ed8d15ada8dfed58c0f3-0">					<cite class="fn">Rajesh Bhat</cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-17753"><time pubdate="" datetime="2015-10-04T05:10:57+00:00">
+					October 4, 2015 at 5:10 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Can anyone explain me the role bias term in neural networks?<br>
+Thanks in advance.</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=17753#respond" onclick="return addComment.moveForm( &quot;comment-17753&quot;, &quot;17753&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to Rajesh Bhat">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+
+	<li class="comment even thread-odd thread-alt depth-1 highlander-comment" id="li-comment-17774">
+		<article id="comment-17774" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/Lala_Mustafa_Pa_a_normal.jpg" class="avatar avatar-40" height="40" width="40">					<cite class="fn"><a href="http://twitter.com/vivalalamustafa" rel="external nofollow" class="url">Viva la laMustafa (@vivalalamustafa)</a></cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-17774"><time pubdate="" datetime="2015-10-05T04:22:00+00:00">
+					October 5, 2015 at 4:22 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Very nice tutorial, thanks</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=17774#respond" onclick="return addComment.moveForm( &quot;comment-17774&quot;, &quot;17774&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to Viva la laMustafa (@vivalalamustafa)">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+
+	<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-17855">
+		<article id="comment-17855" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/51ae8cb725fc491102d070ebfebe6832" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-51ae8cb725fc491102d070ebfebe6832-0">					<cite class="fn">harsimranpal</cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-17855"><time pubdate="" datetime="2015-10-09T10:36:38+00:00">
+					October 9, 2015 at 10:36 am					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hey Mazur<br>
+I want to classify the documents into different categories by using neural networks. Please give me the step by step algorithm for classification of documents.</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=17855#respond" onclick="return addComment.moveForm( &quot;comment-17855&quot;, &quot;17855&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to harsimranpal">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+
+	<li class="comment even thread-odd thread-alt depth-1 highlander-comment" id="li-comment-17910">
+		<article id="comment-17910" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/bfd904c928fae10aef7d82d4a4d39168" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-bfd904c928fae10aef7d82d4a4d39168-0">					<cite class="fn">Syete</cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-17910"><time pubdate="" datetime="2015-10-13T15:23:22+00:00">
+					October 13, 2015 at 3:23 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Great post!!!!!!!!! The visualization is excellent </p>
+<p>Thank for all !!!!</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=17910#respond" onclick="return addComment.moveForm( &quot;comment-17910&quot;, &quot;17910&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to Syete">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+
+	<li class="comment odd alt thread-even depth-1 highlander-comment" id="li-comment-17921">
+		<article id="comment-17921" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<img alt="" src="./best example of backpropogation_files/ddda1029aeffc36aa668b6c826be6a7a" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-ddda1029aeffc36aa668b6c826be6a7a-0">					<cite class="fn"><a href="http://danijar.com/" rel="external nofollow" class="url">Danijar Hafner</a></cite> <span class="says">says:</span>				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+					<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/comment-page-1/#comment-17921"><time pubdate="" datetime="2015-10-14T14:30:13+00:00">
+					October 14, 2015 at 2:30 pm					</time></a>
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Thanks for the good article, Matt! I think we could compute the gradient with respect to all incoming activations dE/dnet first. In a second pass, we can compute gradient with respect to all weights dE/dw from that. Is that correct? I’d just like to validate my understanding.</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/?replytocom=17921#respond" onclick="return addComment.moveForm( &quot;comment-17921&quot;, &quot;17921&quot;, &quot;respond&quot;, &quot;3998&quot; )" aria-label="Reply to Danijar Hafner">Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+		</ol><!-- .commentlist -->
+
+		
+	
+	
+							<div id="respond" class="comment-respond js">
+				<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/#respond" style="display:none;">Cancel reply</a></small></h3>
+									<form action="http://mattmazur.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+																										
+
+
+												<input type="hidden" id="highlander_comment_nonce" name="highlander_comment_nonce" value="1849fa57a2"><input type="hidden" name="_wp_http_referer" value="/2015/03/17/a-step-by-step-backpropagation-example/">
+<input type="hidden" name="hc_post_as" id="hc_post_as" value="guest">
+
+<div class="comment-form-field comment-textarea">
+	
+	<div id="comment-form-comment"><textarea tabindex="-1" style="position: absolute; top: -999px; left: 0px; right: auto; bottom: auto; border: 0px; padding: 0px; box-sizing: content-box; word-wrap: break-word; overflow: hidden; transition: none; height: 0px !important; min-height: 0px !important; font-family: Arial, Helvetica, Tahoma, Verdana, sans-serif; font-size: 14px; font-weight: 300; font-style: normal; letter-spacing: 0px; text-transform: none; text-decoration: none; word-spacing: 0px; text-indent: 0px; line-height: 21px; width: 503px;" class="autosizejs "></textarea><textarea id="comment" name="comment" title="Enter your comment here..." placeholder="Enter your comment here..." style="height: 41px; overflow: hidden; word-wrap: break-word; resize: none;"></textarea></div>
+</div>
+
+<div id="comment-form-identity" style="display: none;">
+
+	<div id="comment-form-nascar">
+		<p>Fill in your details below or click an icon to log in:</p>
+		<ul>
+			<li class="selected" style="display:none;">
+				<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/#comment-form-guest" id="postas-guest" title="Guest">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/#comment-form-load-service:WordPress.com" id="postas-wordpress" title="WordPress.com">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/#comment-form-load-service:Twitter" id="postas-twitter" title="Twitter">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/#comment-form-load-service:Facebook" id="postas-facebook" title="Facebook">
+					<span></span>
+				</a>
+			</li>
+			<li>
+		</li></ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a href="https://gravatar.com/site/signup/" target="_blank">				<img src="./best example of backpropogation_files/ad516503a11cd5ca435acc9bb6523536" alt="Gravatar" width="25" class="no-grav">
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Email <span class="required">(required)</span> <span class="nopublish">(Address never made public)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email" value=""></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Name <span class="required">(required)</span></label>
+					<div class="comment-form-input"><input id="author" name="author" type="text" value=""></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Website</label>
+					<div class="comment-form-input"><input id="url" name="url" type="text" value=""></div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./best example of backpropogation_files/wplogo.png" alt="WordPress.com Logo" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="">
+				<input type="hidden" name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="">
+				<input type="hidden" name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="">
+				<p class="comment-form-posting-as pa-wordpress"><strong></strong> You are commenting using your WordPress.com account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'wordpress' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./best example of backpropogation_files/ad516503a11cd5ca435acc9bb6523536" alt="Twitter picture" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="">
+				<input type="hidden" name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="">
+				<input type="hidden" name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="">
+				<p class="comment-form-posting-as pa-twitter"><strong></strong> You are commenting using your Twitter account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'twitter' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./best example of backpropogation_files/ad516503a11cd5ca435acc9bb6523536" alt="Facebook photo" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="">
+				<input type="hidden" name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="">
+				<input type="hidden" name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="">
+				<p class="comment-form-posting-as pa-facebook"><strong></strong> You are commenting using your Facebook account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'facebook' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./best example of backpropogation_files/ad516503a11cd5ca435acc9bb6523536" alt="Google+ photo" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="">
+				<input type="hidden" name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="">
+				<input type="hidden" name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="">
+				<p class="comment-form-posting-as pa-googleplus"><strong></strong> You are commenting using your Google+ account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'googleplus' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a></div>
+		<p>Connecting to %s</p>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div id="comment-form-subscribe" style="display: none;">
+	<p class="comment-subscription-form"><input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;" tabindex="6"> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of new comments via email.</label></p></div>
+
+						
+						<p class="form-submit" style="display: none;"><input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="3998" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="5d2e988b0e"></p>
+<input type="hidden" name="genseq" value="1445142752">
+<p style="display: none;"></p>					<input type="hidden" id="ak_js" name="ak_js" value="1445142754148"></form>
+							</div><!-- #respond -->
+			<div style="clear: both"></div>
+</div><!-- #comments .comments-area -->
+
+			
+			</div><!-- #content .site-content -->
+		</div><!-- #primary .content-area -->
+
+		<div id="secondary" class="widget-area" role="complementary">
+						<aside id="text-3" class="widget widget_text"><h1 class="widget-title">About</h1>			<div class="textwidget">I'm a developer at Automattic where I work on the Store Team at WordPress.com. I also built <a href="http://www.leandomainsearch.com/">Lean Domain Search</a>, <a href="http://www.preceden.com/">Preceden</a> and a number of other software products over the years. I love solving problems and helping others do the same. Drop me a note if I can help with anything.</div>
+		</aside><aside id="text-2" class="widget widget_text">			<div class="textwidget"><p></p>
+<a href="mailto:matthew.h.mazur@gmail.com" title="GMail"><img src="./best example of backpropogation_files/gmail.png"></a>
+
+<a href="http://twitter.com/mhmazur" title="Twitter"><img src="./best example of backpropogation_files/twitter.png"></a>
+
+<a href="http://www.linkedin.com/in/mhmazur" title="LinkedIn"><img src="./best example of backpropogation_files/linkedin.png"></a>
+
+<a href="http://mattmazur.com/feed/" title="RSS"><img src="./best example of backpropogation_files/rss.png"></a>
+
+<a href="http://cloud.feedly.com/#subscription%2Ffeed%2Fhttp%3A%2F%2Fmattmazur.com%2Ffeed%2F" title="Feedly"><img src="./best example of backpropogation_files/feedly1.png"></a></div>
+		</aside><aside id="search-3" class="widget widget_search">	<form method="get" id="searchform" action="http://mattmazur.com/" role="search">
+		<label for="s" class="assistive-text">Search</label>
+		<input type="text" class="field" name="s" value="" id="s" placeholder="Search …">
+		<input type="submit" class="submit" name="submit" id="searchsubmit" value="Search">
+	</form>
+</aside><aside id="twitter_timeline-2" class="widget widget_twitter_timeline"><h1 class="widget-title">Follow me on Twitter</h1><iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" class="twitter-timeline twitter-timeline-rendered" style="position: static; visibility: visible; display: inline-block; width: 100%; height: 1122px; padding: 0px; border: none; max-width: 225px; min-width: 180px; margin-top: 0px; margin-bottom: 0px;" data-widget-id="545611726235123712" data-user-id="279802557" title="Twitter Timeline"></iframe></aside>		</div><!-- #secondary .widget-area -->
+
+	</div><!-- #main .site-main -->
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+		<div class="site-info">
+			<a href="https://wordpress.com/?ref=footer_blog">Blog at WordPress.com</a>. <a href="https://wordpress.com/themes/publish/" title="Learn more about this theme">The Publish Theme</a>.		</div><!-- .site-info -->
+	</footer><!-- #colophon .site-footer -->
+</div><!-- #page .hfeed .site -->
+
+<!-- wpcom_wp_footer -->
+		<script type="text/javascript">
+			!function(d,s,id){
+				var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+				if(!d.getElementById(id)){
+					js=d.createElement(s);
+					js.id=id;js.src=p+"://platform.twitter.com/widgets.js";
+					fjs.parentNode.insertBefore(js,fjs);
+				}
+			}(document,"script","twitter-wjs");
+		</script>
+		<script type="text/javascript" src="./best example of backpropogation_files/gprofiles.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./best example of backpropogation_files/wpgroho.js"></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-79bf282d81154242b7ebe115443bdccc">
+	</div>
+	<div class="grofile-hash-map-36410bc698c05fe9cc30bca18d8e96ed">
+	</div>
+	<div class="grofile-hash-map-661d979019ad8fc4e3b2ea296e4f7974">
+	</div>
+	<div class="grofile-hash-map-e8fca90b337d71fafd7c0ede311ef617">
+	</div>
+	<div class="grofile-hash-map-b2926727641e29700e261539fdeff88c">
+	</div>
+	<div class="grofile-hash-map-4c494a517f53892c0a52a4a5d807c9f8">
+	</div>
+	<div class="grofile-hash-map-cf0fba5058550501b22c77e95b14ff58">
+	</div>
+	<div class="grofile-hash-map-c8d4985de5178b53824df4eb94ad9cda">
+	</div>
+	<div class="grofile-hash-map-f9f07c17fd67c207f6991ac6e378be99">
+	</div>
+	<div class="grofile-hash-map-283dcd673a62a886c8a9da1a94bf52cf">
+	</div>
+	<div class="grofile-hash-map-e63598f1098dafcf2b184de2bbbb21f4">
+	</div>
+	<div class="grofile-hash-map-443e519854a9d0f434bb0e7180b04024">
+	</div>
+	<div class="grofile-hash-map-6ce3ad2ed95e439631aa8728ed7bb215">
+	</div>
+	<div class="grofile-hash-map-f25a6e8055cb2aa763c1a991305b8512">
+	</div>
+	<div class="grofile-hash-map-48d653ba3c8477df556b61d241e3599b">
+	</div>
+	<div class="grofile-hash-map-54231be7f9e8f15f827bacd815587910">
+	</div>
+	<div class="grofile-hash-map-d54f5dd56e0df2066728712fdc2b6990">
+	</div>
+	<div class="grofile-hash-map-3b564181619e0a2c9f85df7ee98b699e">
+	</div>
+	<div class="grofile-hash-map-088810e3823c76643392b1ada52d7236">
+	</div>
+	<div class="grofile-hash-map-acb2765386ec98a5524f78e32fd5592f">
+	</div>
+	<div class="grofile-hash-map-1bb16854d6a26540afea146b646a9eef">
+	</div>
+	<div class="grofile-hash-map-6787fef18cf2acb1e4ec7495cf4e4b83">
+	</div>
+	<div class="grofile-hash-map-a037d529fedb5ac41b3c4caeeb530cd7">
+	</div>
+	<div class="grofile-hash-map-5865c8c305e29cdacac0abdccb168d91">
+	</div>
+	<div class="grofile-hash-map-ed7d224b7d74ed8d15ada8dfed58c0f3">
+	</div>
+	<div class="grofile-hash-map-8ab3ea3151dbb21121d9611623a720ab">
+	</div>
+	<div class="grofile-hash-map-51ae8cb725fc491102d070ebfebe6832">
+	</div>
+	<div class="grofile-hash-map-bfd904c928fae10aef7d82d4a4d39168">
+	</div>
+	<div class="grofile-hash-map-ddda1029aeffc36aa668b6c826be6a7a">
+	</div>
+	</div>
+<script type="text/javascript">
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/matthewmazur.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"https:\/\/matthewmazur.wordpress.com\/wp-login.php?action=logout&_wpnonce=d17a27014d","homeURL":"http:\/\/mattmazur.com\/","postID":"3998","gravDefault":"identicon","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"0","userIsLoggedIn":"","isJetpack":"0","text_direction":"ltr"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./best example of backpropogation_files/saved_resource(4)"></script>
+
+	<div id="bit" class="loggedout-follow-normal" style="bottom: -270px;">
+		<a class="bsub" href="javascript:void(0)"><span id="bsub-text">Follow</span></a>
+		<div id="bitsubscribe">
+
+					<h3><label for="loggedout-follow-field">Follow “Matt Mazur”</label></h3>
+
+			<form action="https://subscribe.wordpress.com/" method="post" accept-charset="utf-8" id="loggedout-follow">
+			<p>Get every new post delivered to your Inbox.</p>
+
+			<p id="loggedout-follow-error" style="display: none;"></p>
+
+						<p class="bit-follow-count">Join 76 other followers</p>
+			<p><input type="email" name="email" placeholder="Enter your email address" id="loggedout-follow-field"></p>
+
+			<input type="hidden" name="action" value="subscribe">
+			<input type="hidden" name="blog_id" value="53579024">
+			<input type="hidden" name="source" value="http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/">
+			<input type="hidden" name="sub-type" value="loggedout-follow">
+
+			<input type="hidden" id="_wpnonce" name="_wpnonce" value="2c464765a1"><input type="hidden" name="_wp_http_referer" value="/2015/03/17/a-step-by-step-backpropagation-example/">
+			<p id="bsub-subscribe-button"><input type="submit" value="Sign me up"></p>
+			</form>
+					<div id="bsub-credit"><a href="https://wordpress.com/?ref=lof">Build a website with WordPress.com</a></div>
+		</div><!-- #bitsubscribe -->
+	</div><!-- #bit -->
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"http:\/\/mattmazur.com\/2015\/03\/17\/a-step-by-step-backpropagation-example\/":3998};
+	</script>
+		<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+				<iframe src="./best example of backpropogation_files/master.html" scrolling="no" id="likes-master" name="likes-master" style="display:none;"></iframe>
+		<div id="likes-other-gravatars"><div class="likes-text"><span>%d</span> bloggers like this:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+		<script type="text/javascript">
+		//<![CDATA[
+			var jetpackLikesWidgetQueue = [];
+			var jetpackLikesWidgetBatch = [];
+			var jetpackLikesMasterReady = false;
+
+			function JetpackLikespostMessage( message, target ) {
+				if ( "string" === typeof message ){
+					try{
+						message = JSON.parse( message );
+					}
+					catch(e) {
+						return;
+					}
+				}
+
+				pm( {
+					target: target,
+					type: 'likesMessage',
+					data: message,
+					origin: '*'
+				} );
+			}
+
+			function JetpackLikesBatchHandler() {
+				var requests = [];
+				jQuery( 'div.jetpack-likes-widget-unloaded' ).each( function( i ) {
+					if ( jetpackLikesWidgetBatch.indexOf( this.id ) > -1 )
+						return;
+					jetpackLikesWidgetBatch.push( this.id );
+					var regex = /like-(post|comment)-wrapper-(\d+)-(\d+)-(\w+)/;
+					var match = regex.exec( this.id );
+					if ( ! match || match.length != 5 )
+						return;
+
+					var info = {
+						blog_id: match[2],
+						width:   this.width
+					};
+
+					if ( 'post' == match[1] ) {
+						info.post_id = match[3];
+					} else if ( 'comment' == match[1] ) {
+						info.comment_id = match[3];
+					}
+
+					info.obj_id = match[4];
+
+					requests.push( info );
+				});
+
+				if ( requests.length > 0 ) {
+					JetpackLikespostMessage( { event: 'initialBatch', requests: requests }, window.frames['likes-master'] );
+				}
+			}
+
+			function JetpackLikesMessageListener( event ) {
+				if ( "undefined" == typeof event.event )
+					return;
+
+				if ( 'masterReady' == event.event ) {
+					jQuery( document ).ready( function() {
+						jetpackLikesMasterReady = true;
+
+						var stylesData = {
+								event: 'injectStyles'
+						};
+
+						if ( jQuery( 'iframe.admin-bar-likes-widget' ).length > 0 ) {
+							JetpackLikespostMessage( { event: 'adminBarEnabled' }, window.frames[ 'likes-master' ] );
+
+							stylesData.adminBarStyles = {
+								background: jQuery( '#wpadminbar .quicklinks li#wp-admin-bar-wpl-like > a' ).css( 'background' ),
+								isRtl: ( 'rtl' == jQuery( '#wpadminbar' ).css( 'direction' ) )
+							};
+						}
+
+						if ( !window.addEventListener )
+							jQuery( '#wp-admin-bar-admin-bar-likes-widget' ).hide();
+
+						stylesData.textStyles = {
+							color: jQuery( '.sd-text-color').css( 'color' ),
+							fontFamily: jQuery( '.sd-text-color' ).css( 'font-family' ),
+							fontSize: jQuery( '.sd-text-color' ).css( 'font-size' ),
+							direction: jQuery( '.sd-text-color' ).css( 'direction' ),
+							fontWeight: jQuery( '.sd-text-color' ).css( 'font-weight' ),
+							fontStyle: jQuery( '.sd-text-color' ).css( 'font-style' ),
+							textDecoration: jQuery( '.sd-text-color' ).css('text-decoration')
+						};
+
+						stylesData.linkStyles = {
+							color: jQuery( '.sd-link-color' ).css('color'),
+							fontFamily: jQuery( '.sd-link-color' ).css('font-family'),
+							fontSize: jQuery( '.sd-link-color' ).css('font-size'),
+							textDecoration: jQuery( '.sd-link-color' ).css('text-decoration'),
+							fontWeight: jQuery( '.sd-link-color' ).css( 'font-weight' ),
+							fontStyle: jQuery( '.sd-link-color' ).css( 'font-style' )
+						};
+
+						JetpackLikespostMessage( stylesData, window.frames[ 'likes-master' ] );
+
+						JetpackLikesBatchHandler();
+
+						jQuery( document ).on( 'inview', 'div.jetpack-likes-widget-unloaded', function() {
+							jetpackLikesWidgetQueue.push( this.id );
+						});
+					});
+				}
+
+				if ( 'showLikeWidget' == event.event ) {
+					jQuery( '#' + event.id + ' .post-likes-widget-placeholder'  ).fadeOut( 'fast', function() {
+						jQuery( '#' + event.id + ' .post-likes-widget' ).fadeIn( 'fast', function() {
+							JetpackLikespostMessage( { event: 'likeWidgetDisplayed', blog_id: event.blog_id, post_id: event.post_id, obj_id: event.obj_id }, window.frames['likes-master'] );
+						});
+					});
+				}
+
+				if ( 'clickReblogFlair' == event.event ) {
+					wpcom_reblog.toggle_reblog_box_flair( event.obj_id );
+				}
+
+				if ( 'showOtherGravatars' == event.event ) {
+					var $container = jQuery( '#likes-other-gravatars' );
+					var $list = $container.find( 'ul' );
+
+					$container.hide();
+					$list.html( '' );
+
+					$container.find( '.likes-text span' ).text( event.total );
+
+					jQuery.each( event.likers, function( i, liker ) {
+						$list.append( '<li class="' + liker.css_class + '"><a href="' + liker.profile_URL + '" class="wpl-liker" rel="nofollow" target="_parent"><img src="' + liker.avatar_URL + '" alt="' + liker.name + '" width="30" height="30" style="padding-right: 3px;" /></a></li>');
+					} );
+
+					var offset = jQuery( "[name='" + event.parent + "']" ).offset();
+
+					$container.css( 'left', offset.left + event.position.left - 10 + 'px' );
+					$container.css( 'top', offset.top + event.position.top - 33 + 'px' );
+
+					var rowLength = Math.floor( event.width / 37 );
+					var height = ( Math.ceil( event.likers.length / rowLength ) * 37 ) + 13;
+					if ( height > 204 ) {
+						height = 204;
+					}
+
+					$container.css( 'height', height + 'px' );
+					$container.css( 'width', rowLength * 37 - 7 + 'px' );
+
+					$list.css( 'width', rowLength * 37 + 'px' );
+
+					$container.fadeIn( 'slow' );
+
+					var scrollbarWidth = $list[0].offsetWidth - $list[0].clientWidth;
+					if ( scrollbarWidth > 0 ) {
+						$container.width( $container.width() + scrollbarWidth );
+						$list.width( $list.width() + scrollbarWidth );
+					}
+				}
+			}
+
+			pm.bind( 'likesMessage', function(e) { JetpackLikesMessageListener(e); } );
+
+			jQuery( document ).click( function( e ) {
+				var $container = jQuery( '#likes-other-gravatars' );
+
+				if ( $container.has( e.target ).length === 0 ) {
+					$container.fadeOut( 'slow' );
+				}
+			});
+
+			function JetpackLikesWidgetQueueHandler() {
+				var wrapperID;
+				if ( ! jetpackLikesMasterReady ) {
+					setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+					return;
+				}
+
+				if ( jetpackLikesWidgetQueue.length > 0 ) {
+					// We may have a widget that needs creating now
+					var found = false;
+					while( jetpackLikesWidgetQueue.length > 0 ) {
+						// Grab the first member of the queue that isn't already loading.
+						wrapperID = jetpackLikesWidgetQueue.splice( 0, 1 )[0];
+						if ( jQuery( '#' + wrapperID ).hasClass( 'jetpack-likes-widget-unloaded' ) ) {
+							found = true;
+							break;
+						}
+					}
+					if ( ! found ) {
+						setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+						return;
+					}
+				} else if ( jQuery( 'div.jetpack-likes-widget-unloaded' ).length > 0 ) {
+					// Grab any unloaded widgets for a batch request
+					JetpackLikesBatchHandler();
+
+					// Get the next unloaded widget
+					wrapperID = jQuery( 'div.jetpack-likes-widget-unloaded' ).first()[0].id;
+					if ( ! wrapperID ) {
+						// Everything is currently loaded
+						setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+						return;
+					}
+				}
+
+				if ( 'undefined' === typeof wrapperID ) {
+					setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+					return;
+				}
+
+				var $wrapper = jQuery( '#' + wrapperID );
+				$wrapper.find( 'iframe' ).remove();
+
+				if ( $wrapper.hasClass( 'slim-likes-widget' ) ) {
+					$wrapper.find( '.post-likes-widget-placeholder' ).after( "<iframe class='post-likes-widget jetpack-likes-widget' name='" + $wrapper.data( 'name' ) + "' height='22px' width='68px' frameBorder='0' scrolling='no' src='" + $wrapper.data( 'src' ) + "'></iframe>" );
+				} else {
+					$wrapper.find( '.post-likes-widget-placeholder' ).after( "<iframe class='post-likes-widget jetpack-likes-widget' name='" + $wrapper.data( 'name' ) + "' height='55px' width='100%' frameBorder='0' src='" + $wrapper.data( 'src' ) + "'></iframe>" );
+				}
+
+				$wrapper.removeClass( 'jetpack-likes-widget-unloaded' ).addClass( 'jetpack-likes-widget-loading' );
+
+				$wrapper.find( 'iframe' ).load( function( e ) {
+					var $iframe = jQuery( e.target );
+					$wrapper.removeClass( 'jetpack-likes-widget-loading' ).addClass( 'jetpack-likes-widget-loaded' );
+
+					JetpackLikespostMessage( { event: 'loadLikeWidget', name: $iframe.attr( 'name' ), width: $iframe.width() }, window.frames[ 'likes-master' ] );
+
+					if ( $wrapper.hasClass( 'slim-likes-widget' ) ) {
+						$wrapper.find( 'iframe' ).Jetpack( 'resizeable' );
+					}
+				});
+				setTimeout( JetpackLikesWidgetQueueHandler, 250 );
+			}
+			JetpackLikesWidgetQueueHandler();
+		//]]>
+		</script>
+<script type="text/javascript" src="./best example of backpropogation_files/form.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./best example of backpropogation_files/saved_resource(5)"></script>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script><script src="./best example of backpropogation_files/w.js" type="text/javascript" async="" defer=""></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'53579024','blog_tz':'-4','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'53579024','v':'wpcom','tz':'-4','user_id':'0','post':'3998','subd':'matthewmazur'}]);
+_stq.push(['extra', {'crypt':'UE40eW5QN0p8M2Y/RE1TaVhzUzFMbjdWNHpwZGhTayxPSUFCMGRVYVNrSFguN3FwSmQ5RGtNX3VQcj1yVzhiflM1THQtLGFdQ2toOXYlK0JfZ0Y2Zk1mRUQtVkxkeWZBTzRYWlo9S2RoaEJXaEJZT1lRVGRncj9IZXM9bzBxLUVsLTJiQ3VFMXZDZF8/SW92JTgmM2VlJixbflh0YytEQlBlRGR2T0JFNkdveUNrXz9rMlhybFs/WVtmYkxZZHUzOVosYS1ET1QsNGxYZU1nVGhqW0RYdkF6OGFNV189SVk0SWxBWDFvWEUueXpZbHJqbmt8Sy4xMG0/RzVScWtiNHJYbyY4T0R1cHJJbVhCNDA3U3pLaTNtSHNMcERqJjdpZnRiVnhOSG02cGk3WnlGMklCMVVGa0pkbg=='}]);
+_stq.push([ 'clickTrackerInit', '53579024', '3998' ]);
+	</script>
+<noscript>&lt;img src="http://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /&gt;</noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+
+<img src="./best example of backpropogation_files/g.gif" id="wpstats"></body></html>
