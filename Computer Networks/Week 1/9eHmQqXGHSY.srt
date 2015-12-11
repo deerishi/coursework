@@ -1,0 +1,216 @@
+0
+00:00:00,570 --> 00:00:04,780
+In this unit, learned some of the basics about how the Internet works. You learned how applications
+
+1
+00:00:04,780 --> 00:00:08,929
+like web browsing and Skype work, how an application use the Internet, and the basic structure
+
+2
+00:00:08,929 --> 00:00:13,070
+of the Internet. You learned about some of the fundamental architectural principles of
+
+3
+00:00:13,070 --> 00:00:18,670
+networking. Perhaps by now you know which one of us is Phil and which one is Nick.
+
+4
+00:00:18,670 --> 00:00:21,800
+Now you’ve finished the first unit, you should be very familiar with this picture
+
+5
+00:00:21,800 --> 00:00:25,730
+of the 4-layer model of the Internet. You now know that the Internet is broken down
+
+6
+00:00:25,730 --> 00:00:29,800
+into four distinct layers, what the four layers are, and how they work together. But even
+
+7
+00:00:29,800 --> 00:00:35,399
+more importantly than how it works, you hopefully understand why it works this way and why layering
+
+8
+00:00:35,399 --> 00:00:38,530
+is a good idea in all networks, not just the Internet.
+
+9
+00:00:38,530 --> 00:00:42,940
+You’ve now seen that the Internet works by breaking data up into small units called
+
+10
+00:00:42,940 --> 00:00:47,840
+packets. When you request a web page, your computer sends some packets to the web server.
+
+11
+00:00:47,840 --> 00:00:51,680
+The Internet decides how these little pieces of data arrive to the right destination – and
+
+12
+00:00:51,680 --> 00:00:55,780
+how the packets the web server responds with, containing the page, make their way to you
+
+13
+00:00:55,780 --> 00:00:57,250
+correctly as well.
+
+14
+00:00:57,250 --> 00:01:02,449
+You‘ve learned how two architectural principles, layering and packets, come together, in the
+
+15
+00:01:02,449 --> 00:01:07,220
+architectural principle of encapsulation. Encapsulation is how one takes layers and
+
+16
+00:01:07,220 --> 00:01:11,110
+lets them use packets in a clean and simple way, such that each layer’s use of a packet
+
+17
+00:01:11,110 --> 00:01:15,280
+is independent of the others. We’ll talk about a few more architectural principles
+
+18
+00:01:15,280 --> 00:01:20,850
+in later units.
+
+19
+00:01:20,850 --> 00:01:24,040
+In this unit we studied four main topics
+
+20
+00:01:24,040 --> 00:01:30,049
+1. How an application uses the Internet. Phil explained the common way in which a variety
+
+21
+00:01:30,049 --> 00:01:35,439
+of different applications use the Internet, using Skype, BitTorrent and the Web as specific
+
+22
+00:01:35,439 --> 00:01:40,310
+examples. You learned that most applications want to communicate over a reliable, bi-directional
+
+23
+00:01:40,310 --> 00:01:44,619
+byte-stream between two or more end points.
+
+24
+00:01:44,619 --> 00:01:51,619
+2. The structure of the Internet. You learnd what the 4-layer model is, and the responsibility
+
+25
+00:01:52,110 --> 00:01:57,149
+of each layer. You also learned why we use the Internet Protocol or “IP” every time
+
+26
+00:01:57,149 --> 00:02:02,450
+we send packets across the Internet, and why we call IP the “thin waist” of the Internet.
+
+27
+00:02:02,450 --> 00:02:09,450
+3. The Internet protocol (IP). Because IP is so important, we spent several videos describing
+
+28
+00:02:10,550 --> 00:02:17,120
+what IP does for us, and how it works. So far we’ve focussed on IP version 4, because
+
+29
+00:02:17,120 --> 00:02:21,660
+it’s the most widely used version of IP today. You’ll learn about IP addresses,
+
+30
+00:02:21,660 --> 00:02:26,640
+how routers look up IP addresses and so on. Later in the course you’ll learn about the
+
+31
+00:02:26,640 --> 00:02:31,380
+newer version of IP, IPv6.
+
+32
+00:02:31,380 --> 00:02:37,030
+4. Basic architectural ideas and principles. You’ve studied three fundamental principles
+
+33
+00:02:37,030 --> 00:02:41,390
+of networks, all of which are very relevant to our understanding of the Internet. The
+
+34
+00:02:41,390 --> 00:02:46,160
+first is packet switching, which is the simple way in which data is broken down into self-contained
+
+35
+00:02:46,160 --> 00:02:50,000
+packets of information that are forwarded hop-by-hop based on the information in the
+
+36
+00:02:50,000 --> 00:02:56,140
+packet header. The second is Layering, which we’ve already mentioned. And the third is
+
+37
+00:02:56,140 --> 00:03:01,530
+encapsulation, which is the process of placing a packet processed at one layer inside the
+
+38
+00:03:01,530 --> 00:03:08,060
+data of the packet below. This helps a clear separation of concerns between how data is
+
+39
+00:03:08,060 --> 00:03:12,210
+processed at each layer in the hierarchy.
+
+40
+00:03:12,210 --> 00:03:16,170
+you should now have a good understanding of the basic structure of the Internet and three
+
+41
+00:03:16,170 --> 00:03:20,470
+basic architectural ideas. You understand how applications like your web browser works,
+
+42
+00:03:20,470 --> 00:03:23,720
+and how the Internet delivers packets between two computers. You‘d probably heard the
+
+43
+00:03:23,720 --> 00:03:29,230
+term TCP/IP used before: now you know what TCP is and what IP is, and why they’re related.
+
+44
+00:03:29,230 --> 00:03:33,790
+At first glance, these might seem like grungy, low-level details. But it turns out that they’re
+
+45
+00:03:33,790 --> 00:03:38,680
+the bedrock of what the Internet is. Every year, new applications and uses of the Internet
+
+46
+00:03:38,680 --> 00:03:43,430
+emerge. But all of them use these basic principles you’re learning about, and almost all of
+
+47
+00:03:43,430 --> 00:03:49,150
+them use TCP/IP. By starting with these fundamentals that have remained amazingly constant, you’ll
+
+48
+00:03:49,150 --> 00:03:53,270
+learn the knowledge that will continue to be important even as we move on to 5G wireless
+
+49
+00:03:53,270 --> 00:03:55,670
+networks, Web 3.0, and the Internet of Things.
+
+50
+00:03:55,670 --> 00:04:00,790
+And that’s part of what’s exciting. The Internet and what it can do is always expanding
+
+51
+00:04:00,790 --> 00:04:04,720
+and changing. But there are some core ideas and principles which are constant through
+
+52
+00:04:04,720 --> 00:04:10,810
+all of that evolution. By learning them, you not only know how the Internet and networks
+
+53
+00:04:10,810 --> 00:04:14,819
+work today, but most likely how they will work in 20 years as well.
+

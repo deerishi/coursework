@@ -1,0 +1,672 @@
+0
+00:00:01,140 --> 00:00:06,240
+In the last video you learned how different applications -- such as BitTorrent, Skype
+
+1
+00:00:06,240 --> 00:00:12,600
+and the World Wide Web – communicate over the Internet using a bi-directional reliable
+
+2
+00:00:12,600 --> 00:00:13,550
+byte stream.
+
+3
+00:00:13,550 --> 00:00:17,990
+It takes a lots of different pieces working together to create this reliable communication
+
+4
+00:00:17,990 --> 00:00:24,130
+model for our applications. But even though we use a huge variety of different Internet
+
+5
+00:00:24,130 --> 00:00:28,189
+applications, sending many kinds of data at very different speeds, there are surprisingly
+
+6
+00:00:28,189 --> 00:00:34,180
+strong similarities in the way applications send and receive data. For example, applications
+
+7
+00:00:34,180 --> 00:00:38,680
+want to send and receive data without having to worry about the path, or route, that the
+
+8
+00:00:38,680 --> 00:00:43,210
+data takes across the Internet. And almost all applications want to be confident that
+
+9
+00:00:43,210 --> 00:00:48,469
+their data is correctly delivered, with any lost or corrupted data automatically retransmitted
+
+10
+00:00:48,469 --> 00:00:51,920
+until it is received correctly.
+
+11
+00:00:51,920 --> 00:00:56,730
+The early Internet pioneers created the “4 Layer Internet Model” to describe the hierarchy
+
+12
+00:00:56,730 --> 00:01:01,379
+of operations that make up the Internet, so that applications can reuse the same building
+
+13
+00:01:01,379 --> 00:01:06,860
+blocks over and over again, without having to create them from scratch for every application.
+
+14
+00:01:06,860 --> 00:01:10,439
+Layering is an important and frequently used concept in networking and we’ll be seeing
+
+15
+00:01:10,439 --> 00:01:14,860
+it many times throughout this course. There is even a video devoted just to the concept
+
+16
+00:01:14,860 --> 00:01:15,590
+of layering.
+
+17
+00:01:15,590 --> 00:01:19,960
+Let’s take a look at what each layer of the 4 Layer Internet model does. It helps
+
+18
+00:01:19,960 --> 00:01:25,540
+to remember that all four layers are there to enable applications in the end-hosts communicate
+
+19
+00:01:25,540 --> 00:01:26,530
+reliably.
+
+20
+00:01:26,530 --> 00:01:30,329
+To explain how it works, I’m going to start at the bottom layer. We’ll see that each
+
+21
+00:01:30,329 --> 00:01:34,100
+layer has a different responsibility, with each layer building a service on top of the
+
+22
+00:01:34,100 --> 00:01:38,630
+one below, all the way to the top where we have the bi-directional reliable byte stream
+
+23
+00:01:38,630 --> 00:01:40,560
+communication between applications.
+
+24
+00:01:40,560 --> 00:01:45,530
+Let’s start with the Link Layer. The Internet is made up of end-hosts, links
+
+25
+00:01:45,530 --> 00:01:50,549
+and routers. Data is delivered hop-by-hop over each link in turn. Data is delivered
+
+26
+00:01:50,549 --> 00:01:56,700
+in packets. A packet consists of the data we want to be delivered, along with a header
+
+27
+00:01:56,700 --> 00:02:01,119
+that tells the network where the packet is to be delivered, where it came from and so
+
+28
+00:02:01,119 --> 00:02:03,810
+on. &lt;Draw topology and hop by hop delivery of
+
+29
+00:02:03,810 --> 00:02:05,539
+data&gt; The Link Layer’s job is to carry the data
+
+30
+00:02:05,539 --> 00:02:09,840
+over one link at a time. You’ve probably heard of Ethernet and WiFi – these are two
+
+31
+00:02:09,840 --> 00:02:14,470
+examples of different Link layers.
+
+32
+00:02:14,470 --> 00:02:19,170
+The next layer up is, for us, the most important layer: the Network layer.
+
+33
+00:02:19,170 --> 00:02:24,620
+The network layer’s job is to deliver packets end-to-end across the Internet from the source
+
+34
+00:02:24,620 --> 00:02:26,030
+to the destination.
+
+35
+00:02:26,030 --> 00:02:29,650
+A packet is an important basic building block in networks. A packet is the name we give
+
+36
+00:02:29,650 --> 00:02:33,599
+to a self-contained collection of data, plus a header that describes what the data is,
+
+37
+00:02:33,599 --> 00:02:38,980
+where it is going and where it came from. You will often see packets drawn like this:
+
+38
+00:02:38,980 --> 00:02:41,510
+&lt;draw a packet with header and data&gt;
+
+39
+00:02:41,510 --> 00:02:47,069
+Network layer packets are called datagrams. They consist of some data and a head containing
+
+40
+00:02:47,069 --> 00:02:51,010
+the “To” and “From” addresses – just like we put the “To:” and “From” addresses
+
+41
+00:02:51,010 --> 00:02:53,849
+on a letter. &lt;Draw a datagram with To/From addresses&gt; .
+
+42
+00:02:53,849 --> 00:02:58,300
+The Network hands the datagram to the Link Layer below &lt;click to wipe arrows down&gt;, telling
+
+43
+00:02:58,300 --> 00:03:01,760
+it to send the datagram over the first link. In other words, the Link Layer is providing
+
+44
+00:03:01,760 --> 00:03:07,010
+a *service* to the Network Layer. Essentially, the Link Layer says: “if you give me a datagram
+
+45
+00:03:07,010 --> 00:03:12,970
+to send, I will transmit it over one link for you”.
+
+46
+00:03:12,970 --> 00:03:17,370
+At the other end of the link is a router. The Link Layer of the router accepts the datagram
+
+47
+00:03:17,370 --> 00:03:22,459
+from the link, and hands it up to the Network Layer in the router. The Network Layer on
+
+48
+00:03:22,459 --> 00:03:26,799
+the router examines the destination address of the datagram, and is responsible for routing
+
+49
+00:03:26,799 --> 00:03:31,700
+the datagram one hop at a time towards its eventual destination. It does this by sending
+
+50
+00:03:31,700 --> 00:03:38,700
+to the Link Layer again, to carry it over the next link. And so on until it reaches
+
+51
+00:03:41,620 --> 00:03:47,439
+the Network Layer at the destination. &lt;sequence of clicks shows the steps&gt;
+
+52
+00:03:47,439 --> 00:03:50,939
+Notice that the Network Layer does not need to concern itself with *how* the Link Layer
+
+53
+00:03:50,939 --> 00:03:55,489
+sends the datagram over the link. In fact, different Link Layers work in very different
+
+54
+00:03:55,489 --> 00:04:02,489
+ways; Ethernet and WiFi are clearly very different. This separation of concerns between the Network
+
+55
+00:04:03,680 --> 00:04:07,769
+Layer and the Link Layer allows each to focus on its job, without worrying about how the
+
+56
+00:04:07,769 --> 00:04:12,909
+other layer works. It also means that a single Network Layer has a common way to talk to
+
+57
+00:04:12,909 --> 00:04:17,580
+many different Link Layers by simply handing them datagrams to send. This separation of
+
+58
+00:04:17,579 --> 00:04:23,470
+concerns is made possibly by the modularity of each layer and a common well-defined API
+
+59
+00:04:23,470 --> 00:04:27,560
+to the layer below.
+
+60
+00:04:27,560 --> 00:04:31,910
+In the internet, the network layer is special: When we send packets into the Internet, we
+
+61
+00:04:31,910 --> 00:04:37,700
+must use the Internet Protocol. It is the Internet Protocol, or IP, that holds the Internet
+
+62
+00:04:37,700 --> 00:04:41,910
+together. We’ll learn more about the details of IP in later videos. But for now it’s
+
+63
+00:04:41,910 --> 00:04:44,340
+good to know some basic facts about IP.
+
+64
+00:04:44,340 --> 00:04:49,220
+&lt;bulleted list to appear on screen&gt; IP makes a best-effort attempt to deliver
+
+65
+00:04:49,220 --> 00:04:53,170
+our packets to the other end. But it makes no promises.
+
+66
+00:04:53,170 --> 00:04:58,980
+IP packets can get lost, can be delivered out of order, and can be corrupted. There
+
+67
+00:04:58,980 --> 00:05:02,790
+are no guarantees.
+
+68
+00:05:02,790 --> 00:05:08,690
+This may come as a surprise. How can the Internet work at all when the packets are not guaranteed
+
+69
+00:05:08,690 --> 00:05:14,970
+to be delivered? Well, if an application wants a guarantee that its data will be retransmitted
+
+70
+00:05:14,970 --> 00:05:20,110
+when necessary and will be delivered to the application in order and without corruption
+
+71
+00:05:20,110 --> 00:05:25,160
+then it needs another protocol running on top of IP. This is the job of the Transport
+
+72
+00:05:25,160 --> 00:05:28,280
+Layer….
+
+73
+00:05:28,280 --> 00:05:31,590
+The most common Transport Layer is TCP &lt;draw TCP: Transmission Control Protocol&gt;, or the
+
+74
+00:05:31,590 --> 00:05:35,790
+Tranmission Control Protocol. (You have probably heard of TCP/IP, which is when an application
+
+75
+00:05:35,790 --> 00:05:39,610
+uses both TCP and IP together).
+
+76
+00:05:39,610 --> 00:05:45,740
+TCP makes sure that data sent by an application at one end of the Internet is correctly delivered
+
+77
+00:05:45,740 --> 00:05:50,410
+– in the right order - to the application at the other end of the Internet. If the Network
+
+78
+00:05:50,410 --> 00:05:56,610
+Layers drops some datagrams, TCP will retransmit them, multiple times if need-be. If the Network
+
+79
+00:05:56,610 --> 00:06:00,340
+Layer delivers them out of order – perhaps because two packets follow a different path
+
+80
+00:06:00,340 --> 00:06:05,630
+to their destination – TCP will put the data back into the right order again. In later
+
+81
+00:06:05,630 --> 00:06:11,350
+videos you will learn a lot about TCP and how it works. For now, the main thing to remember
+
+82
+00:06:11,350 --> 00:06:16,910
+is that TCP provides a service to an application guaranteeing correct in-order delivery of
+
+83
+00:06:16,910 --> 00:06:23,290
+data, running on top of the Network Layer service, which provides an unreliable datagram
+
+84
+00:06:23,290 --> 00:06:27,080
+delivery service.
+
+85
+00:06:27,080 --> 00:06:31,410
+As I’m sure you can imagine, applications such as a web client, or an email client,
+
+86
+00:06:31,410 --> 00:06:36,730
+find TCP very useful indeed. By employing TCP to make sure data is delivered correctly,
+
+87
+00:06:36,730 --> 00:06:41,190
+they don’t have to worry about implementing all of the mechanisms inside the application.
+
+88
+00:06:41,190 --> 00:06:45,520
+They can take advantage of the huge effort that developers put into correctly implementing
+
+89
+00:06:45,520 --> 00:06:52,520
+TCP, and reuse it to deliver data correctly. Reuse is another big advantage of layering.
+
+90
+00:06:54,630 --> 00:06:59,960
+But not all applications need data to be delivered correctly. For example, if a video conference
+
+91
+00:06:59,960 --> 00:07:03,870
+application is sending a snippet of video in a packet, there may be no point waiting
+
+92
+00:07:03,870 --> 00:07:09,120
+for the packet to be retransmitted multiple times; better to just move on. Some applications
+
+93
+00:07:09,120 --> 00:07:12,240
+just don’t need the TCP service.
+
+94
+00:07:12,240 --> 00:07:16,470
+If an application doesn’t need reliable delivery, it can use the much simpler UDP
+
+95
+00:07:16,470 --> 00:07:21,690
+– or user datagram protocol – instead &lt;draw: UDP: User Datagram Protocol&gt;. UDP just
+
+96
+00:07:21,690 --> 00:07:25,270
+bundles up application data and hands it to the Network Layer for delivery to the other
+
+97
+00:07:25,270 --> 00:07:28,680
+end. UDP offers no delivery guarantees.
+
+98
+00:07:28,680 --> 00:07:34,240
+In other words, an Application has the choice of at least two different Transport Layer
+
+99
+00:07:34,240 --> 00:07:39,810
+services: TCP and UDP. There are in fact many other choices too, but these are the most
+
+100
+00:07:39,810 --> 00:07:44,620
+commonly used transport layer services.
+
+101
+00:07:44,620 --> 00:07:49,470
+Finally we have the Application Layer at the top of the 4 Layer Model. There are of course
+
+102
+00:07:49,470 --> 00:07:54,930
+many thousands of applications that use the Internet. While each application is different,
+
+103
+00:07:54,930 --> 00:07:59,160
+it can reuse the Transport Layer by using the well-defined API from the Application
+
+104
+00:07:59,160 --> 00:08:03,720
+Layer to the TCP or UDP service beneath.
+
+105
+00:08:03,720 --> 00:08:08,370
+As we saw in the last video, applications typically want a bi-directional reliable byte
+
+106
+00:08:08,370 --> 00:08:13,460
+stream between two end points. They can send whatever byte-stream they want, and Applications
+
+107
+00:08:13,460 --> 00:08:17,490
+have a protocol of their own that defines the syntax and semantics of data flowing between
+
+108
+00:08:17,490 --> 00:08:21,970
+the two end points. &lt;click to make second 4layer stack appear&gt; For example, as we saw
+
+109
+00:08:21,970 --> 00:08:26,480
+in the last video, when a web client requests a page from a web server &lt;draw them on Application
+
+110
+00:08:26,480 --> 00:08:30,820
+layer&gt;, the web client sends a GET request. This is one of the commands of the hypertext
+
+111
+00:08:30,820 --> 00:08:37,820
+transfer protocol, or http. http dictates that the GET command is sent as an ASCII string,
+
+112
+00:08:37,830 --> 00:08:44,530
+along with the URL of the page being requested. As far as the Application Layer is concerned,
+
+113
+00:08:44,530 --> 00:08:49,800
+the GET request is sent directly to its peer at the other end – the web server Application
+
+114
+00:08:49,800 --> 00:08:53,070
+&lt;draw dotted lines to show peer communication of GET request&gt;. The Application doesn’t
+
+115
+00:08:53,070 --> 00:08:58,530
+need to know how it got there, or how many times it needed to be retransmitted. At the
+
+116
+00:08:58,530 --> 00:09:02,740
+web client, the Application Layer hands the GET request to the TCP layer, which provides
+
+117
+00:09:02,740 --> 00:09:06,710
+the service of making sure it is reliably delivered. It does this using the services
+
+118
+00:09:06,710 --> 00:09:10,630
+of the Network layer, which in turn uses the services of the Link Layer.
+
+119
+00:09:10,630 --> 00:09:13,690
+We say that each layer communicates with its peer layer &lt;draw dotted lines&gt;. It’s as
+
+120
+00:09:13,690 --> 00:09:17,770
+if each layer is only communicating with the same layer at the other end of the link or
+
+121
+00:09:17,770 --> 00:09:24,770
+Internet, without regard for how the layer below gets the data there.
+
+122
+00:09:24,960 --> 00:09:27,020
+Putting it all together then….
+
+123
+00:09:27,020 --> 00:09:30,710
+Network engineers find it convenient to arrange all the functions that make up the Internet
+
+124
+00:09:30,710 --> 00:09:34,220
+into *Layers*. At the top is the Application, such as BitTorrent
+
+125
+00:09:34,220 --> 00:09:38,360
+or Skype or the world wide web, which talks to its peer layer at the destination &lt;draw
+
+126
+00:09:38,360 --> 00:09:42,700
+dotted line&gt;. When the application has data to send, it hands the data to the Transport
+
+127
+00:09:42,700 --> 00:09:46,280
+layer &lt;draw red arrows down&gt;, which has the job of delivering the data reliably (or not)
+
+128
+00:09:46,280 --> 00:09:50,320
+to the other end. The Transport Layer sends data to the other end by handing it to the
+
+129
+00:09:50,320 --> 00:09:54,020
+Network Layer &lt;draw red arrow down&gt;, which has the job of breaking the data into packets,
+
+130
+00:09:54,020 --> 00:09:57,180
+each with the correct destination address. Finally, the packets are handed to the Link
+
+131
+00:09:57,180 --> 00:10:01,110
+Layer, which has the responsibility of delivering the packet from one hop to the next along
+
+132
+00:10:01,110 --> 00:10:02,930
+its path.
+
+133
+00:10:02,930 --> 00:10:06,630
+The data makes its way, hop by hop, from one router to the next. The Network Layer forwards
+
+134
+00:10:06,630 --> 00:10:11,020
+it to the next router, one at a time, until it reaches the destination. There, the data
+
+135
+00:10:11,020 --> 00:10:15,840
+is passed up the layers, until it reaches the Application.
+
+136
+00:10:15,840 --> 00:10:22,840
+Application: Bi-directional reliable byte stream between two applications, using application-specific
+
+137
+00:10:24,200 --> 00:10:29,480
+semantics (e.g. http, bit-torrent).
+
+138
+00:10:29,480 --> 00:10:36,480
+Transport: Guarantees correct, in-order delivery of data end-to-end. Controls congestion.
+
+139
+00:10:37,760 --> 00:10:44,760
+Network: Delivers datagrams end-to-end. Best-effort delivery – no guarantees. Must use the Internet
+
+140
+00:10:47,440 --> 00:10:48,780
+Protocol (IP).
+
+141
+00:10:48,780 --> 00:10:53,440
+Link: Delivers data over a single link between an end host and router, or between routers
+
+142
+00:10:53,440 --> 00:10:59,870
+Now we’ve seen what the 4 layers are, I’ll finish with two extra things you need to know….
+
+143
+00:10:59,870 --> 00:11:05,500
+The first is that IP is often referred to as “the thin waist” of the Internet. This
+
+144
+00:11:05,500 --> 00:11:09,960
+is because if we want to use the Internet, we have to use the Internet Protocol, or IP.
+
+145
+00:11:09,960 --> 00:11:11,690
+We have no choice.
+
+146
+00:11:11,690 --> 00:11:16,540
+But we have lots of choices for Link Layers: IP runs over many different Link Layers, such
+
+147
+00:11:16,540 --> 00:11:21,940
+as Ethernet, WiFi, DSL, 3G cellular, and so on.
+
+148
+00:11:21,940 --> 00:11:25,820
+On top of the unreliable IP layer, we can choose between many different transport layers
+
+149
+00:11:25,820 --> 00:11:32,540
+. We already saw TCP and UDP. There is RTP for real time data and many others too. And
+
+150
+00:11:32,540 --> 00:11:39,320
+of course there are tens of thousands of different applications.
+
+151
+00:11:39,320 --> 00:11:44,000
+The second thing you should know is that in the 1980s the International Standards Organization,
+
+152
+00:11:44,000 --> 00:11:50,880
+or ISO created a 7-layer model to represent any type of network. It was called the 7-layer
+
+153
+00:11:50,880 --> 00:11:56,720
+Open Systems Interconnection or OSI model. We don’t spend any time on it in this course
+
+154
+00:11:56,720 --> 00:12:02,600
+because it has been replaced by the 4-layer Internet model. If you’re interested, you’ll
+
+155
+00:12:02,600 --> 00:12:09,600
+find any networking textbook and Wikipedia describes the 7 layers in lots of detail.
+
+156
+00:12:10,380 --> 00:12:15,860
+The 7 layer model defined layers that were combined in the 4 layer Internet model. For
+
+157
+00:12:15,860 --> 00:12:21,850
+example, what we call the Link Layer today was separated into the Link Layer – that
+
+158
+00:12:21,850 --> 00:12:26,420
+defined the framing format – and the Physical Layer that defined things like the voltage
+
+159
+00:12:26,420 --> 00:12:32,870
+levels on a cable, or the physical dimensions of a connector. The Network Layers are pretty
+
+160
+00:12:32,870 --> 00:12:39,870
+much the same. The Transport and Application Layers are each represented by 2 layers in
+
+161
+00:12:39,870 --> 00:12:44,920
+the OSI model. These &lt;annotate the text in the middle&gt; are examples of commonly used
+
+162
+00:12:44,920 --> 00:12:51,920
+Internet protocols, and how they map to the OSI numbering scheme.
+
+163
+00:12:55,450 --> 00:13:02,130
+Today, the only real legacy of the 7-layer OSI model is the numbering system. You’ll
+
+164
+00:13:02,130 --> 00:13:07,450
+often hear network engineers refer to the Network Layer as “Layer 3”, &lt;circle it&gt;
+
+165
+00:13:07,450 --> 00:13:13,240
+even though it is the 2nd layer up from the bottom in the Internet Layer. Similarly, you’ll
+
+166
+00:13:13,240 --> 00:13:19,730
+hear people refer to Ethernet as a Layer 2 protocol &lt;circle it&gt;, and the Application
+
+167
+00:13:19,730 --> 00:13:20,810
+as Layer 7 &lt;circle it&gt;.
+

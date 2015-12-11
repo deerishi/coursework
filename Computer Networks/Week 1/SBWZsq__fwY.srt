@@ -1,0 +1,484 @@
+0
+00:00:00,099 --> 00:00:03,649
+Nick: In the last few videos you’ve seen many references to “layering”, particularly
+
+1
+00:00:03,649 --> 00:00:08,690
+in the video describing the 4-layer Internet Model. Layering is a very widely used principle
+
+2
+00:00:08,690 --> 00:00:12,470
+and has been used in networking for decades, predating the Internet.
+
+3
+00:00:12,470 --> 00:00:18,070
+In fact, layering is a design principle used widely outside networking as well --- it is
+
+4
+00:00:18,070 --> 00:00:22,250
+commonly used as a design principle in many many types of computer system. There are lots
+
+5
+00:00:22,250 --> 00:00:27,860
+of reasons for layering, and we’ll explore some of them in this video. We’ll explore
+
+6
+00:00:27,860 --> 00:00:31,970
+what layering is, we’ll look at some simple examples of layering in communication and
+
+7
+00:00:31,970 --> 00:00:35,980
+computer systems, and we’ll explain why so many systems are layered – either by
+
+8
+00:00:35,980 --> 00:00:39,789
+natural happenstance or deliberately by design.
+
+9
+00:00:39,789 --> 00:00:43,879
+Let’s start with a definition of layering.
+
+10
+00:00:43,879 --> 00:00:48,530
+Layering is the name we give to the organization of a system into a number of separate functional
+
+11
+00:00:48,530 --> 00:00:51,859
+components, or layers.
+
+12
+00:00:51,859 --> 00:00:57,219
+The layers are hierarchical and they communicate sequentially; i.e. each layer has an interface
+
+13
+00:00:57,219 --> 00:01:01,429
+only to the layer directly above or below.
+
+14
+00:01:01,429 --> 00:01:06,200
+Each layer provides a well defined service to the layer above, using the services provided
+
+15
+00:01:06,200 --> 00:01:11,450
+by the layer(s) below and its own private processing.
+
+16
+00:01:11,450 --> 00:01:16,090
+There are many examples of layering in everyday life, particularly when one service is deliberately
+
+17
+00:01:16,090 --> 00:01:21,119
+or naturally layered on top of another. For example, if you are looking for airplane tickets
+
+18
+00:01:21,119 --> 00:01:27,770
+you might visit a brokerage website such as Google Flights, Hipmunk or Kayak. These websites
+
+19
+00:01:27,770 --> 00:01:32,409
+let you find tickets across a wide range of airlines by communicating with a single service.
+
+20
+00:01:32,409 --> 00:01:37,079
+You could, instead, go to the website of every airline to query what tickets they have available.
+
+21
+00:01:37,079 --> 00:01:42,210
+A brokerage website provides a service layer on top of each airline, abstracting away the
+
+22
+00:01:42,210 --> 00:01:47,749
+details of each airline’s website for you. Now, if we look under the covers of each airline,
+
+23
+00:01:47,749 --> 00:01:52,399
+they fly different types of airplane, over different routes. The airline takes care of
+
+24
+00:01:52,399 --> 00:01:56,210
+the details of providing the service, and offers you the simple abstraction of a ticket
+
+25
+00:01:56,210 --> 00:02:00,799
+valid for a particular flight to take you between two airports. They hide many other
+
+26
+00:02:00,799 --> 00:02:06,179
+details too, such as how they provide the awful food they serve. In most cases, they
+
+27
+00:02:06,179 --> 00:02:10,700
+have a number of suppliers to provide meals, drinks, fuel and so on. Each of those are
+
+28
+00:02:10,699 --> 00:02:16,850
+naturally hidden from us, the consumer. This separation of concerns allows each layer in
+
+29
+00:02:16,850 --> 00:02:22,630
+the hierarchy to focus on doing its job well, and provide a well defined service to the
+
+30
+00:02:22,630 --> 00:02:26,460
+layer above.
+
+31
+00:02:26,460 --> 00:02:32,800
+Another well known example of layering, closer to the Internet, is the postal service.
+
+32
+00:02:32,800 --> 00:02:38,140
+Imagine that I have a book that I want to send to Phil &lt;click for book to appear then
+
+33
+00:02:38,140 --> 00:02:38,390
+arrow to appear&gt;
+
+34
+00:02:38,140 --> 00:02:43,860
+I place it in an envelope, add Phil’s address and mine and then hand it to Olive to take
+
+35
+00:02:43,860 --> 00:02:49,810
+to the mailbox. The postal service sorts the mail, then sends
+
+36
+00:02:49,810 --> 00:02:55,160
+it by a variety of different means (airplanes, mail trucks, trains etc) until it reaches
+
+37
+00:02:55,160 --> 00:03:01,460
+a sorting office near Phil. The mail man delivers the letter to Phil, who opens it and finds
+
+38
+00:03:01,460 --> 00:03:06,090
+the book inside.
+
+39
+00:03:06,090 --> 00:03:12,490
+The service is layered. At the top, I don’t care how the letter gets from me to Phil – whether
+
+40
+00:03:12,490 --> 00:03:18,590
+it goes by plane, truck or hovercraft. And I don’t care about the route it takes, or
+
+41
+00:03:18,590 --> 00:03:22,910
+how many sorting offices it passes through along the way. I don’t mind whether Olive
+
+42
+00:03:22,910 --> 00:03:27,300
+walks, skips, bicycles or runs to the mailbox; I don’t care which mailbox she posts the
+
+43
+00:03:27,300 --> 00:03:33,840
+letter in. I want the lower layers to abstract away the details for me, providing me with
+
+44
+00:03:33,840 --> 00:03:38,510
+a simple service model. I put the book in an envelope and the layers below deliver it
+
+45
+00:03:38,510 --> 00:03:43,450
+to Phil. In turn, Olive doesn’t need to know how the postal service delivers the letter;
+
+46
+00:03:43,450 --> 00:03:47,980
+she simply communicates with the layer below by posting the letter. Phil just wants the
+
+47
+00:03:47,980 --> 00:03:50,510
+book.
+
+48
+00:03:50,510 --> 00:03:55,000
+Notice that each layer communicates only with the layers above and below. If the postal
+
+49
+00:03:55,000 --> 00:03:59,850
+service deploys new trains, or starts using a different airline freight service, Phil
+
+50
+00:03:59,850 --> 00:04:04,040
+and I don’t need to know about it. IN other words, because communication is simply up
+
+51
+00:04:04,040 --> 00:04:09,210
+and down, with a well defined interface between layers, we can improve each layer independently
+
+52
+00:04:09,210 --> 00:04:14,840
+over time. For example, if I want faster, guaranteed delivery, I could hand the envelope
+
+53
+00:04:14,840 --> 00:04:20,640
+to a carrier such as DHL or Fedex. The interface is almost the same – I give them an envelope
+
+54
+00:04:20,640 --> 00:04:21,989
+and money.
+
+55
+00:04:21,988 --> 00:04:25,930
+Phil: Layering is deliberately designed into many computer systems.
+
+56
+00:04:25,930 --> 00:04:30,720
+When we write programs – this is TY editing a program – we create source code using
+
+57
+00:04:30,720 --> 00:04:35,060
+a language that abstracts away the details of the operating system, how virtual memory
+
+58
+00:04:35,060 --> 00:04:40,410
+works, and the low level details of the hardware. (OK, so C isn’t great at hiding the details
+
+59
+00:04:40,410 --> 00:04:44,930
+– but many other languages, like Java and Python deliberately shield us from how the
+
+60
+00:04:44,930 --> 00:04:47,060
+lower layers work).
+
+61
+00:04:47,060 --> 00:04:51,120
+As a programmer we communicate with the layer below – the compiler – by handing it our
+
+62
+00:04:51,120 --> 00:04:55,570
+source code. The compiler is a self-contained functional component that is responsible for
+
+63
+00:04:55,570 --> 00:05:02,570
+several tasks, such as: lexical analysis, parsing our code, preprocessing declarations,
+
+64
+00:05:03,340 --> 00:05:08,650
+and then code generation and optimization. The compiler generates object code, which
+
+65
+00:05:08,650 --> 00:05:12,290
+is then passes to the linker.
+
+66
+00:05:12,290 --> 00:05:17,060
+The linker links together the compiled object files and libraries. It generates an executable
+
+67
+00:05:17,060 --> 00:05:18,570
+file.
+
+68
+00:05:18,570 --> 00:05:23,490
+The CPU (real or virtual) then executes the code.
+
+69
+00:05:23,490 --> 00:05:27,530
+If you have experience writing computer programs, the benefits of layering are fairly clear
+
+70
+00:05:27,530 --> 00:05:32,620
+in this example. Layering breaks down the overall problem of writing programs that execute
+
+71
+00:05:32,620 --> 00:05:39,110
+on hardware into modules, or functional components, each with a well defined role and providing
+
+72
+00:05:39,110 --> 00:05:46,110
+a well defined service to the layer above. It also provides a clear separation of concerns:
+
+73
+00:05:46,280 --> 00:05:51,120
+The compiler can focus on lexical analysis, parsing and so on; the linker can focus on
+
+74
+00:05:51,120 --> 00:05:56,220
+efficiently piecing objects together. Neither has to worry about the job of the other, and
+
+75
+00:05:56,220 --> 00:06:01,389
+each can be improved, upgraded and replaced over time as technology and know-how progress.
+
+76
+00:06:01,389 --> 00:06:07,389
+For example, we might swap out a commercial C compiler with “gcc” or vice-versa, without
+
+77
+00:06:07,389 --> 00:06:14,200
+needing to change the linker or the language we use.
+
+78
+00:06:14,200 --> 00:06:18,480
+When Nick first drafted these slides, I was excited that he put compilers in as an example
+
+79
+00:06:18,480 --> 00:06:22,590
+of layering: they’re a great example of both the benefits of layering as well as how
+
+80
+00:06:22,590 --> 00:06:27,100
+sometimes you need to break layering despite its very negative consequences.
+
+81
+00:06:27,100 --> 00:06:32,419
+Let’s take the C programming language as an example. Generally speaking, a piece of
+
+82
+00:06:32,419 --> 00:06:38,630
+C code can be compiled for almost any processor. We can take C code like i++ and compile it
+
+83
+00:06:38,630 --> 00:06:43,950
+for an ARM processor in a phone, an x86_64 processor in a laptop, or microcontroller
+
+84
+00:06:43,950 --> 00:06:48,790
+in an ultra-modern dish washer. In this way the C code is hardware independent and so
+
+85
+00:06:48,790 --> 00:06:52,010
+keeps the layering here.
+
+86
+00:06:52,010 --> 00:06:58,110
+But sometimes we need our C code to do something special that only our processor can do. For
+
+87
+00:06:58,110 --> 00:07:02,650
+example, an x86_64 processor has all kinds of special instructions that a microcontroller
+
+88
+00:07:02,650 --> 00:07:09,650
+doesn’t. C allows you to directly include assembly code. Software like operating systems
+
+89
+00:07:09,980 --> 00:07:14,419
+kernels such as Linux and Windows use this for some of their lowest level implementations.
+
+90
+00:07:14,419 --> 00:07:19,860
+The layering that C provides hides this detail so doesn’t let you do so directly, but you
+
+91
+00:07:19,860 --> 00:07:26,449
+have to do it to achieve your goal. So OS kernels include assembly code. Doing this
+
+92
+00:07:26,449 --> 00:07:31,160
+means that code is no longer layer independent: the Linux context switch assembly written
+
+93
+00:07:31,160 --> 00:07:37,710
+for ARM only works for ARM. So you have to write a version for each layer. If Linux wants
+
+94
+00:07:37,710 --> 00:07:42,880
+to run on a new processor, developers need to write new assembly code for that processor.
+
+95
+00:07:42,880 --> 00:07:47,620
+So this is a great example because it shows the benefits of layers they separate concerns
+
+96
+00:07:47,620 --> 00:07:53,300
+and simplify your system, just as programming C is easier than assembly. But sometimes you
+
+97
+00:07:53,300 --> 00:07:59,060
+have to break the layer boundaries. Doing so has a huge cost, suddenly you are no longer
+
+98
+00:07:59,060 --> 00:08:04,080
+independent of the lower layer, greatly limiting flexibility. So sometimes you have to do it,
+
+99
+00:08:04,080 --> 00:08:11,080
+but do so only when you really have to. As we’ll see, a lot of the practical, operational
+
+100
+00:08:11,350 --> 00:08:15,580
+challenges in the Internet today result from people breaking layering and assuming thinks
+
+101
+00:08:15,580 --> 00:08:21,250
+above and below their service interface: there’s a continual tension to improve the Internet
+
+102
+00:08:21,250 --> 00:08:27,150
+by making cross-layer optimizations and the resulting loss of flexibility. We’ll see
+
+103
+00:08:27,150 --> 00:08:32,969
+one really telling example of this with something called NATs, or Network Address Translators,
+
+104
+00:08:32,969 --> 00:08:37,959
+tremendously useful devices that have unfortunately made it almost impossible to add new transport
+
+105
+00:08:37,958 --> 00:08:40,949
+protocols to the Internet.
+
+106
+00:08:40,948 --> 00:08:46,139
+So in summary, there are five main reasons we use layering in computer systems:
+
+107
+00:08:46,139 --> 00:08:52,540
+Modularity: It breaks down the system into smaller, more manageable modules.
+
+108
+00:08:52,540 --> 00:08:56,980
+Well defined service: Each layer provides a well defined service to the layer above.
+
+109
+00:08:56,980 --> 00:09:03,009
+Reuse: A layer above can rely on all the hard work put in by others to implement the layers
+
+110
+00:09:03,009 --> 00:09:09,149
+below. It saves us the time to rewrite each layer whenever we build a system.
+
+111
+00:09:09,149 --> 00:09:13,660
+Separation of concerns: Each layer can focus on its own job, without having to worry about
+
+112
+00:09:13,660 --> 00:09:19,439
+how other layers do theirs. The only communication is up-down the layers, so it helps keep one
+
+113
+00:09:19,439 --> 00:09:24,540
+layer’s processing and data local and internal where possible, minimizing the complex interactions
+
+114
+00:09:24,540 --> 00:09:27,670
+between layers.
+
+115
+00:09:27,670 --> 00:09:29,439
+Continuous improvement:
+
+116
+00:09:29,439 --> 00:09:36,439
+A 6th benefit is specific to layered communication systems, such as the Internet. That is peer
+
+117
+00:09:37,720 --> 00:09:43,220
+to peer communications. In the 4-layer Internet model we saw how each layer communicates with
+
+118
+00:09:43,220 --> 00:09:50,050
+its peer on another system, using the delivery service provided by the layers below. Similarly,
+
+119
+00:09:50,050 --> 00:09:55,110
+in the mail example, Phil and I are communicating with each other as users, without worrying
+
+120
+00:09:55,110 --> 00:09:57,249
+about how the communication service works.
+

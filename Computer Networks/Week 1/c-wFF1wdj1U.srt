@@ -1,0 +1,104 @@
+0
+00:00:00,630 --> 00:00:04,630
+For two parties to communicate, they need to agree on the messages they exchange. If
+
+1
+00:00:04,630 --> 00:00:08,170
+one party assumes messages are in Spanish and the other assumes they are in Cambodian,
+
+2
+00:00:08,170 --> 00:00:11,640
+they will not be able to communicate. For computer communication, this means agreeing
+
+3
+00:00:11,640 --> 00:00:16,689
+on what fields messages have, how they are arranged and formatted, and how they are represented.
+
+4
+00:00:16,689 --> 00:00:20,859
+To generate a message to send, software typically has to create a copy of it in memory, which
+
+5
+00:00:20,859 --> 00:00:25,249
+it then passes to the networking card. Similarly, when a computer receives a message, the networking
+
+6
+00:00:25,249 --> 00:00:30,119
+card puts that message in memory, which software can then access. Understanding how this works
+
+7
+00:00:30,119 --> 00:00:34,130
+and some of the pitfalls you can encounter is important if you want to understand network
+
+8
+00:00:34,130 --> 00:00:39,320
+protocols and write network protocol software. So let’s start with a simple model of computer
+
+9
+00:00:39,320 --> 00:00:44,300
+memory. In most computers today, memory is organized in terms of bytes: 8 bit chunks
+
+10
+00:00:44,300 --> 00:00:49,190
+of memory. A program has an address space, starting at address zero. Most computers today
+
+11
+00:00:49,190 --> 00:00:53,579
+are 64 bits: this means that memory addresses are 64 bits long, so a computer has up to
+
+12
+00:00:53,579 --> 00:00:58,920
+2 to the 64 bytes, or 18 sextillion bytes. In practice, computers today do not have this
+
+13
+00:00:58,920 --> 00:01:04,519
+much memory: they have gigabytes, which is 2 to the 30th. In this example, our computer
+
+14
+00:01:04,519 --> 00:01:11,519
+has 8 gigabytes of memory, so its largest address is the hexidecimal value shown. Software
+
+15
+00:01:15,789 --> 00:01:20,090
+can access each byte of this memory, or access bytes in groups, such as loading a 64-bit
+
+16
+00:01:20,090 --> 00:01:26,049
+integer from 8 contiguous byte cells of memory in a single instruction. But how does a computer
+
+17
+00:01:26,049 --> 00:01:30,789
+represent a multibyte value? Let’s say we want to represent the number 1,024, which
+
+18
+00:01:30,789 --> 00:01:37,789
+in hexidecimal is 0x0400, or 4 times 256. This value requires 16 bits, or two bytes.
+
+19
+00:01:39,170 --> 00:01:45,389
+Which byte comes first: 0x00 or 0x04? How you lay out a multibyte value in memory is
+
+20
+00:01:45,389 --> 00:01:51,279
+called endianness, and there are two options. In little endian, the least significant byte
+
+21
+00:01:51,279 --> 00:01:56,999
+is at the lowest address. So the least significant byte comes first in memory. It turns out that
+
+22
+00:01:56,999 --> 00:02:02,149
+from a computational and architectural standpoint, this can make the most sense. The other option
+
+23
+00:02:02,149 --> 00:02:06,959
+is big endian, where the most significant byte is the lowest address. Big endian makes
+
+24
+00:02:06,959 --> 00:02:12,110
+more sense to a human reader, because it’s how we write numbers, with the most significant
+
+25
+00:02:12,110 --> 00:02:12,970
+digits first.
+

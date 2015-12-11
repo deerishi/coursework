@@ -1,0 +1,148 @@
+0
+00:00:00,220 --> 00:00:03,889
+The Internet Protocol allows two computers to exchange messages across a network that&#39;s
+
+1
+00:00:03,889 --> 00:00:09,180
+built out of many different link layers. It does so through addresses. An IP packet has
+
+2
+00:00:09,180 --> 00:00:14,500
+a source and a destination address. Routers decide which link to forward a packet over
+
+3
+00:00:14,500 --> 00:00:19,159
+based on the packet&#39;s destination address. Let’s look in detail at what IP version
+
+4
+00:00:19,159 --> 00:00:23,499
+4 addresses look like, how they are formatted, and how they are allocated.
+
+5
+00:00:23,499 --> 00:00:27,519
+The original goal of the Internet Protocol was to take many different networks and stitch
+
+6
+00:00:27,519 --> 00:00:32,260
+them together. For this to work, the protocol needed a way to refer to a computer that was
+
+7
+00:00:32,259 --> 00:00:37,450
+independent of the network it was on and unique. So a computer on an IBM network and a computer
+
+8
+00:00:37,450 --> 00:00:41,890
+connected to a router over a serial line can talk to each other, and need a way to address
+
+9
+00:00:41,890 --> 00:00:46,330
+each other. Today, IPv4 addresses are a bit more complicated, they’re not totally unique
+
+10
+00:00:46,330 --> 00:00:50,130
+due to a bunch of special cases and uses, but for now let’s just assume they’re
+
+11
+00:00:50,130 --> 00:00:50,760
+unique.
+
+12
+00:00:50,760 --> 00:00:56,380
+An Internet Protocol, version 4 address is 32 bits long. This 32 bits is often written
+
+13
+00:00:56,380 --> 00:01:03,380
+as 4 octets, 4 8 bit values, in the form a.b.c.d. Here are three examples. 171.64.64.64, 128.30.76.82,
+
+14
+00:01:09,159 --> 00:01:16,159
+and 12.22.58.30. Every device connected through IPv4 has an IP address. The IP layer delivers
+
+15
+00:01:19,310 --> 00:01:24,310
+packets whose destination is this address to that device.
+
+16
+00:01:24,310 --> 00:01:29,610
+In addition to an address, a device typically also has something called a netmask. A netmask
+
+17
+00:01:29,610 --> 00:01:35,640
+tells the device which IP addresses are local -- on the same link -- and which require going
+
+18
+00:01:35,640 --> 00:01:41,170
+through an IP router. Think, for example, of a laptop on a wireless network. In order
+
+19
+00:01:41,170 --> 00:01:44,940
+to send a packet to another device in the same wireless network, the laptop doesn’t
+
+20
+00:01:44,940 --> 00:01:48,940
+need to go through an IP router. It can, in theory, just send the packet directly to the
+
+21
+00:01:48,940 --> 00:01:52,990
+other device since it’s on the same link.
+
+22
+00:01:52,990 --> 00:01:56,950
+A netmask is written as a string of consecutive 1s, starting with the most significant bit.
+
+23
+00:01:56,950 --> 00:02:03,950
+A netmask of 255.255.255.0, for example, means the first 3 octets are all 1s (2 to the 8th
+
+24
+00:02:04,610 --> 00:02:11,400
+-1 is 255) and the last octet is zero. This means that an IP address which matches the
+
+25
+00:02:11,400 --> 00:02:16,450
+first three octets -- 24 bits -- of your IP address is in the same network. A netmask
+
+26
+00:02:16,450 --> 00:02:23,450
+of 255.255.252.0 means the netmask is 22 bits long, while 255.128.0.0 is a 9 bit netmask.
+
+27
+00:02:26,120 --> 00:02:30,260
+You tell whether two computers are in the same network by taking a bitwise AND of their
+
+28
+00:02:30,260 --> 00:02:34,150
+addresses with the netmask. If the resulting addresses are equal, they are in the same
+
+29
+00:02:34,150 --> 00:02:34,730
+network.
+
+30
+00:02:34,730 --> 00:02:39,069
+Let’s see what this looks like on my computer. I can open up a terminal an use the ifconfig
+
+31
+00:02:39,069 --> 00:02:43,340
+program. My computer is connected to the Internet over WiFi, which happens to be the link named
+
+32
+00:02:43,340 --> 00:02:48,000
+“en1.” If we look inside the “en1” information, we can see that my Internet Protocol
+
+33
+00:02:48,000 --> 00:02:55,000
+version 4 address is 192.168.0.106 and my netmask is 0xffffff00, which is hexidecimal
+
+34
+00:02:58,560 --> 00:03:03,709
+for 255.255.255.0. This means that if I send an IP packet to an address beginning with
+
+35
+00:03:03,709 --> 00:03:10,150
+192.168.0 I should send it directly, but if it doesn’t begin with 192.168.0 I need to
+
+36
+00:03:10,150 --> 00:03:10,910
+send it through a router.
+

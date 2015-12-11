@@ -1,0 +1,480 @@
+0
+00:00:01,319 --> 00:00:04,630
+Phil: When the Internet was designed, it was based on a controversial and revolutionary
+
+1
+00:00:04,630 --> 00:00:09,389
+idea: packet switching. Nowadays it seems straightforward and the obvious way to build
+
+2
+00:00:09,389 --> 00:00:14,519
+networks. But that wasn’t always the case. It’s a very simple idea, but of course as
+
+3
+00:00:14,519 --> 00:00:18,519
+it is with simple ideas, there are many interesting implications that arise once you put it into
+
+4
+00:00:18,519 --> 00:00:22,519
+practice. We’ll spend an entire week of the course on packet switching and its implications,
+
+5
+00:00:22,519 --> 00:00:26,910
+but in this video we present the high-level idea and its immediate benefits.
+
+6
+00:00:26,910 --> 00:00:28,250
+Nick
+
+7
+00:00:28,250 --> 00:00:33,050
+Packet: A self-contained unit of data that carries information necessary for it to reach
+
+8
+00:00:33,050 --> 00:00:35,610
+its destination.
+
+9
+00:00:35,610 --> 00:00:40,210
+Packet switching is the idea that we break our data up into discrete, self-contained
+
+10
+00:00:40,210 --> 00:00:44,590
+chunks of data. Each chunk, called a packet, carries sufficient information that a network
+
+11
+00:00:44,590 --> 00:00:49,809
+can deliver the packet to its destination. So let’s say we have a source and a destination,
+
+12
+00:00:49,809 --> 00:00:54,399
+and a network of packet switches A, B, and C between them. When A receives a packet for
+
+13
+00:00:54,399 --> 00:00:59,820
+the destination, it sends it along the link to B. When B receives a packet for the destination,
+
+14
+00:00:59,820 --> 00:01:04,320
+it sends it along to C. When C receives a packet for the destination, it sends it to
+
+15
+00:01:04,319 --> 00:01:10,100
+the destination. In the simplest form of packet switching, each packet is routed separately
+
+16
+00:01:10,100 --> 00:01:14,229
+and independently. For example, let’s say there’s another switch connected to B, called
+
+17
+00:01:14,229 --> 00:01:20,590
+D. Immediately after sending a packet to C, B can send the next packet to D. Or, if the
+
+18
+00:01:20,590 --> 00:01:24,720
+next packet were also to the destination, it would send two packets back-to-back to
+
+19
+00:01:24,720 --> 00:01:28,390
+C.
+
+20
+00:01:28,390 --> 00:01:35,390
+Packet switching: Independently for each arriving packet, pick its outgoing link. If the link
+
+21
+00:01:35,670 --> 00:01:40,740
+is free, send it. Else hold the packet for later.
+
+22
+00:01:40,740 --> 00:01:45,729
+Here’s one example of how packet switching can work: each packet contains an explicit
+
+23
+00:01:45,729 --> 00:01:51,840
+route, specifying the IDs of each packet switch along the way. We call this “self routing”
+
+24
+00:01:51,840 --> 00:01:56,210
+or “source routing,” because the source specifies the route. When the source sends
+
+25
+00:01:56,210 --> 00:02:03,210
+a packet, it puts in the packet A, B, C, destination. It then forwards the packet to A. A looks
+
+26
+00:02:04,229 --> 00:02:09,610
+inside the header and sees the next hop is B. So it forwards the packet to B. B sees
+
+27
+00:02:09,610 --> 00:02:14,190
+the next hop is C, and C sees the last hop is the destination. It turns out the Internet
+
+28
+00:02:14,190 --> 00:02:19,690
+supports source routing, but it’s generally turned off because it raises big security
+
+29
+00:02:19,690 --> 00:02:20,220
+issues. People owning routers don’t want you telling them how to send packets, because
+
+30
+00:02:20,220 --> 00:02:20,790
+maybe you can trick them to sending them somewhere they shouldn’t, such as secure computers.
+
+31
+00:02:20,790 --> 00:02:25,510
+One simple optimization, and what the Internet mostly does today, is to place a small amount
+
+32
+00:02:25,510 --> 00:02:30,360
+of state in each switch which tells it which next hop to send packets to. For example,
+
+33
+00:02:30,360 --> 00:02:35,550
+a switch can have a table of destination addresses and the next hop. When it receives a packet,
+
+34
+00:02:35,550 --> 00:02:41,080
+it looks up the address in the table, and sends the packet to the appropriate next hop.
+
+35
+00:02:41,080 --> 00:02:47,030
+In this model, all the packet needs to carry is the destination address. Using the address,
+
+36
+00:02:47,030 --> 00:02:51,080
+each switch along the way can make the right decision. For example, in our network here,
+
+37
+00:02:51,080 --> 00:02:56,220
+A’s table says that packets to destination should go to switch B, switch B’s table
+
+38
+00:02:56,220 --> 00:03:00,230
+says packets to destination should go to switch C, and so on.
+
+39
+00:03:00,230 --> 00:03:01,660
+In packet switching, there is no dedicated circuit to carry our data. Instead, we send
+
+40
+00:03:01,660 --> 00:03:01,910
+a block of data by adding a header to it, and call it a packet. The header contains
+
+41
+00:03:01,810 --> 00:03:02,060
+the address of where the packet is going, just like an envelope tells the post office
+
+42
+00:03:01,940 --> 00:03:02,190
+where to send a letter. &lt;click to send packet on link&gt; A packet switched
+
+43
+00:03:02,050 --> 00:03:02,300
+network consists of end-hosts, links, and packet switches. When we send a packet, it
+
+44
+00:03:02,160 --> 00:03:02,410
+is routed hop-by-hop to its destination. Each packet switch lookups the address in the packet
+
+45
+00:03:02,280 --> 00:03:02,530
+header in its local forwarding table. For example, this packet is addressed to B.
+
+46
+00:03:02,400 --> 00:03:02,650
+When we transmit it, the first router looks up address B in its local table, and sees
+
+47
+00:03:02,530 --> 00:03:03,340
+that switch S2 is the next hop. S2 and S4 do the same thing, and the packet is eventually
+
+48
+00:03:03,340 --> 00:03:03,780
+delivered to B.In the Internet there are several different types of packet switches. Some of
+
+49
+00:03:03,780 --> 00:03:04,030
+them are called routers or gateways, while others are called Ethernet switches. We’ll
+
+50
+00:03:03,780 --> 00:03:04,030
+learn more about each of them later. At this stage you just need to know that they are
+
+51
+00:03:03,780 --> 00:03:04,030
+both types of packet switch, and they forward packets based on the destination address in
+
+52
+00:03:03,780 --> 00:03:04,030
+the header.
+
+53
+00:03:03,780 --> 00:03:05,890
+Packet switching has two really nice properties. The first is that a switch can make individual,
+
+54
+00:03:05,890 --> 00:03:09,700
+local decisions for each packet. It doesn’t need to keep extra state on the packets its
+
+55
+00:03:09,700 --> 00:03:14,050
+seen or whether two packets go to the same destination. Even if many packets are part
+
+56
+00:03:14,050 --> 00:03:18,180
+of some larger transfer or protocol, the switch doesn’t need to know or care. The switch
+
+57
+00:03:18,180 --> 00:03:21,630
+doesn’t need to know that some packets are a Skype call, others are a web request, and
+
+58
+00:03:21,630 --> 00:03:26,180
+others still are a firmware update for your computer. It just forwards packets. This greatly
+
+59
+00:03:26,180 --> 00:03:28,890
+simplifies the switch.
+
+60
+00:03:28,890 --> 00:03:34,540
+The second is that it lets a switch efficiently share a link between many parties. For example,
+
+61
+00:03:34,540 --> 00:03:38,210
+consider a wireless router in a home with two people browsing the Internet on their
+
+62
+00:03:38,210 --> 00:03:42,080
+laptops. (Draw picture) If one person is reading a page, then the other person can download
+
+63
+00:03:42,080 --> 00:03:46,680
+a file at the full speed of the link. If the first person starts loading a new web page,
+
+64
+00:03:46,680 --> 00:03:50,450
+the link can be shared between the two of them. Once the download completes, the first
+
+65
+00:03:50,450 --> 00:03:53,190
+person can use the full speed of the link.
+
+66
+00:03:53,190 --> 00:03:58,090
+These two points are really important, so we’ll go into some greater detail on both
+
+67
+00:03:58,090 --> 00:03:58,340
+of them.
+
+68
+00:03:58,090 --> 00:04:02,700
+Nick: Of course when we communicate we don’t usually send only one packet, we send many;
+
+69
+00:04:02,700 --> 00:04:07,450
+for example a voice call consists of many consecutive packets all part of the same communication.
+
+70
+00:04:07,450 --> 00:04:11,340
+We call this sequence of packets a flow. More specifically:
+
+71
+00:04:11,340 --> 00:04:16,449
+Flow: A collection of datagrams belonging to the same end-to-end communication, e.g.
+
+72
+00:04:16,449 --> 00:04:19,920
+a TCP connection.
+
+73
+00:04:19,920 --> 00:04:26,920
+Let’s first look at each packet being routed independently.
+
+74
+00:04:28,100 --> 00:04:31,410
+Because each packet is self-contained, a switch doesn’t need to know about groups of packets,
+
+75
+00:04:31,410 --> 00:04:35,820
+or flows of packets. Imagine if every switch had to keep track of every single web connection
+
+76
+00:04:35,820 --> 00:04:40,890
+passing through it. This would require a huge amount of state that would be hard to manage!
+
+77
+00:04:40,890 --> 00:04:45,270
+Instead, treating each packet independently means the switch can be much simpler to build,
+
+78
+00:04:45,270 --> 00:04:47,480
+manage, and troubleshoot.
+
+79
+00:04:47,480 --> 00:04:51,590
+The switch doesn’t need to worry about adding or removing this per-flow state. Imagine if
+
+80
+00:04:51,590 --> 00:04:55,010
+every time you wanted to load a web page, you had to communicate with every switch along
+
+81
+00:04:55,010 --> 00:05:01,630
+the path to set up state so your request would work. This could make things much slower.
+
+82
+00:05:01,630 --> 00:05:07,480
+Instead, you can just send packets and the switches forward them appropriately.
+
+83
+00:05:07,480 --> 00:05:11,920
+The switches also don’t need to *store* this state. Because switches have to be fast,
+
+84
+00:05:11,920 --> 00:05:17,760
+they’d need to store this state in very fast memory, which is expensive. This lets
+
+85
+00:05:17,760 --> 00:05:22,070
+switches focus on doing one thing, forwarding packets quickly.
+
+86
+00:05:22,070 --> 00:05:28,310
+Finally, it means switches don’t have to worry about failures. Imagine, for example,
+
+87
+00:05:28,310 --> 00:05:33,780
+what happens when you start a web request but then your tablet runs out of energy. The
+
+88
+00:05:33,780 --> 00:05:37,050
+switch is going to keep the per-flow state for the request, but if one of the nodes that
+
+89
+00:05:37,050 --> 00:05:41,720
+created the state fails, the switch needs to know how to clean up after it. Otherwise
+
+90
+00:05:41,720 --> 00:05:47,040
+you can have millions, billions of dead flows eating up your memory. With packet switching,
+
+91
+00:05:47,040 --> 00:05:51,940
+a switch has no per-endpoint state. If your tablet dies, the switch doesn’t care, it
+
+92
+00:05:51,940 --> 00:05:56,350
+just means that it stops receiving packets from it. In this way the switch is more functionally
+
+93
+00:05:56,350 --> 00:05:59,460
+independent of the computers sending traffic through it.
+
+94
+00:05:59,460 --> 00:06:00,500
+Phil
+
+95
+00:06:00,500 --> 00:06:05,680
+Think about how you typically use the Internet – your use is bursty. You load a web page,
+
+96
+00:06:05,680 --> 00:06:10,090
+then read it, then load another one. You download a few songs from iTunes, then listen to them.
+
+97
+00:06:10,090 --> 00:06:14,600
+You stream a show from Netflix for forty five minutes, then stop. Data traffic is bursty:
+
+98
+00:06:14,600 --> 00:06:19,480
+rather than always sending and receiving data at a fixed rate, usage jumps and drops, goes
+
+99
+00:06:19,480 --> 00:06:22,270
+up and down, over time.
+
+100
+00:06:22,270 --> 00:06:26,660
+While there are large-scale changes and peaks in data traffic – 3PM is typically high,
+
+101
+00:06:26,660 --> 00:06:32,660
+as is 8PM, while 2AM is low, on a smaller scale it is very bursty and these bursts are
+
+102
+00:06:32,660 --> 00:06:36,639
+often independent. Let’s say you and your friend are both browsing the web in a coffee
+
+103
+00:06:36,639 --> 00:06:41,160
+shop. When you load a new page and when your friend loads a new page are mostly independent.
+
+104
+00:06:41,160 --> 00:06:45,220
+Sometimes they might overlap, but often they won’t. By treating all of your traffic as
+
+105
+00:06:45,220 --> 00:06:50,010
+just packets, the wireless router can very effectively and simply share its capacity
+
+106
+00:06:50,010 --> 00:06:53,550
+between you. If you’re loading a page while your friend is reading, the wireless router
+
+107
+00:06:53,550 --> 00:06:57,690
+can give all of its capacity to your packets. Similarly, if your friend is loading a page
+
+108
+00:06:57,690 --> 00:07:01,370
+and you’re reading, the router can give all of its capacity to your friend’s packets.
+
+109
+00:07:01,370 --> 00:07:04,570
+The link doesn’t need to go partially idle because one of you isn’t using it, and if
+
+110
+00:07:04,570 --> 00:07:08,370
+you’re both using it then the link can be shared between you.
+
+111
+00:07:08,370 --> 00:07:13,139
+This idea of taking a single resource and sharing it across multiple users in a probabilistic
+
+112
+00:07:13,139 --> 00:07:19,050
+or statistical way is called statistical multiplexing. It’s statistical in that each user receives
+
+113
+00:07:19,050 --> 00:07:23,080
+a statistical share of the resource based on how much others are using it. For example,
+
+114
+00:07:23,080 --> 00:07:26,580
+if your friend is reading, you can use all of the link. If both of you are loading a
+
+115
+00:07:26,580 --> 00:07:30,070
+page, you receive half of the link capacity.
+
+116
+00:07:30,070 --> 00:07:34,560
+Nick: So those are the two major benefits of packet switching: it makes the switches
+
+117
+00:07:34,560 --> 00:07:40,090
+simple because they don’t need to know about flows of packets. And second, it lets us efficiently
+
+118
+00:07:40,090 --> 00:07:47,090
+share the capacity among many flows sharing a link. This simple building block was revolutionary
+
+119
+00:07:47,790 --> 00:07:51,620
+at the time, but it’s now accepted as the common way to build networks.
+

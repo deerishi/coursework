@@ -1,0 +1,116 @@
+0
+00:00:00,760 --> 00:00:04,000
+Phil: Welcome to the first unit! This is the unit where you get the “big picture,”
+
+1
+00:00:04,000 --> 00:00:04,580
+and a first few details.
+
+2
+00:00:04,580 --> 00:00:09,830
+Nick :You’re going to learn the basics of how the Internet works. You might even figure
+
+3
+00:00:09,830 --> 00:00:14,480
+out which one of us is Phil and which one is Nick. We hope to help you to understand
+
+4
+00:00:14,480 --> 00:00:19,180
+*why* the Internet is designed the way it is. What are some of its strengths and weaknesses?
+
+5
+00:00:19,180 --> 00:00:23,680
+We’ll also teach you some of the commonly accepted network design principles, such as
+
+6
+00:00:23,680 --> 00:00:27,940
+layering, encapsulation, and packet switching. At the end of this unit, you should be able
+
+7
+00:00:27,940 --> 00:00:31,970
+to answer questions such as “What is the Internet? What is an Internet Address?”
+
+8
+00:00:31,970 --> 00:00:37,059
+and “How do applications such as the web, Skype, and BitTorrent work?” These principles
+
+9
+00:00:37,059 --> 00:00:39,729
+will help you design better networks in the future.
+
+10
+00:00:39,729 --> 00:00:43,620
+Phil: At the end of the first unit, you should be familiar with something called the “4-layer
+
+11
+00:00:43,620 --> 00:00:48,979
+model” of the Internet. It describes how the Internet is broken down into four distinct
+
+12
+00:00:48,979 --> 00:00:53,469
+layers. You’ll learn what layers are and why they’re a basic principle of good network
+
+13
+00:00:53,469 --> 00:00:57,440
+design. You’ll learn what the Internet’s four layers are and how they work together.
+
+14
+00:00:57,440 --> 00:01:01,639
+You’ll learn that most applications use a transport layer called the Transmission
+
+15
+00:01:01,639 --> 00:01:06,220
+Control Protocol, or TCP, and how some applications use it.
+
+16
+00:01:06,220 --> 00:01:10,630
+You’ll also learn that the Internet works by breaking data up into small units called
+
+17
+00:01:10,630 --> 00:01:14,620
+packets. For example, when you request a web page, your computer sends some packets to
+
+18
+00:01:14,620 --> 00:01:20,320
+the web server. The Internet decides how these packets of data arrive to the right destination.
+
+19
+00:01:20,320 --> 00:01:26,130
+Nick: This unit also examines one layer, called the network layer, in a bit of detail. You
+
+20
+00:01:26,130 --> 00:01:30,620
+might have heard of IP, the Internet Protocol. It’s the protocol named after the Internet
+
+21
+00:01:30,620 --> 00:01:35,550
+because it’s the glue that lets the whole thing work. You can change all of the other
+
+22
+00:01:35,550 --> 00:01:40,970
+layers, but to be using the Internet you need to be using the Internet Protocol at the network
+
+23
+00:01:40,970 --> 00:01:45,740
+layer. You’ll learn about what the Internet Protocol does and how it does it. You’ll
+
+24
+00:01:45,740 --> 00:01:49,640
+learn about Internet Protocol addresses and how they’re assigned. You’ll start to
+
+25
+00:01:49,640 --> 00:01:54,030
+learn how the Internet decides the path a packet should take based on Internet addresses.
+
+26
+00:01:54,030 --> 00:01:59,330
+Phil: Finally, we’ll show you a few software tools you can use to inspect how your computer
+
+27
+00:01:59,330 --> 00:02:02,979
+is using the Internet. So you can apply what you’ve learned in this unit to the next
+
+28
+00:02:02,979 --> 00:02:03,979
+time you browse the web!
+

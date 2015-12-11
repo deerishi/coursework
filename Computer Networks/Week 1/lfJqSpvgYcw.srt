@@ -1,0 +1,464 @@
+0
+00:00:01,000 --> 00:00:06,220
+The 4-layer model of the Internet takes a stream of data from the application layer.
+
+1
+00:00:06,220 --> 00:00:11,150
+The transport layer breaks this stream into segments of data that it reliably delivers
+
+2
+00:00:11,150 --> 00:00:17,680
+to an application running on another computer. The transport layer sends these segments as
+
+3
+00:00:17,680 --> 00:00:23,070
+network layer packets, which the network layer delivers to the other computer. Let’s see
+
+4
+00:00:23,070 --> 00:00:26,970
+what that looks like in practice, the actual packets that a web browser and server send
+
+5
+00:00:26,970 --> 00:00:33,780
+and receive. First, let’s look at the transport layer.
+
+6
+00:00:33,780 --> 00:00:40,320
+Almost all web traffic is over TCP, the Transport Control Protocol. In its typical operation,
+
+7
+00:00:40,320 --> 00:00:48,000
+there’s a client and a server. A server listens for connection requests. To open a
+
+8
+00:00:48,000 --> 00:00:53,510
+connection, a client issues a connection request, which the server responds to. I won’t go
+
+9
+00:00:53,510 --> 00:00:57,809
+into the details of exactly how this works, but it turns out this exchange takes three
+
+10
+00:00:57,809 --> 00:01:03,230
+messages, something called the “three way handshake.”
+
+11
+00:01:03,230 --> 00:01:09,030
+The first step of handshake is when the client sends a “synchronize” message to the server,
+
+12
+00:01:09,030 --> 00:01:14,570
+often called a SYN. The second step is when the server responds with a “synchronize”
+
+13
+00:01:14,570 --> 00:01:19,520
+message that also acknowledges the clients “synchronize”, or a “synchronize and
+
+14
+00:01:19,520 --> 00:01:26,939
+acknowledge message”, often called a SYN-ACK. The third and final step is when the client
+
+15
+00:01:26,939 --> 00:01:33,820
+responds by acknowledging the server’s synchronize, often called an ACK. So often the three way
+
+16
+00:01:33,820 --> 00:01:38,170
+handshake is described as “synchronize, synchronize and acknowledge, acknowledge”,
+
+17
+00:01:38,170 --> 00:01:44,680
+or “SYN, SYN-ACK, ACK”. Recall that the network layer is responsible
+
+18
+00:01:44,680 --> 00:01:49,369
+for delivering packets to computers, but the transport layer is responsible for delivering
+
+19
+00:01:49,369 --> 00:01:55,340
+data to applications. From the perspective of the network layer, packets sent to different
+
+20
+00:01:55,340 --> 00:02:01,439
+applications on the same computer look the same. This means that to open a TCP stream
+
+21
+00:02:01,439 --> 00:02:08,530
+to another program, we need two addresses. The first, an Internet Protocol address, is
+
+22
+00:02:08,530 --> 00:02:16,040
+the address the network layer uses to deliver packets to the computer. The second, the TCP
+
+23
+00:02:16,040 --> 00:02:22,870
+port, tells the computer’s software which application to deliver data to. Web servers
+
+24
+00:02:22,870 --> 00:02:29,739
+usually run on TCP port 80. So when we open a connection to a web server, we send IP packets
+
+25
+00:02:29,739 --> 00:02:35,090
+to the computer running the web server whose destination address is that computer’s IP
+
+26
+00:02:35,090 --> 00:02:41,959
+address. Those IP packets have TCP segments whose destination port is 80.
+
+27
+00:02:41,959 --> 00:02:48,690
+But how do those IP packets get to their destination? We don’t have a direct wire connecting my
+
+28
+00:02:48,690 --> 00:02:54,879
+client to the server. Instead, my client is connected to an intermediate computer, a router.
+
+29
+00:02:54,879 --> 00:03:01,269
+This router is itself connected to other routers. IP packets between the client and server take
+
+30
+00:03:01,269 --> 00:03:08,140
+many “hops,” where a hop is a link connecting two routers. For example, since my client
+
+31
+00:03:08,140 --> 00:03:15,060
+is on a WiFi network, the first hop is wireless to the WiFi access point. The access point
+
+32
+00:03:15,060 --> 00:03:20,080
+has a wired connection to the broader Internet, so it forwards my client’s packets along
+
+33
+00:03:20,080 --> 00:03:26,930
+this wired hop. A router can have many links connecting it.
+
+34
+00:03:26,930 --> 00:03:33,440
+As each packet arrives, a router decides which of its links to send it out on. Routers have
+
+35
+00:03:33,440 --> 00:03:37,950
+IP addresses, so it’s also the case that it might not forward a packet but rather deliver
+
+36
+00:03:37,950 --> 00:03:43,940
+it to its own software. For example, when you log into a router using TCP, the IP packets
+
+37
+00:03:43,940 --> 00:03:52,040
+are destined to the router’s own IP address. How does a router make this decision? It does
+
+38
+00:03:52,040 --> 00:03:57,590
+so through something called a forwarding table, shown here on the right. A forwarding table
+
+39
+00:03:57,590 --> 00:04:04,689
+consists of a set of IP address patterns and the link to send across for each pattern.
+
+40
+00:04:04,689 --> 00:04:09,519
+When a packet arrives, the router checks which forwarding table entry’s pattern best matches
+
+41
+00:04:09,519 --> 00:04:15,890
+the packet. It forwards the packet along that entry’s link. Generally, “best” means
+
+42
+00:04:15,890 --> 00:04:20,590
+the most specific match. I’ll describe how this matching works in more detail in the
+
+43
+00:04:20,590 --> 00:04:25,400
+video on longest prefix match. But in this simple example let’s just consider the default
+
+44
+00:04:25,400 --> 00:04:30,190
+route, the first entry in the table above. The default route is the least specific route
+
+45
+00:04:30,190 --> 00:04:36,490
+-- it matches every IP address. If, when a packet arrives, there isn’t a more specific
+
+46
+00:04:36,490 --> 00:04:42,610
+route than the default route, the router will just use the default one.
+
+47
+00:04:42,610 --> 00:04:47,310
+The default route is especially useful in edge networks. Say, for example, you’re
+
+48
+00:04:47,310 --> 00:04:52,250
+Stanford University and have a router connecting you to the larger Internet. Your router will
+
+49
+00:04:52,250 --> 00:04:57,150
+have many specific routes for the IP addresses of Stanford’s network: “send packets to
+
+50
+00:04:57,150 --> 00:05:02,400
+the engineering school over this link”, “send packets to the library over that link.”
+
+51
+00:05:02,400 --> 00:05:05,900
+But if the destination IP address isn’t Stanford’s, then the router should send
+
+52
+00:05:05,900 --> 00:05:13,100
+it out to the larger Internet. So now let’s look at some IP packets in
+
+53
+00:05:13,100 --> 00:05:19,550
+a real network. I’m going to request a web page from www.brown.edu and use a tool called
+
+54
+00:05:19,550 --> 00:05:25,030
+Wireshark to show you all of the packets. We’ll see how my web browser opens a TCP
+
+55
+00:05:25,030 --> 00:05:30,810
+connection to the Brown web server using a three way handshake of SYN, SYN-ACK, ACK,
+
+56
+00:05:30,810 --> 00:05:37,479
+then starts issuing HTTP GET requests which the server responds to with data. Once we’ve
+
+57
+00:05:37,479 --> 00:05:42,240
+seen the exchange of packets between my client and the Brown University web server, I’ll
+
+58
+00:05:42,240 --> 00:05:46,949
+use another tool, called traceroute, to observe the path that these packets take through the
+
+59
+00:05:46,949 --> 00:05:53,639
+Internet. So first I’ll start up wireshark. Because
+
+60
+00:05:53,639 --> 00:05:58,199
+my computer is using many network applications and sending lots of different packets, I’m
+
+61
+00:05:58,199 --> 00:06:03,240
+going to tell wireshark to only display packets that are TCP segments to the Brown server
+
+62
+00:06:03,240 --> 00:06:10,020
+using port 80. This way we’ll only see the web traffic I’m generating. I’m also going
+
+63
+00:06:10,020 --> 00:06:16,360
+to tell Wireshark to listen on en1, which is the name my Mac gives to my WiFi link layer.
+
+64
+00:06:16,360 --> 00:06:21,509
+As you can see, I have many link layers available, but let’s just look at en1 since that’s
+
+65
+00:06:21,509 --> 00:06:28,810
+how I’m connected to the Internet. Next I’ll open my web browser and request
+
+66
+00:06:28,810 --> 00:06:32,630
+the web page for Brown University’s Computer Science department. This is where I went as
+
+67
+00:06:32,630 --> 00:06:38,460
+an undergraduate and so I like to keep up with news on the department. You can see in
+
+68
+00:06:38,460 --> 00:06:43,919
+wireshark that loading this page involved sending and receiving a lot of packets! Wireshark
+
+69
+00:06:43,919 --> 00:06:51,080
+shows me the timestamp of each packet, the source IP address, the destination IP address,
+
+70
+00:06:51,080 --> 00:06:59,500
+what protocol it uses, its length, and further information. Look at this first packet. It’s
+
+71
+00:06:59,500 --> 00:07:06,979
+from my computer, whose address is 192.168.0.106, to the Brown CS web server, whose address
+
+72
+00:07:06,979 --> 00:07:15,509
+is 128.148.32.12. It’s going to TCP port 80 -- the HyperText Transport Protocol port
+
+73
+00:07:15,509 --> 00:07:22,569
+on the server, which we can see from the > http field in the Info column. The packets is SYN
+
+74
+00:07:22,569 --> 00:07:27,569
+packets -- the first step of the three way handshake.
+
+75
+00:07:27,569 --> 00:07:31,680
+Look at the first three packets. The first is a SYN packet from my computer to the web
+
+76
+00:07:31,680 --> 00:07:40,380
+server. The second is a SYN-ACK packet from the web server back to my computer. The third
+
+77
+00:07:40,380 --> 00:07:45,879
+is an ACK from my computer back to the web server. This is the three way handshake! Now
+
+78
+00:07:45,879 --> 00:07:51,830
+the two computers can exchange data, and you can see that the first data packet is an HTTP
+
+79
+00:07:51,830 --> 00:07:58,300
+request -- my computer sends a GET request to the web server. The response to this GET
+
+80
+00:07:58,300 --> 00:08:03,860
+request is three packets -- wireshark shows the response when it receives the third one,
+
+81
+00:08:03,860 --> 00:08:11,449
+shown in the line whose info is HTTP/1.1 200 OK. So here we can see how my requesting a
+
+82
+00:08:11,449 --> 00:08:17,180
+web page from Brown’s Computer Science server creates a TCP connection through the three
+
+83
+00:08:17,180 --> 00:08:27,789
+IP packets for the 3-way handshake, then more packets for the HTTP request and response.
+
+84
+00:08:27,789 --> 00:08:32,449
+This is how the network looks like to the end hosts, the computers, as they exchange
+
+85
+00:08:32,449 --> 00:08:37,860
+packets at the network layer. But what does it look like inside the network layer? What
+
+86
+00:08:37,860 --> 00:08:44,750
+hops do these packets take? To see this, I’m going to use a second tool, traceroute. Traceroute
+
+87
+00:08:44,750 --> 00:08:54,649
+shows you the hops that packets to a destination take. So we can type traceroute www.cs.brown.edu
+
+88
+00:08:54,649 --> 00:08:59,940
+to see the path through the Internet. I’ll add the -w flag, which specifies a timeout,
+
+89
+00:08:59,940 --> 00:09:07,260
+with a timeout of 1 second. The first hop the packets take is to my wireless
+
+90
+00:09:07,260 --> 00:09:14,850
+router, whose IP address is 192.168.0.1. As you can see from the next hop, I’m at home
+
+91
+00:09:14,850 --> 00:09:21,430
+-- I have a cable modem and my Internet provider is Astound. After this packets take another
+
+92
+00:09:21,430 --> 00:09:32,310
+hop to a router with IP address 74.14.0.3. The hop after that is a router in San Francisco,
+
+93
+00:09:32,310 --> 00:09:42,959
+California, then several routers in San Jose, sjc for above.net and sanjose1 for level3.net.
+
+94
+00:09:42,959 --> 00:09:48,610
+After sanjose1.level3.net, the packets are across the United States in New York! They
+
+95
+00:09:48,610 --> 00:09:55,610
+go through a series of routers in New York -- ebr, csw, ebr, then, on hop 13, to Boston.
+
+96
+00:09:55,610 --> 00:10:01,430
+Boston is very close to Providence, where Brown is. After oshean.org that we see three
+
+97
+00:10:01,430 --> 00:10:06,250
+stars -- this means there’s a router that won’t tell traceroute about itself. The
+
+98
+00:10:06,250 --> 00:10:12,490
+stars are traceroute’s way to show it waited for a reply but the replied timed out. On
+
+99
+00:10:12,490 --> 00:10:17,890
+hop 20 we see a router in Brown’s CS department. After that, everything is hidden -- Brown’s
+
+100
+00:10:17,890 --> 00:10:21,720
+CS department doesn’t want you to be able to see what the inside of its network looks
+
+101
+00:10:21,720 --> 00:10:29,089
+like. Because we couldn’t see the path end with
+
+102
+00:10:29,089 --> 00:10:32,959
+Brown’s web server, let’s try another one: the Computer Science and Artificial Intelligence
+
+103
+00:10:32,959 --> 00:10:42,440
+Lab (CSAIL) at MIT. We can see that packets take the same path to Boston, until hop 15.
+
+104
+00:10:42,440 --> 00:10:50,040
+The path to Brown goes to oshean at hop 15, while the path to MIT continues in level3‘s
+
+105
+00:10:50,040 --> 00:10:58,149
+network. On the path to www.csail.mit.edu only two routers are hidden, the 13th and
+
+106
+00:10:58,149 --> 00:11:07,579
+19th hops. We can see that www.csail.mit.edu is also named akron.csail.mit.edu and, after
+
+107
+00:11:07,579 --> 00:11:15,519
+22 hops, packets from my computer reach MIT’s web server. Look at the time values -- the
+
+108
+00:11:15,519 --> 00:11:20,279
+time for my packet to reach the MIT web server and its response to return to me -- there
+
+109
+00:11:20,279 --> 00:11:28,560
+and back, the round-trip time -- is under 90 milliseconds, or less than an eye blink.
+
+110
+00:11:28,560 --> 00:11:35,279
+We’ve now seen the life of a packet, starting as an application-level client web request
+
+111
+00:11:35,279 --> 00:11:39,769
+and taking nearly 20 hops through the Internet to reach its destination. For me, this is
+
+112
+00:11:39,769 --> 00:11:43,720
+one of the best things about teaching this course. Everything we present is something
+
+113
+00:11:43,720 --> 00:11:48,510
+that you and I interact with every day -- even just in the space of watching one video! It’s
+
+114
+00:11:48,510 --> 00:11:53,860
+easy to see the principles and ideas in practice, and with a few simple tools you can inspect
+
+115
+00:11:53,860 --> 00:11:56,590
+the Internet in operation, in real time!
+

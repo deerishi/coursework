@@ -1,0 +1,684 @@
+0
+00:00:02,139 --> 00:00:06,350
+What ultimately makes networks interesting are the applications that use them. Dave Clark,
+
+1
+00:00:06,350 --> 00:00:11,219
+one of the key contributors to the Internet’s design, once wrote “The current exponential
+
+2
+00:00:11,219 --> 00:00:16,449
+growth of the network seems to show that connectivity is its own reward, and it is more valuable
+
+3
+00:00:16,449 --> 00:00:21,630
+than any individual application such as mail or the World-Wide Web.” Connectivity is
+
+4
+00:00:21,630 --> 00:00:25,679
+the idea that two computers in different parts of the world can connect to one another and
+
+5
+00:00:25,679 --> 00:00:30,169
+exchange data. If you connect your computer to the Internet, you suddenly can talk with
+
+6
+00:00:30,169 --> 00:00:33,130
+all of the other computers connected on the Internet. Well, at least the ones that want
+
+7
+00:00:33,130 --> 00:00:36,079
+to talk with you too. Let’s look at what exactly that means and how some modern applications
+
+8
+00:00:36,079 --> 00:00:40,649
+-- the world wide web, Skype, and BitTorrent -- use it.
+
+9
+00:00:40,649 --> 00:00:44,660
+The tremendous power of networked applications is that you can have multiple computers, each
+
+10
+00:00:44,660 --> 00:00:49,210
+with their own private data, each perhaps owned and controlled by different people,
+
+11
+00:00:49,210 --> 00:00:53,760
+exchange information. Unlike your local applications, which can only access data that resides on
+
+12
+00:00:53,760 --> 00:00:59,390
+your local system, networked applications can exchange data across the world. For example,
+
+13
+00:00:59,390 --> 00:01:05,160
+think of using a web browser to read a magazine. The server run by the publisher has all of
+
+14
+00:01:05,160 --> 00:01:09,570
+the magazine articles, and might also have all of the articles from past issues. As articles
+
+15
+00:01:09,570 --> 00:01:13,060
+are corrected or added, you can immediately see the newer versions and newer content.
+
+16
+00:01:13,060 --> 00:01:17,030
+The entire back catalog of articles might be too much for you to download, so you can
+
+17
+00:01:17,030 --> 00:01:20,310
+load them on demand. If you didn’t have a network, then you’d need someone to send
+
+18
+00:01:20,310 --> 00:01:23,290
+you a DVD or USB stick with the latest issue.
+
+19
+00:01:23,290 --> 00:01:28,710
+So the basic model is that you have two computers, each running a program locally, and these
+
+20
+00:01:28,710 --> 00:01:34,149
+two programs communicate over the network. The most common communication model used is
+
+21
+00:01:34,149 --> 00:01:41,149
+a bidirectional, reliable stream of bytes. Program A running on computer A can write
+
+22
+00:01:42,500 --> 00:01:47,700
+data, which goes over the network, such that then program B running on computer B can read
+
+23
+00:01:47,700 --> 00:01:54,700
+it. Similarly, program B can write data that program A can read. There are other modes
+
+24
+00:01:55,810 --> 00:02:00,240
+of communication, which we’ll talk about later in the course, but a reliable, bidirectional
+
+25
+00:02:00,240 --> 00:02:03,520
+byte stream is by far the most common one.
+
+26
+00:02:03,520 --> 00:02:10,220
+Let’s walk through what this looks like. Computer B, on the right, is waiting for other
+
+27
+00:02:10,220 --> 00:02:15,060
+computers to connect to it. It might be, for example, a web server. Computer A, on the
+
+28
+00:02:15,060 --> 00:02:22,060
+left, wants to communicate with B. Following this example, it’s a mobile phone running
+
+29
+00:02:22,170 --> 00:02:29,170
+a web browser. A and B set up a connection. Now, when A writes data to the connection,
+
+30
+00:02:29,750 --> 00:02:36,750
+it travels over the network and B can read it. Similarly, if B writes data to the connection,
+
+31
+00:02:37,480 --> 00:02:44,480
+that data travels over the network and A can read it. Either side can close the connection.
+
+32
+00:02:45,760 --> 00:02:50,190
+For example, when the web browser is done requesting data from the web server, it can
+
+33
+00:02:50,190 --> 00:02:56,659
+close the connection. Similarly, if the server wants to, it can close the connection as well.
+
+34
+00:02:56,659 --> 00:03:01,269
+If you’ve ever seen an error message in a web browser saying “connection reset by
+
+35
+00:03:01,269 --> 00:03:04,799
+peer,” that’s what this means: the web server closed the connection when the web
+
+36
+00:03:04,799 --> 00:03:08,799
+browser wasn’t expecting it. Of course the server can refuse the connection as well:
+
+37
+00:03:08,799 --> 00:03:12,549
+you’re probably seen connection refused messages, or have a browser wait for a long
+
+38
+00:03:12,549 --> 00:03:15,000
+time because the server isn’t even responding with a refusal.
+
+39
+00:03:15,000 --> 00:03:15,750
+Later in this course, you’ll learn all of the details of how this works under the covers;
+
+40
+00:03:15,750 --> 00:03:16,370
+for now, let’s just think about it from the application perspective, which is the
+
+41
+00:03:16,370 --> 00:03:16,950
+ability to reliably read and write data between two programs over a network.
+
+42
+00:03:16,950 --> 00:03:20,220
+Now that we’ve seen the basic way networked applications communicate, let’s look at
+
+43
+00:03:20,220 --> 00:03:25,030
+our first example: the world wide web. The world wide web works using something called
+
+44
+00:03:25,030 --> 00:03:32,030
+HTTP, which stands for the HyperText Transfer Protocol. When you see http:// in your browser,
+
+45
+00:03:33,590 --> 00:03:39,310
+that means it’s communicating using HTTP. We’ll dig much deeper into the details of
+
+46
+00:03:39,310 --> 00:03:43,120
+HTTP later in the course, when we cover applications. For now I’m just going to give a very high
+
+47
+00:03:43,120 --> 00:03:44,269
+level overview.
+
+48
+00:03:44,269 --> 00:03:50,290
+In HTTP, a client opens a connection to a server and sends commands to it. The most
+
+49
+00:03:50,290 --> 00:03:57,290
+common command is GET, which requests a page. HTTP was designed to be a document-centric
+
+50
+00:03:57,769 --> 00:04:04,769
+way for programs to communicate. For example, if I type http://www.stanford.edu/ in my browser,
+
+51
+00:04:05,049 --> 00:04:10,579
+the browser opens a connection to the server www.stanford.edu and sends a GET request for
+
+52
+00:04:10,579 --> 00:04:16,989
+the root page of the site. The server receives the request, checks if it’s valid and the
+
+53
+00:04:16,988 --> 00:04:22,410
+user can access that page, and sends a response. The response has a numeric code associated
+
+54
+00:04:22,410 --> 00:04:26,720
+with it. For example, if the server sends a 200 OK response to a GET, this means that
+
+55
+00:04:26,720 --> 00:04:33,720
+the request was accepted and the rest of the response has the document data. In the example
+
+56
+00:04:34,140 --> 00:04:39,800
+of the www.stanford.edu web page, a 200 OK response would include the HyperText that
+
+57
+00:04:39,800 --> 00:04:44,080
+describes the main Stanford page. There are other kinds of requests, such as PUT, DELETE,
+
+58
+00:04:44,080 --> 00:04:51,080
+and INFO, as well as other responses such as 400 Bad Request.
+
+59
+00:04:51,670 --> 00:04:58,670
+Because HTTP is document-centric, clients requests name a file. HTTP is all in ASCII
+
+60
+00:04:58,710 --> 00:05:02,990
+text: it’s human readable. For example, the beginning of a GET request for Stanford
+
+61
+00:05:02,990 --> 00:05:09,380
+looks like this: GET / HTTP/1.1. The beginning of a response to a successful request looks
+
+62
+00:05:09,380 --> 00:05:11,780
+like this: HTTP/1.1 200 OK.
+
+63
+00:05:11,780 --> 00:05:17,620
+But the basic model is simple: client sends a request by writing to the connection, the
+
+64
+00:05:17,620 --> 00:05:21,780
+server reads the request, processes it, and writes a response to the connection, which
+
+65
+00:05:21,780 --> 00:05:24,760
+the client then reads.
+
+66
+00:05:24,760 --> 00:05:29,600
+Let’s look at a second application, BitTorrent. BitTorrent is a program that allows people
+
+67
+00:05:29,600 --> 00:05:33,690
+to share and exchange large files. Unlike the web, where a client requests documents
+
+68
+00:05:33,690 --> 00:05:38,820
+from a server, in BitTorrent a client requests documents from other clients. So that a single
+
+69
+00:05:38,820 --> 00:05:43,370
+client can request from many others in parallel, BitTorrent breaks files up into chunks of
+
+70
+00:05:43,370 --> 00:05:48,850
+data called pieces. When a client downloads a complete piece from another client, it then
+
+71
+00:05:48,850 --> 00:05:53,060
+tells other clients it has that piece so they can download it too. These collections of
+
+72
+00:05:53,060 --> 00:05:58,000
+collaborating clients are called swarms. So we talk about a client joining or leaving
+
+73
+00:05:58,000 --> 00:06:00,030
+the swarm.
+
+74
+00:06:00,030 --> 00:06:03,920
+BitTorrent uses the exact same mechanism as the world wide web: a reliable, bidirectional
+
+75
+00:06:03,920 --> 00:06:09,660
+data stream. But it uses it in a slightly more complex way. When a client wants to download
+
+76
+00:06:09,660 --> 00:06:14,680
+a file, it first has to find something called a torrent file. Usually, you find this using
+
+77
+00:06:14,680 --> 00:06:21,070
+the world wide web and download it using, you guessed it, HTTP. This torrent file describes
+
+78
+00:06:21,070 --> 00:06:25,460
+some information about the data file you want to download. It also tells BitTorrent about
+
+79
+00:06:25,460 --> 00:06:32,220
+who the tracker is for that torrent. A tracker is a node that keeps track (hence the name)
+
+80
+00:06:32,220 --> 00:06:38,630
+of what clients are members of the swarm. To join a torrent, your client contacts the
+
+81
+00:06:38,630 --> 00:06:45,630
+tracker, again, over HTTP, to request a list of other clients. Your client opens connections
+
+82
+00:06:46,220 --> 00:06:51,220
+to some of these clients and starts requesting pieces of the file. Those clients, in turn,
+
+83
+00:06:51,220 --> 00:06:57,530
+can request pieces. Furthermore, when a new client joins the swarm, it might tell this
+
+84
+00:06:57,530 --> 00:07:01,850
+new client to connect to your client. So rather than a single connection between a client
+
+85
+00:07:01,850 --> 00:07:06,270
+and one server, you have a dense graph of connections between clients, dynamically exchanging
+
+86
+00:07:06,270 --> 00:07:08,560
+data.
+
+87
+00:07:08,560 --> 00:07:12,030
+For our third and final application, let’s look at Skype, the popular voice, chat, and
+
+88
+00:07:12,030 --> 00:07:16,550
+video service. Skype is a proprietary system. It doesn’t have any official documentation
+
+89
+00:07:16,550 --> 00:07:21,000
+on how it works internally. In 2008 some researchers at Columbia figured out mostly how it works
+
+90
+00:07:21,000 --> 00:07:25,000
+by looking at where and when Skype clients send messages. The messages were encrypted,
+
+91
+00:07:25,000 --> 00:07:30,310
+though, so they couldn’t look inside. In 2011, however, Efim Bushmanov reverse engineered
+
+92
+00:07:30,310 --> 00:07:33,810
+the protocol and published open source code. So now we have a better sense of how the protocol
+
+93
+00:07:33,810 --> 00:07:34,670
+works.
+
+94
+00:07:34,670 --> 00:07:39,880
+In its most simple mode, when you want to call someone on Skype, it’s a simple client-server
+
+95
+00:07:39,880 --> 00:07:46,880
+exchange, sort of like HTTP. You, the caller, open a connection to the recipient. If the
+
+96
+00:07:47,560 --> 00:07:49,800
+recipient accepts your call, you start exchanging voice, video, or chat data.
+
+97
+00:07:49,800 --> 00:07:51,980
+In some ways this looks like the world wide web example: one side opens a connection to
+
+98
+00:07:51,980 --> 00:07:55,030
+the other and they exchange data. But unlike the web, where there’s a client and a server,
+
+99
+00:07:55,030 --> 00:07:59,310
+in the Skype case you have two clients. So rather than having a personal computer request
+
+100
+00:07:59,310 --> 00:08:03,160
+something from a dedicated server, you have two personal computers requesting data from
+
+101
+00:08:03,160 --> 00:08:10,160
+each other. This difference turns out to have a really big implication to how Skype works.
+
+102
+00:08:10,180 --> 00:08:15,460
+The complication comes from something called a NAT, or Network Address Translator. NATs
+
+103
+00:08:15,460 --> 00:08:20,360
+are everywhere today. A small home wireless router is a NAT. When a mobile phone connects
+
+104
+00:08:20,360 --> 00:08:21,890
+to the Internet, it’s behind a NAT.
+
+105
+00:08:21,890 --> 00:08:25,590
+We’ll cover them in greater detail later in the course, but for now all you need to
+
+106
+00:08:25,590 --> 00:08:30,050
+know is that if you’re behind a NAT then you can open connections out to the Internet,
+
+107
+00:08:30,050 --> 00:08:35,860
+but other nodes on the Internet can’t easily open connections to you. In this example,
+
+108
+00:08:35,860 --> 00:08:40,680
+that means that Client B can open connections to other nodes freely, but it’s very hard
+
+109
+00:08:40,679 --> 00:08:45,930
+for other nodes to open connections. That’s what this red-green gradient is showing; connections
+
+110
+00:08:45,930 --> 00:08:49,940
+coming from the green side work fine, but connections coming from the red side don’t.
+
+111
+00:08:49,940 --> 00:08:56,780
+So the complication here is that if the client A wants to call the client B, it can’t open
+
+112
+00:08:56,780 --> 00:09:00,820
+a connection. Skype has to work around this.
+
+113
+00:09:00,820 --> 00:09:04,400
+It does so using something called a rendezvous server. When you log into Skype, your client
+
+114
+00:09:04,400 --> 00:09:09,420
+opens connections to a network of control servers. In this case, client B opens a connection
+
+115
+00:09:09,420 --> 00:09:14,070
+to the rendezvous server. This works fine because the server isn’t behind a NAT and
+
+116
+00:09:14,070 --> 00:09:16,670
+client B can open connections out without any problems.
+
+117
+00:09:16,670 --> 00:09:22,610
+When client A calls client B, it sends a message to the rendezvous server. Since the server
+
+118
+00:09:22,610 --> 00:09:27,280
+has an open connection to client B, it tells B that there’s a call request from A. The
+
+119
+00:09:27,280 --> 00:09:33,250
+call dialog pops up on client B. If client B accepts the call, then it opens a connection
+
+120
+00:09:33,250 --> 00:09:38,840
+to client A. Client A was trying to open a connection to client B, but since B was behind
+
+121
+00:09:38,840 --> 00:09:42,640
+a NAT, it couldn’t. So instead it sends a message to a computer that client B is already
+
+122
+00:09:42,640 --> 00:09:47,220
+connected to, which then asks client B to open a connection back to client A. Since
+
+123
+00:09:47,220 --> 00:09:51,490
+client A isn’t behind a NAT, this connection can open normally. This is called a reverse
+
+124
+00:09:51,490 --> 00:09:56,890
+connection because it reverses the expected direction for initiating the connection. Client
+
+125
+00:09:56,890 --> 00:10:02,240
+A is trying to connect to client B, but instead client B opens a connection to client A.
+
+126
+00:10:02,240 --> 00:10:06,050
+This happens in Skype because Skype clients are typically personal machines. It’s rare
+
+127
+00:10:06,050 --> 00:10:09,990
+for publicly accessible web servers to be behind NATs. Since you want the server to
+
+128
+00:10:09,990 --> 00:10:14,080
+be accessed by everyone on the Internet, putting it behind a NAT is a bad idea. Therefore,
+
+129
+00:10:14,080 --> 00:10:17,810
+opening connections to web servers is easy. Personal computers, however, are often behind
+
+130
+00:10:17,810 --> 00:10:21,870
+NATs, for security and other reasons. Therefore Skype has to incorporate some new communication
+
+131
+00:10:21,870 --> 00:10:24,700
+patterns to work around them.
+
+132
+00:10:24,700 --> 00:10:28,510
+So what does Skype do if both clients are behind NATs? We can’t reverse the connection.
+
+133
+00:10:28,510 --> 00:10:32,970
+Client A can’t open a connection to client B and client B can’t open a connection to
+
+134
+00:10:32,970 --> 00:10:35,010
+client A.
+
+135
+00:10:35,010 --> 00:10:40,250
+To handle this case, Skype introduces a second kind of server, called a relay. Relays can’t
+
+136
+00:10:40,250 --> 00:10:44,740
+be behind NATs. If both client A and client B are behind NATs, then the communicate through
+
+137
+00:10:44,740 --> 00:10:50,860
+a relay. They both open connections to the relay. When client A sends data, the relay
+
+138
+00:10:50,860 --> 00:10:57,300
+forwards it to client B through the connection that B opened. Similarly, when client B sends
+
+139
+00:10:57,300 --> 00:11:02,560
+data, the relay forwards it to client A through the connection client A opened.
+
+140
+00:11:02,560 --> 00:11:07,120
+In summary, we’ve seen the most common communication model of networked applications: a reliable,
+
+141
+00:11:07,120 --> 00:11:10,260
+bidirectional byte stream. This allows two programs running on different computers to
+
+142
+00:11:10,260 --> 00:11:15,670
+exchange data. It abstracts away the entire network to a simple read/write relationship.
+
+143
+00:11:15,670 --> 00:11:19,270
+Although it’s a very simple communication model, it can be used in very inventive and
+
+144
+00:11:19,270 --> 00:11:23,700
+complex ways. We looked at 3 examples: the world wide web, BitTorrent and Skype. The
+
+145
+00:11:23,700 --> 00:11:27,160
+world wide web is a client-server model. A client opens a connection to a server and
+
+146
+00:11:27,160 --> 00:11:31,440
+requests documents. The server responds with the documents. BitTorrent is a peer-to-peer
+
+147
+00:11:31,440 --> 00:11:35,340
+model, where swarms of clients open connections to each other to exchange pieces of data,
+
+148
+00:11:35,340 --> 00:11:39,920
+creating a dense network of connections. Skype is a mix of the two. When Skype clients can
+
+149
+00:11:39,920 --> 00:11:44,420
+communicate directly, they do so in a peer-to-peer fashion. But sometimes the clients can’t
+
+150
+00:11:44,420 --> 00:11:48,040
+open connections directly, and so instead go through rendezvous or relay servers.
+
+151
+00:11:48,040 --> 00:11:52,350
+So you can see how what looks like a very simple abstraction, a bidirectional, reliable
+
+152
+00:11:52,350 --> 00:11:56,970
+data stream, can be used in many interesting ways. By changing how programs open connections
+
+153
+00:11:56,970 --> 00:12:00,660
+and what different programs do, we can create complex applications ranging from document
+
+154
+00:12:00,660 --> 00:12:05,390
+retrieval to swarming downloads to IP telephony. Trackers in BitTorrent, for example, have
+
+155
+00:12:05,390 --> 00:12:08,890
+very different data and a very different role than the clients, just as Skype has relays
+
+156
+00:12:08,890 --> 00:12:10,400
+and rendezvous servers in addition to clients.
+
+157
+00:12:10,400 --> 00:12:10,650
+I’ve presented a very simple abstraction: “A and B set up a connection.” In order
+
+158
+00:12:10,400 --> 00:12:10,650
+to provide this abstraction, a network must implement a bunch of services. An application
+
+159
+00:12:10,400 --> 00:12:10,650
+must be able to somehow find another computer, for example, through a name such as www.google.com.
+
+160
+00:12:10,400 --> 00:12:10,650
+An application must also be able to name the service it wants, such as a web page, a BitTorrent
+
+161
+00:12:10,400 --> 00:12:10,650
+chunk, or multimedia over Skype. The network somehow figures out the best path messages
+
+162
+00:12:10,400 --> 00:12:10,650
+should take across the world: messages send to New York from Chicago should not pass through
+
+163
+00:12:10,400 --> 00:12:10,650
+London. Our applications can deliver data reliably, despite the fact that nodes in the
+
+164
+00:12:10,400 --> 00:12:10,650
+middle of the network might fail.
+
+165
+00:12:10,400 --> 00:12:10,650
+By providing all of these services and more, the network allows applications to just think
+
+166
+00:12:10,400 --> 00:12:10,650
+about this high level abstraction and not worry about how it’s achieved. I find it
+
+167
+00:12:10,400 --> 00:12:10,880
+exciting and fascinating how a network like the Internet is really just a collection of
+
+168
+00:12:10,880 --> 00:12:11,130
+very small abstractions and services, which, somehow, when you combine them, become something
+
+169
+00:12:10,920 --> 00:12:11,170
+so much greater than the sum of its parts. If we take all of these little pieces and
+
+170
+00:12:10,980 --> 00:12:11,230
+stick them together, we get “A and B set up a connection.”
+

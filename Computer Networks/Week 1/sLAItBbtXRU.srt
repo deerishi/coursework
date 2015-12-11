@@ -1,0 +1,128 @@
+0
+00:00:01,800 --> 00:00:06,040
+Internet routers can have many links. They have many options for which direction to forward
+
+1
+00:00:06,040 --> 00:00:10,540
+a received packet. To select which link to forward a packet over, routers today typically
+
+2
+00:00:10,540 --> 00:00:13,850
+use an algorithm called Longest Prefix Match.
+
+3
+00:00:13,850 --> 00:00:18,980
+In this example a client wants to open a TCP connection to a server on port 80, the typical
+
+4
+00:00:18,980 --> 00:00:23,079
+port for web servers. The packets to set up the connection and transfer data take many
+
+5
+00:00:23,079 --> 00:00:28,140
+hops between the client and server. On each hop of each packet, a router decides which
+
+6
+00:00:28,140 --> 00:00:31,289
+link to forward the packet over.
+
+7
+00:00:31,289 --> 00:00:35,530
+How does a router make this decision? It does so through something called a forwarding table,
+
+8
+00:00:35,530 --> 00:00:39,989
+shown here on the right. A forwarding table consists of a set of partial IP addresses.
+
+9
+00:00:39,989 --> 00:00:44,370
+The x’s show that the addresses are partial. The x’s represent wildcards. For example,
+
+10
+00:00:44,370 --> 00:00:50,460
+the second entry, reading 171.33.x.x means “any IP address whose first byte is 171
+
+11
+00:00:50,460 --> 00:00:57,460
+and whose second byte is 33.” This particular entry, for example, includes 171.33.5.245
+
+12
+00:00:57,629 --> 00:00:59,739
+as well as 171.33.1.1.
+
+13
+00:00:59,739 --> 00:01:05,360
+When a packet arrives, the router checks which forwarding table entry best matches the packet
+
+14
+00:01:05,360 --> 00:01:09,410
+and forwards the packet along the link associated with that forwarding table entry. By “best”,
+
+15
+00:01:09,410 --> 00:01:14,610
+I mean most specific. The default route is effectively all wildcards -- it matches every
+
+16
+00:01:14,610 --> 00:01:18,550
+IP address. If, when a packet arrives, there isn’t a more specific route than the default
+
+17
+00:01:18,550 --> 00:01:21,870
+route, the router will just use the default one.
+
+18
+00:01:21,870 --> 00:01:26,450
+Longest prefix match, or LPM, is the algorithm IP routers use to decide how to forward a
+
+19
+00:01:26,450 --> 00:01:31,490
+packet. Every router has a forwarding table. Entries in this forwarding table have two
+
+20
+00:01:31,490 --> 00:01:36,030
+parts: a CIDR entry describing a block of addresses, and a next hop for packets that
+
+21
+00:01:36,030 --> 00:01:40,370
+match that CIDR entry. An address might belong to multiple CIDR entries.
+
+22
+00:01:40,370 --> 00:01:44,380
+ For example, in this routing table on the right, there are two entries, one for the
+
+23
+00:01:44,380 --> 00:01:51,380
+default route, which has a prefix of length 0, and one for 171.33.0.0/16. By default,
+
+24
+00:01:52,230 --> 00:01:58,500
+all packets will go over link 1. However, if the first 16 bits, two octets, of a packet
+
+25
+00:01:58,500 --> 00:02:04,290
+destination address matches 171.33, the router will send it over link 5. This is because
+
+26
+00:02:04,290 --> 00:02:09,140
+a 16 bit prefix is a longer prefix than 0 bits, it’s more specific.
+
+27
+00:02:09,139 --> 00:02:12,230
+So let’s go back to our earlier example, where we showed a forwarding table with Xs
+
+28
+00:02:12,230 --> 00:02:16,300
+denoting wildcards. Here’s the router and its forwarding table.
+
+29
+00:02:16,300 --> 00:02:20,250
+If we represent this forwarding table as CIDR entries, this is what it looks like. Since
+
+30
+00:02:20,250 --> 00:02:24,740
+in this simple example all of the prefixes are in terms of bytes, all of the prefixes
+
+31
+00:02:24,740 --> 00:02:28,129
+have length 0, 8, 16, or 24 bits.
+
