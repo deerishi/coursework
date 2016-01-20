@@ -27,7 +27,7 @@ class KNearestNeighbor:
         for i in range(0,X.shape[0]):
             #remember already an array
             #print 'xtrain is ',self.X_train - X[i]
-            norms=self.L1(self.X_train-X[i]) 
+            norms=self.L2(self.X_train-X[i]) 
             
             norms=norms.tolist()
             distances=[j[0] for j in sorted(enumerate(norms),key=lambda x:x[1])]
@@ -112,7 +112,7 @@ class KNearestNeighbor:
 knn=KNearestNeighbor()
 accuracy=[]
 ks=[]
-for k in range(1,300):
+for k in range(1,30):
     ks.append(k)
     accuracy.append(knn.crossValidate(K=10,k=k))
     

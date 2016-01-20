@@ -17,7 +17,7 @@ class Regression():
     
     def mse_loss(self,predicted,goldset):
         diff=goldset-predicted
-        print 'diff returning ',0.5* (sum([i**2 for i in diff]))
+        #print 'diff returning ',0.5* (sum([i**2 for i in diff]))
         return 0.5* (sum([i**2 for i in diff]))
             
     def total_loss(self,predicted,goldset,weights,lamda):
@@ -36,7 +36,7 @@ class Regression():
         
         A=np.dot(X.T,X) # X is mxd , we want A to be dxd
         regularization_term=lamda*np.diag(np.ones(X.shape[1])) #remember to add the one dimension to X
-        print 'regularization_term is ',regularization_term
+        #print 'regularization_term is ',regularization_term
         A=A+regularization_term
         
         b=np.dot(X.T,y)
@@ -117,10 +117,10 @@ class Regression():
             #fig = plt.figure()
             #ax = fig.add_subplot(111, projection='3d')
             #ax.scatter(trainX[:,0],trainX[:,1],trainy)
-            #ax.plot_trisurf(trainX[:,0],trainX[:,1],predicted_train)
+            #ax.plot_trisurf(trainX[:,0],trainX[:,1],predicted_train,color=(0,0,0,0))
             #plt.title('Regression Surface with lamda= '+str(lamda))
-            #ax.contour(trainX[:,0],trainX[:,1],predicted_train,cmap=cm.coolwarm)
-            plt.show()
+
+            #plt.show()
             losses.append(loss)
         print 'total loss with lamda=',lamda,' is is ',np.mean(losses),' mean r2 is ',np.mean(r2s)  
                 

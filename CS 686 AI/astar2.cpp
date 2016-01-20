@@ -6,6 +6,9 @@ int adjacencyMatrixForMinimumSpanningTree[40][40];
 bool visited[40];
 int parentsMinimumSpanningTree[40];
 int verticesMinimumSpanningTree[40];
+
+vector<pair<int,int> > extendedList; //node ,path length to it. 
+
 //Each time we update the vertices , we update their parents too
 class TSP 
 {
@@ -110,65 +113,9 @@ int updateAdjacentWeights(int addedVertex,int numOfCities)
 }
 
 
-int buildMinimumSpanningTree(TSP problem)
+int buildMinimumSpanningTree(vertex<int> unvisited)
 {
-    int i,j;
-    for(i=0;i<problem.numCities;i++)
-    {
-        visited[i]=false;
-        verticesMinimumSpanningTree[i]=INT_MAX;
-    }
-    verticesMinimumSpanningTree[0]=0;
-    parentsMinimumSpanningTree[0]=-1;
-    int numVertices=0;
-    
-    int current=0,next;
-
-    
-    
-    int minVal,minIndex;
-    while(numVertices<problem.numCities)
-    {
-        //1) find the minimum vertex
-        next=findMinimumVertex(problem.numCities);
-        cout<<"next is "<<next<<"\n";
-        //2)add that vertex to the he MST and update its weights
-        visited[next]=true;
-        updateAdjacentWeights( next,problem.numCities);
-        numVertices++;
-    }
-    //3)Now we can build the adjacency matrix for the MST we just built
-    for(i=1;i<problem.numCities;i++)
-    {
-        adjacencyMatrixForMinimumSpanningTree[i][parentsMinimumSpanningTree[i]]=1;
-        adjacencyMatrixForMinimumSpanningTree[parentsMinimumSpanningTree[i]][i]=1; 
-        minimumSpanningTree[i][parentsMinimumSpanningTree[i]]=originalGraph[i][parentsMinimumSpanningTree[i]];
-        minimumSpanningTree[parentsMinimumSpanningTree[i]][i]=originalGraph[i][parentsMinimumSpanningTree[i]];       
-    }
-        
-        
-    
-    
-    cout<<" the adjacency matrix for the minimum spanning tree looks like \n";
-    for(i=0;i<problem.numCities;i++)
-    {
-        for(j=0;j<problem.numCities;j++)
-        {
-            cout<<adjacencyMatrixForMinimumSpanningTree[i][j]<<" ";
-        }
-        cout<<"\n";
-    }
-    
-    cout<<" the minimum spanning tree looks like \n";
-    
-    for(i=0;i<problem.numCities;i++)
-    {
-        for(j=0;j<problem.numCities;j++)
-        {
-            cout<<minimumSpanningTree[i][j]<<" ";
-        }
-        cout<<"\n";
-    }
+    unvisited.push_back()
 }
 
 int main()
