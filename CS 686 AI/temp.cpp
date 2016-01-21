@@ -51,7 +51,10 @@ int main()
     v1.push_back(2);
     v1.push_back(3);
     vector<int> v2;
-    
+    v2.push_back(0);
+    v2.push_back(2);
+    v2.push_back(1);
+    v2.push_back(3);
     sort(v1.begin(),v1.end());
     vector<string> v2;
     v2=v1;
