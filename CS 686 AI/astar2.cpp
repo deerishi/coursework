@@ -316,7 +316,8 @@ int main()
     int numCities=prob1.numCities;
     buildMinimumSpanningTree(prob1);
     //Now we have the number of cities and the orignal graph
-    
+    vector<int> vertices
+    int initialHeuristic=
     Node A=new A(0,'A',numCities-1,'A',)
     vector<int> v1;
     vector<char> v2;
