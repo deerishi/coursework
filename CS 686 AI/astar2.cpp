@@ -318,6 +318,8 @@ int startSearch()
     {
         current=astar.top();
         string pathSoFar=current.pathSoFar;
+        string state=pathSoFar+pathSoFar[pathSoFar.length()-1];
+        // the state is the entire path + in the closed list
         cout<<"current heuristic is "<<current.cost<<" last path is "<<current.pathSoFar[current.pathSoFar.length()-1]<<"\n";
         astar.pop();
     }
