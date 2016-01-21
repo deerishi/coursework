@@ -362,12 +362,11 @@ int main()
     int initialHeuristic=calculateHeuristic(v1,v2,0);
     cout<<"initialHeuristic is "<<initialHeuristic<<"\n";
     
-
-    Node temp(0,"A",numCities-1,'A',initialHeuristic,v1);
-    City[nodeTrack++]=temp;
     
-    temp(0,"AB",numCities-1,'B',initialHeuristic+400,v1);
-    City[nodeTrack++]=temp;
+    City[nodeTrack++]=createNode(0,"A",numCities-1,'A',initialHeuristic,v1);
+    
+  
+    City[nodeTrack++]=createNode(0,"AB",numCities-1,'B',initialHeuristic+400,v1);
     astar.push(City[0]);
     //astar.push(City[1]);
     startSearch();
