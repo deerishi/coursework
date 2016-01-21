@@ -51,7 +51,7 @@ int main()
     
     sort(v1.begin(),v1.end());
     //unordered_map<vector<int>,int,container_hash<vector<int> >> m1;
-    m1[v1]=10;
+    //m1[v1]=10;
     
     //cout<<"v1==v2 "<<m1[v1]<<"\n";
     
