@@ -23,7 +23,7 @@ bool compare( ai v1,  ai v2)
 int main()
 {
 	vector<int>  v1;
-	MyQueue<ai> q1;
+	priority_queue<ai> q1;
 	ai ob1,ob2,ob3,ob;
 	ob1.a=1;
 	ob1.b=5;
