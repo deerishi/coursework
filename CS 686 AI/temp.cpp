@@ -1,6 +1,6 @@
 #include "bits/stdc++.h"
 using namespace std;
-using namespace boost;
+
 class ai
 {
     public: 
@@ -8,7 +8,7 @@ class ai
         int b;
     bool operator<(ai other) const
     {
-        return this->b > other.b;
+        return this->b < other.b;
     }
 
    
