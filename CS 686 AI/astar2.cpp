@@ -314,7 +314,8 @@ int startSearch()
     Node *current;
     while(!astar.empty())
     {
-        
+        current=astar.top();
+        cout<<"current heuristic is "<<current.
     }
 }
 
