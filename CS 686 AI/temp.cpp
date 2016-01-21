@@ -46,11 +46,12 @@ int main()
         cout<<q1.top().a<<" "<<q1.top().b<<"\n";
         q1.pop();
     }
-    v1.push_back("0");
-    v1.push_back("1");
-    v1.push_back("2");
-    v1.push_back("3");
-    vector<
+    v1.push_back(0);
+    v1.push_back(1);
+    v1.push_back(2);
+    v1.push_back(3);
+    vector<int> v2;
+    
     sort(v1.begin(),v1.end());
     vector<string> v2;
     v2=v1;
