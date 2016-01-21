@@ -322,7 +322,7 @@ int startSearch()
     }
 }
 
-Node
+Node createNode()
 
 int main()
 {
