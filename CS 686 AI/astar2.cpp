@@ -7,7 +7,7 @@ bool visited[40];
 int parentsMinimumSpanningTree[40];
 int verticesMinimumSpanningTree[40];
 unordered_map<string,int> mstMap;
-unordered_map<path,cost> closedList;
+unordered_map<path,cost> closedList; // this is our closed List which we have kept to keep track of nodes that have been extended , and can be used to prune away the paths.
 //Each time we update the vertices , we update their parents too
 
 class Node
