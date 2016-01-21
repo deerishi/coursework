@@ -54,7 +54,7 @@ class TSP
         //double distance;
         while(i<numCities)
         {
-            scanf("%s%d%d ",&node,&points[i][0],&points[i][1]);
+            scanf("%s%d%d ",node,&points[i][0],&points[i][1]);
             i++;
         }
         cout<<"n the data entered is \n";
