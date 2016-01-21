@@ -7,6 +7,7 @@ bool visited[40];
 int parentsMinimumSpanningTree[40];
 int verticesMinimumSpanningTree[40];
 unordered_map<string,int> mstMap;
+priority_queue<Node*> astar;
 //Each time we update the vertices , we update their parents too
 
 class Node
