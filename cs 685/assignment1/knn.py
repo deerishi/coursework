@@ -27,7 +27,7 @@ class KNearestNeighbor:
         for i in range(0,X.shape[0]):
             #remember already an array
             #print 'xtrain is ',self.X_train - X[i]
-            norms=self.L2(self.X_train-X[i]) 
+            norms=self.L1(self.X_train-X[i]) 
             
             norms=norms.tolist()
             distances=[j[0] for j in sorted(enumerate(norms),key=lambda x:x[1])]
@@ -112,7 +112,7 @@ class KNearestNeighbor:
 knn=KNearestNeighbor()
 accuracy=[]
 ks=[]
-for k in range(1,30):
+for k in range(1,100):
     ks.append(k)
     accuracy.append(knn.crossValidate(K=10,k=k))
     
@@ -124,7 +124,9 @@ plt.title('my exp Variation of Accuracy with increasing k in k Nearest Neighbour
 
 plt.show()        
 maxAcc=max(accuracy)
-print 'maximum accuracy of  ',maxAcc,'occurs at k= ',ks[accuracy.index(maxAcc)]   
+print 'maximum accuracy of  ',maxAcc,'occurs at k= ',ks[accuracy.index(maxAcc)] 
+maxAcc=max(accuracy[:31])
+print 'maximum accuracy between 1-30 of  ',maxAcc,'occurs at k= ',ks[accuracy.index(maxAcc)]   
                            
         
             

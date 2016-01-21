@@ -52,7 +52,7 @@ class Regression():
         datasetsX=[]
         labelsy=[]
         for i in range(1,11):
-            Xname="Regression/fData"+str(i)+".csv"
+            Xname="Regression2/fData"+str(i)+".csv"
             fx=open(Xname)
             xReader=csv.reader(fx)
             X=[]
@@ -63,7 +63,7 @@ class Regression():
             X=np.asarray(X)
             datasetsX.append(X)
             
-            yname="Regression/fLabels"+str(i)+'.csv'
+            yname="Regression2/fLabels"+str(i)+'.csv'
             fy=open(yname)
             y=[]
             yReader=csv.reader(fy)
@@ -114,20 +114,20 @@ class Regression():
             Ssm=self.mse_loss(predicted_train,trainy)*2
             r2s.append(Ssm/Stt)
             loss=self.total_loss(predicted,testY,weights,lamda)
-            #fig = plt.figure()
-            #ax = fig.add_subplot(111, projection='3d')
-            #ax.scatter(trainX[:,0],trainX[:,1],trainy)
-            #ax.plot_trisurf(trainX[:,0],trainX[:,1],predicted_train,color=(0,0,0,0))
-            #plt.title('Regression Surface with lamda= '+str(lamda))
+            fig = plt.figure()
+            ax = fig.add_subplot(111, projection='3d')
+            ax.scatter(trainX[:,0],trainX[:,1],trainy)
+            ax.plot_trisurf(trainX[:,0],trainX[:,1],predicted_train,color=(0,0,0,0))
+            plt.title('Regression Surface with lamda= '+str(lamda))
 
-            #plt.show()
+            plt.show()
             losses.append(loss)
         print 'total loss with lamda=',lamda,' is is ',np.mean(losses),' mean r2 is ',np.mean(r2s)  
                 
         return  np.mean(losses) 
 
 lsr=Regression()
-lamdas=np.arange(0,4,0.1)
+lamdas=np.arange(0,100,15)
 losses=[]
 for lamda in lamdas:
     losses.append(lsr.crossValidate(K=10,lamda=lamda))
