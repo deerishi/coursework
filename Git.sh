@@ -1,7 +1,8 @@
-#env bash
-git add .
-git commit -m "adding files"
-git push
-at now + 1 minutes << END
-"$0" "$@"
-END
+#! /bin/bash
+i=1
+while [ $i -lt 2 ] ; do
+    git add .
+    git commit -m "adding files"
+    git push
+    sleep 2
+done
