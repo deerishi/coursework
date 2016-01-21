@@ -127,7 +127,7 @@ class Regression():
         return  np.mean(losses) 
 
 lsr=Regression()
-lamdas=np.arange(0,200,1)
+lamdas=np.arange(0,800,1)
 losses=[]
 for lamda in lamdas:
     losses.append(lsr.crossValidate(K=10,lamda=lamda))
