@@ -23,7 +23,7 @@ class Node
             return  this->cost > other.cost;
         }
         
-        Node(int citynum,string pathSoFar,int citiesNotVisited,int cost,vector<int> citiesLeft)
+        Node(int citynum,string pathSoFar,int citiesNotVisited,char name;,int cost,vector<int> citiesLeft)
         {
             this->citynum=citynum;
             this->pathSoFar+=pathSoFar;
