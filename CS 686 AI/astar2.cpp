@@ -319,6 +319,9 @@ int main()
     //Now we have the number of cities and the orignal graph
     vector<int> vertices;
     for(i=1;i<numCities;i++)
+    {
+        vertices.push_back(i);
+    }
     int initialHeuristic=
     Node A=new A(0,'A',numCities-1,'A',)
     vector<int> v1;
