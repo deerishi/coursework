@@ -317,7 +317,7 @@ int startSearch()
     while(!astar.empty())
     {
         current=astar.top();
-        cout<<"current heuristic is "<<current.cost<<" last path is"<<"\n";
+        cout<<"current heuristic is "<<current.cost<<" last path is "<<current.pathSoFar[pathSoFar.length()-1]<<"\n";
         astar.pop();
     }
 }
