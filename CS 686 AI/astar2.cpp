@@ -322,6 +322,8 @@ int startSearch()
     }
 }
 
+Node
+
 int main()
 {
     TSP prob1;
