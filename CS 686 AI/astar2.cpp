@@ -334,6 +334,7 @@ int main()
         cout<<i<<" ";
     }
     vector<char>:: iterator it=v2.begin();
+    cout<<"\n v2 is \n";
     for(it=v2.begin();it!=v2.end();it++)
     {
         cout<<*it<<" ";
