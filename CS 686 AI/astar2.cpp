@@ -354,6 +354,7 @@ int main()
     Node *A=new Node(0,"A",numCities-1,'A',initialHeuristic,v1);
     Node *B=new Node(0,"AB",numCities-1,'B',initialHeuristic+400,v1);
     astar.push(A);
+    astar.push(B);
     startSearch();
     
     int lengthMst = buildMinimumSpanningTree2(v1,v2);
