@@ -35,7 +35,7 @@ class Node
         }
         
     
-}CITIES[50000];
+}City[50000];
 int nodeTrack=0;
 
 priority_queue<Node*> astar;
