@@ -36,6 +36,7 @@ class Node
         
     
 }vertices[50000];
+int nodeTrack=0;
 
 priority_queue<Node*> astar;
 class TSP 
