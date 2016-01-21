@@ -7,7 +7,7 @@ bool visited[40];
 int parentsMinimumSpanningTree[40];
 int verticesMinimumSpanningTree[40];
 unordered_map<string,int> mstMap;
-
+unordered_map<path,cost> 
 //Each time we update the vertices , we update their parents too
 
 class Node
@@ -317,6 +317,7 @@ int startSearch()
     while(!astar.empty() and astar.top().cost < optimumCost)
     {
         current=astar.top();
+        
         cout<<"current heuristic is "<<current.cost<<" last path is "<<current.pathSoFar[current.pathSoFar.length()-1]<<"\n";
         astar.pop();
     }
