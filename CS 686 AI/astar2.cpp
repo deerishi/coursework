@@ -368,7 +368,7 @@ int main()
   
     City[nodeTrack++]=createNode(0,"AB",numCities-1,'B',initialHeuristic+400,v1);
     astar.push(City[0]);
-    //astar.push(City[1]);
+    astar.push(City[1]);
     startSearch();
     
     int lengthMst = buildMinimumSpanningTree2(v1,v2);
