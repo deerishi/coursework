@@ -310,7 +310,7 @@ int buildMinimumSpanningTree(TSP problem) //change to only nodes in the graph
         cout<<"\n";
     }
 }
-
+int optimumCost=INT_MAX;
 int startSearch()
 {
     Node current;
