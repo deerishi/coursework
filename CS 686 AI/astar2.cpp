@@ -19,9 +19,9 @@ class Node
         char name;
         int cost;
         vector<int> citiesLeft;
-        bool operator <(Node * other) const
+        bool operator <(Node  other) const
         {
-            return  this->cost > other->cost;
+            return  this->cost > other.cost;
         }
         
         Node(int citynum,string pathSoFar,int citiesNotVisited,char name,int cost,vector<int> citiesLeft)
@@ -38,7 +38,7 @@ class Node
 }City[50000];
 int nodeTrack=0;
 
-priority_queue<Node*> astar;
+priority_queue<Node> astar;
 class TSP 
 {
     public:
