@@ -317,7 +317,7 @@ int startSearch()
     while(!astar.empty() and astar.top().cost < optimumCost)
     {
         current=astar.top();
-        
+        string pathSoFar=current.pathSoFar;
         cout<<"current heuristic is "<<current.cost<<" last path is "<<current.pathSoFar[current.pathSoFar.length()-1]<<"\n";
         astar.pop();
     }
