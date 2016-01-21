@@ -45,19 +45,10 @@ int main()
    // vector<pair<int,int> >::iterator it;    
     while(!q1.empty())
     {
-        
         cout<<q1.top().a<<" "<<q1.top().b<<"\n";
         q1.pop();
     }
-    v1.push_back(0);
-    v1.push_back(1);
-    v1.push_back(2);
-    v1.push_back(3);
-    vector<int> v2;
-    v2.push_back(0);
-    v2.push_back(1);
-    v2.push_back(2);
-    v2.push_back(3);
+    
     sort(v1.begin(),v1.end());
     //unordered_map<vector<int>,int,container_hash<vector<int> >> m1;
     m1[v1]=10;
