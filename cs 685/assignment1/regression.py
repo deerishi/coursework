@@ -120,7 +120,7 @@ class Regression():
             ax.plot_trisurf(trainX[:,0],trainX[:,1],predicted_train,color=(0,0,0,0))
             plt.title('Regression Surface with lamda= '+str(lamda))
 
-            plt.show()
+            #plt.show()
             losses.append(loss)
         print 'total loss with lamda=',lamda,' is is ',np.mean(losses),' mean r2 is ',np.mean(r2s)  
                 
