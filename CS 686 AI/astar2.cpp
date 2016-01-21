@@ -367,6 +367,8 @@ int main()
     
   
     City[nodeTrack++]=createNode(0,"AB",numCities-1,'B',initialHeuristic+400,v1);
+    City[nodeTrack++]=createNode(0,"AB",numCities-1,'B',initialHeuristic+200,v1);
+    City[nodeTrack++]=createNode(0,"AB",numCities-1,'B',initialHeuristic+300,v1);
     astar.push(City[0]);
     astar.push(City[1]);
     startSearch();
