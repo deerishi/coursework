@@ -6,8 +6,8 @@ int adjacencyMatrixForMinimumSpanningTree[40][40];
 bool visited[40];
 int parentsMinimumSpanningTree[40];
 int verticesMinimumSpanningTree[40];
-unordered_map<string,int> mstMap;
-unordered_map<path,cost> closedList; // this is our closed List which we have kept to keep track of nodes that have been extended , and can be used to prune away the paths.
+unordered_map<string,int> mstMap;//path, cost for that particular mst
+unordered_map<string,int> closedList; // this is our closed List which we have kept to keep track of nodes that have been extended , and can be used to prune away the paths. full state and cost for that 
 //Each time we update the vertices , we update their parents too
 
 class Node
