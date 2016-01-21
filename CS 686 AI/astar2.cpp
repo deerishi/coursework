@@ -333,9 +333,12 @@ int main()
         v1.push_back(i);
         if(i>25)
         {
-            v2.push_back('a'+i);
+            v2.push_back('a'+i-26);
         }
-        v2.push_back('A'+i);
+        else
+        {
+            v2.push_back('A'+i);
+        }
         cout<<i<<" ";
     }
     int lengthMst = buildMinimumSpanningTree2(v1,v2);
