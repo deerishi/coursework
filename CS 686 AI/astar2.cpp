@@ -317,7 +317,7 @@ int main()
     buildMinimumSpanningTree(prob1);
     //Now we have the number of cities and the orignal graph
     
-    //Node A(1,'A',)
+    Node A(1,'A',)
     vector<int> v1;
     vector<char> v2;
     cout<<"now we are finding the MST for the following nodes\n";
