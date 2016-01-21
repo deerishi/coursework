@@ -314,7 +314,7 @@ int optimumCost=INT_MAX;
 int startSearch()
 {
     Node current;
-    while(!astar.empty())
+    while(!astar.empty() and astar.top().cost<)
     {
         current=astar.top();
         cout<<"current heuristic is "<<current.cost<<" last path is "<<current.pathSoFar[current.pathSoFar.length()-1]<<"\n";
