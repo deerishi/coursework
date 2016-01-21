@@ -19,7 +19,7 @@ class Node
         char name;
         int cost;
         vector<int> citiesLeft;
-        bool operator <(Node *other) const
+        bool operator <(Node &other) const
         {
             return  this->cost > other->cost;
         }
