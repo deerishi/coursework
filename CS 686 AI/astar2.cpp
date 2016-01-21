@@ -25,8 +25,8 @@ class Node
         }
         
         Node(){};
-        Node(int citynum,string pathSoFar,int citiesNotVisited,char name,int cost,vector<int> citiesLeft):citynum(citynum),pathSoFar(pathSoFar),citiesNotVisited(),name(name),cost(cost),citiesLeft(citiesLeft)
-        {
+        Node(int citynum,string pathSoFar,int citiesNotVisited,char name,int cost,vector<int> citiesLeft):citynum(citynum),pathSoFar(pathSoFar),citiesNotVisited(),name(name),cost(cost),citiesLeft(citiesLeft){}
+        /*{
             this->citynum=citynum;
             this->pathSoFar+=pathSoFar;
             this->citiesLeft=citiesLeft;
