@@ -33,7 +33,7 @@ class Node
             this->cost=cost;
             this->name=name;
             this->citiesLeft=citiesLeft;
-        }
+        }*/
         
     
 }City[50000];
