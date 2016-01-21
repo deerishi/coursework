@@ -262,7 +262,7 @@ int buildMinimumSpanningTree(TSP problem) //change to only nodes in the graph
     {
         //1) find the minimum vertex
         next=findMinimumVertex(problem.numCities);
-        cout<<"next is "<<next<<"\n";
+        //cout<<"next is "<<next<<"\n";
         //2)add that vertex to the he MST and update its weights
         visited[next]=true;
         updateAdjacentWeights( next,problem.numCities);
