@@ -35,7 +35,7 @@ class Node
         }
         
     
-}vertices[50000];
+}CITIES[50000];
 int nodeTrack=0;
 
 priority_queue<Node*> astar;
@@ -354,7 +354,7 @@ int main()
     }
     int initialHeuristic=calculateHeuristic(v1,v2,0);
     cout<<"initialHeuristic is "<<initialHeuristic<<"\n";
-    Node *A=new Node(0,"A",numCities-1,'A',initialHeuristic,v1);
+    Node A=new Node(0,"A",numCities-1,'A',initialHeuristic,v1);
     Node *B=new Node(0,"AB",numCities-1,'B',initialHeuristic+400,v1);
     astar.push(A);
     astar.push(B);
