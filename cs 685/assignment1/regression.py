@@ -114,11 +114,11 @@ class Regression():
             Ssm=self.mse_loss(predicted_train,trainy)*2
             r2s.append(Ssm/Stt)
             loss=self.total_loss(predicted,testY,weights,lamda)
-            fig = plt.figure()
-            ax = fig.add_subplot(111, projection='3d')
-            ax.scatter(trainX[:,0],trainX[:,1],trainy)
-            ax.plot_trisurf(trainX[:,0],trainX[:,1],predicted_train,color=(0,0,0,0))
-            plt.title('Regression Surface with lamda= '+str(lamda))
+            #fig = plt.figure()
+            #ax = fig.add_subplot(111, projection='3d')
+            #ax.scatter(trainX[:,0],trainX[:,1],trainy)
+            #ax.plot_trisurf(trainX[:,0],trainX[:,1],predicted_train,color=(0,0,0,0))
+            #plt.title('Regression Surface with lamda= '+str(lamda))
 
             #plt.show()
             losses.append(loss)
