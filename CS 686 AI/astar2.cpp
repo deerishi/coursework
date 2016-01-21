@@ -1,6 +1,6 @@
 #include "bits/stdc++.h"
 using namespace std;
-
+  
 int originalGraph[40][40],minimumSpanningTree[40][40];
 int adjacencyMatrixForMinimumSpanningTree[40][40];
 bool visited[40];
