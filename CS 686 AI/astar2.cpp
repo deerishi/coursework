@@ -24,6 +24,7 @@ class Node
             return  this->cost > other.cost;
         }
         
+        Node(){}
         Node(int citynum,string pathSoFar,int citiesNotVisited,char name,int cost,vector<int> citiesLeft)
         {
             this->citynum=citynum;
