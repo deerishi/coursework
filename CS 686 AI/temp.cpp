@@ -6,9 +6,9 @@ class ai
     public: 
         int a;
         int b;
-    bool operator<(ai other) const
+    bool operator <(ai other) const
     {
-        return this->b < other.b;
+        return this->b > other.b;
     }
 
    
