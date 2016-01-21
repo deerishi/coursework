@@ -311,6 +311,7 @@ int buildMinimumSpanningTree(TSP problem) //change to only nodes in the graph
 
 int startSearch()
 {
+    Node *current;
     while(!astar.empty())
     {
         
