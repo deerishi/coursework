@@ -320,7 +320,7 @@ int main()
     vector<int> v1;
     vector<char> v2;
     cout<<"now we are finding the MST for the following nodes\n";
-    for( i=2;i<numCities;i++)
+    for( i=1;i<numCities;i++)
     {
         v1.push_back(i);
         if(i>25)
@@ -334,7 +334,7 @@ int main()
         cout<<i<<" ";
     }
 
-    int initialHeuristic=
+    int initialHeuristic=calculateHeuristic()
     Node A=new A(0,'A',numCities-1,'A',)
     
     int lengthMst = buildMinimumSpanningTree2(v1,v2);
