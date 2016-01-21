@@ -356,8 +356,8 @@ int main()
     cout<<"initialHeuristic is "<<initialHeuristic<<"\n";
     Node City[0]=new Node(0,"A",numCities-1,'A',initialHeuristic,v1);
     Node City[1]=new Node(0,"AB",numCities-1,'B',initialHeuristic+400,v1);
-    astar.push(A);
-    astar.push(B);
+    astar.push(City[0]);
+    astar.push(City[1]);
     startSearch();
     
     int lengthMst = buildMinimumSpanningTree2(v1,v2);
