@@ -322,7 +322,10 @@ int startSearch()
     }
 }
 
-Node createNode()
+Node createNode(int citynum,string pathSoFar,int citiesNotVisited,char name,int cost,vector<int> citiesLeft)
+{
+    
+}
 
 int main()
 {
