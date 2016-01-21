@@ -309,6 +309,11 @@ int buildMinimumSpanningTree(TSP problem) //change to only nodes in the graph
     }
 }
 
+int startSearch()
+{
+    
+}
+
 int main()
 {
     TSP prob1;
