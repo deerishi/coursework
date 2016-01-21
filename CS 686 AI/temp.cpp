@@ -56,9 +56,10 @@ int main()
     v2.push_back(2);
     v2.push_back(3);
     sort(v1.begin(),v1.end());
-
-
-    cout<<"v1==v2 "<<(v1==v2)<<"\n";
+    unordered_map<vector<int>,int> m1;
+    m1[v1]=10;
+    
+    cout<<"v1==v2 "<<m1[v1]<<"\n";
     
     
 	return 0;
