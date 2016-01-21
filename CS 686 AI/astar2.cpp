@@ -334,7 +334,7 @@ int main()
         cout<<i<<" ";
     }
 
-    int initialHeuristic=calculateHeuristic()
+    int initialHeuristic=calculateHeuristic(v1,v2)
     Node A=new A(0,'A',numCities-1,'A',)
     
     int lengthMst = buildMinimumSpanningTree2(v1,v2);
