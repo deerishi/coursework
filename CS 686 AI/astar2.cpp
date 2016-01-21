@@ -35,7 +35,7 @@ class Node
         }
         
     
-};
+}vertices[50000];
 
 priority_queue<Node*> astar;
 class TSP 
