@@ -7,7 +7,7 @@ bool visited[40];
 int parentsMinimumSpanningTree[40];
 int verticesMinimumSpanningTree[40];
 unordered_map<string,int> mstMap;
-unordered_map<path,cost> 
+unordered_map<path,cost> closedList;
 //Each time we update the vertices , we update their parents too
 
 class Node
