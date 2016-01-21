@@ -358,7 +358,8 @@ int main()
 
     Node temp(0,"A",numCities-1,'A',initialHeuristic,v1);
     City[nodeTrack++]=temp;
-    City[nodeTrack++](0,"AB",numCities-1,'B',initialHeuristic+400,v1);
+    City[nodeTrack++]
+    temp(0,"AB",numCities-1,'B',initialHeuristic+400,v1);
     astar.push(City[0]);
     astar.push(City[1]);
     startSearch();
