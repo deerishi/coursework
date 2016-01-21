@@ -56,13 +56,10 @@ int main()
     v2.push_back(1);
     v2.push_back(3);
     sort(v1.begin(),v1.end());
-    vector<string> v2;
-    v2=v1;
-    cout<<"the next array is \n";
-    vector<string>::iterator it;
-    for(it=v2.begin();it!=v2.end();it++)
-    {
-        cout<<"it is "<<(*it)<<"\n";
-    }  
+
+
+    cout<<"v1==v2 \n"<<v1==v2<<"\n";
+    
+    
 	return 0;
 }
