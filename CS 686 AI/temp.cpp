@@ -58,7 +58,7 @@ int main()
     sort(v1.begin(),v1.end());
 
 
-    cout<<"v1==v2 \n"<<v1==v2<<"\n";
+    cout<<"v1==v2 \n"<<(v1==v2)<<"\n";
     
     
 	return 0;
