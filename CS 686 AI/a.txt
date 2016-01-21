@@ -29,49 +29,49 @@ x= 0 n y= 4202308 i= 26
 x= 50 n y= 71 i= 27
 x= 0 n y= 65535 i= 28
 x= 23 n y= 25 i= 29
-x= 0 n y= -2111193016 i= 30
+x= 0 n y= 180355272 i= 30
 x= 96 n y= 16 i= 31
-x= 32652 n y= 1 i= 32
+x= 32706 n y= 1 i= 32
 x= 92 n y= 7 i= 33
 x= 32767 n y= 4202362 i= 34
 x= 99 n y= 81 i= 35
 the original matrix is 
-0 69 80 44 79 91 73 87 75 29 20 66 111 29 74 69 29 116 96 69 86 48 20 46 69 41 4202306 78 65533 25 2111193018 84 32639 79 4202487 116 
-69 0 44 31 44 25 8 18 45 45 56 42 44 42 40 38 42 48 35 31 28 20 53 22 40 33 4202259 26 65486 47 2111193065 45 32588 50 4202440 47 
-80 44 0 64 1 38 52 46 89 51 60 84 76 65 6 11 52 73 30 74 24 47 59 50 83 41 4202293 70 65520 69 2111193031 4 32560 8 4202474 66 
-44 31 64 0 65 57 31 49 34 32 40 25 67 15 59 55 28 74 66 25 58 17 37 14 28 30 4202266 33 65493 19 2111193058 68 32619 68 4202447 76 
-79 44 1 65 0 39 53 47 89 51 60 84 77 65 6 11 52 74 31 75 25 47 59 50 84 41 4202294 70 65521 69 2111193030 4 32560 7 4202475 67 
-91 25 38 57 39 0 28 12 66 64 75 64 39 66 38 38 62 35 12 52 14 43 73 46 62 51 4202255 42 65482 71 2111193069 37 32563 46 4202436 29 
-73 8 52 31 53 28 0 18 38 51 61 36 38 44 48 46 47 43 39 25 34 25 59 26 34 40 4202251 17 65478 49 2111193073 53 32591 58 4202432 44 
-87 18 46 49 47 12 18 0 54 62 74 53 31 60 45 45 60 30 25 41 24 39 71 41 50 50 4202248 31 65475 66 2111193076 47 32573 54 4202429 29 
-75 45 89 34 89 66 38 54 0 67 74 9 55 49 84 81 63 66 78 14 73 46 71 45 6 62 4202232 23 65459 51 2111193092 91 32625 94 4202413 72 
-29 45 51 32 51 64 51 62 67 0 11 58 89 21 45 40 4 93 67 57 57 26 9 25 61 12 4202298 61 65525 23 2111193026 55 32611 51 4202479 91 
-20 56 60 40 60 75 61 74 74 11 0 65 100 25 54 49 13 104 78 65 68 36 3 35 68 24 4202306 71 65533 25 2111193018 64 32619 59 4202487 102 
-66 42 84 25 84 64 36 53 9 58 65 0 59 40 79 75 54 69 76 12 70 39 62 37 4 55 4202241 24 65468 42 2111193083 86 32626 89 4202422 74 
-111 44 76 67 77 39 38 31 55 89 100 59 0 82 76 76 86 12 49 48 53 64 98 65 55 78 4202217 36 65444 87 2111193107 76 32572 84 4202398 21 
-29 42 65 15 65 66 44 60 49 21 25 40 82 0 59 54 17 88 73 41 64 22 22 19 43 24 4202281 49 65508 5 2111193043 68 32624 67 4202462 89 
-74 40 6 59 6 38 48 45 84 45 54 79 76 59 0 5 46 73 32 70 24 42 53 44 79 35 4202293 66 65520 63 2111193031 10 32566 10 4202474 67 
-69 38 11 55 11 38 46 45 81 40 49 75 76 54 5 0 41 73 34 67 26 37 49 40 75 30 4202293 64 65520 58 2111193031 15 32571 13 4202474 68 
-29 42 52 28 52 62 47 60 63 4 13 54 86 17 46 41 0 90 66 53 56 22 11 21 57 11 4202294 57 65521 20 2111193030 56 32612 52 4202475 89 
-116 48 73 74 74 35 43 30 66 93 104 69 12 88 73 73 90 0 43 57 49 68 101 70 65 81 4202220 45 65447 93 2111193104 72 32560 81 4202401 9 
-96 35 30 66 31 12 39 25 78 67 78 76 49 73 32 34 66 43 0 64 10 50 77 53 74 55 4202263 55 65490 78 2111193061 29 32553 38 4202443 36 
-69 31 74 25 75 52 25 41 14 57 65 12 48 41 70 67 53 57 64 0 59 33 62 32 9 50 4202241 12 65468 44 2111193083 77 32614 80 4202422 62 
-86 28 24 58 25 14 34 24 73 57 68 70 53 64 24 26 56 49 10 59 0 42 67 45 69 45 4202269 52 65496 69 2111193055 23 32561 32 4202450 42 
-48 20 47 17 47 43 25 39 46 26 36 39 64 22 42 37 22 68 50 33 42 0 34 3 40 17 4202273 36 65500 27 2111193051 50 32603 51 4202454 67 
-20 53 59 37 59 73 59 71 71 9 3 62 98 22 53 49 11 101 77 62 67 34 0 32 65 22 4202303 68 65530 22 2111193021 63 32619 59 4202484 100 
-46 22 50 14 50 46 26 41 45 25 35 37 65 19 44 40 21 70 53 32 45 3 32 0 38 17 4202273 36 65500 25 2111193051 53 32606 53 4202454 70 
-69 40 83 28 84 62 34 50 6 61 68 4 55 43 79 75 57 65 74 9 69 40 65 38 0 56 4202238 21 65465 45 2111193086 86 32623 89 4202419 70 
-41 33 41 30 41 51 40 50 62 12 24 55 78 24 35 30 11 81 55 50 45 17 22 17 56 0 4202290 53 65517 28 2111193034 45 32601 42 4202471 79 
-4202306 4202259 4202293 4202266 4202294 4202255 4202251 4202248 4202232 4202298 4202306 4202241 4202217 4202281 4202293 4202293 4202294 4202220 4202263 4202241 4202269 4202273 4202303 4202273 4202238 4202290 0 4202237 4136773 4202283 2115395324 4202292 4202433 4202301 32767 4202227 
-78 26 70 33 70 42 17 31 23 61 71 24 36 49 66 64 57 45 55 12 52 36 68 36 21 53 4202237 0 65464 53 2111193087 71 32602 76 4202418 50 
-65533 65486 65520 65493 65521 65482 65478 65475 65459 65525 65533 65468 65444 65508 65520 65520 65521 65447 65490 65468 65496 65500 65530 65500 65465 65517 4136773 65464 0 65510 2111258551 65519 73217 65528 4136956 65454 
-25 47 69 19 69 71 49 66 51 23 25 42 87 5 63 58 20 93 78 44 69 27 22 25 45 28 4202283 53 65510 0 2111193041 73 32629 71 4202464 94 
-2111193018 2111193065 2111193031 2111193058 2111193030 2111193069 2111193073 2111193076 2111193092 2111193026 2111193018 2111193083 2111193107 2111193043 2111193031 2111193031 2111193030 2111193104 2111193061 2111193083 2111193055 2111193051 2111193021 2111193051 2111193086 2111193034 2115395324 2111193087 2111258551 2111193041 0 2111193032 2111193017 2111193023 2115395378 2111193097 
-84 45 4 68 4 37 53 47 91 55 64 86 76 68 10 15 56 72 29 77 23 50 63 53 86 45 4202292 71 65519 73 2111193032 0 32556 9 4202472 65 
-32639 32588 32560 32619 32560 32563 32591 32573 32625 32611 32619 32626 32572 32624 32566 32571 32612 32560 32553 32614 32561 32603 32619 32606 32623 32601 4202433 32602 73217 32629 2111193017 32556 0 32560 4202361 32553 
-79 50 8 68 7 46 58 54 94 51 59 89 84 67 10 13 52 81 38 80 32 51 59 53 89 42 4202301 76 65528 71 2111193023 9 32560 0 4202482 74 
-4202487 4202440 4202474 4202447 4202475 4202436 4202432 4202429 4202413 4202479 4202487 4202422 4202398 4202462 4202474 4202474 4202475 4202401 4202443 4202422 4202450 4202454 4202484 4202454 4202419 4202471 32767 4202418 4136956 4202464 2115395378 4202472 4202361 4202482 0 4202407 
-116 47 66 76 67 29 44 29 72 91 102 74 21 89 67 68 89 9 36 62 42 67 100 70 70 79 4202227 50 65454 94 2111193097 65 32553 74 4202407 0 
+0 69 80 44 79 91 73 87 75 29 20 66 111 29 74 69 29 116 96 69 86 48 20 46 69 41 4202306 78 65533 25 180355270 84 32693 79 4202487 116 
+69 0 44 31 44 25 8 18 45 45 56 42 44 42 40 38 42 48 35 31 28 20 53 22 40 33 4202259 26 65486 47 180355223 45 32642 50 4202440 47 
+80 44 0 64 1 38 52 46 89 51 60 84 76 65 6 11 52 73 30 74 24 47 59 50 83 41 4202293 70 65520 69 180355257 4 32614 8 4202474 66 
+44 31 64 0 65 57 31 49 34 32 40 25 67 15 59 55 28 74 66 25 58 17 37 14 28 30 4202266 33 65493 19 180355230 68 32673 68 4202447 76 
+79 44 1 65 0 39 53 47 89 51 60 84 77 65 6 11 52 74 31 75 25 47 59 50 84 41 4202294 70 65521 69 180355258 4 32614 7 4202475 67 
+91 25 38 57 39 0 28 12 66 64 75 64 39 66 38 38 62 35 12 52 14 43 73 46 62 51 4202255 42 65482 71 180355219 37 32617 46 4202436 29 
+73 8 52 31 53 28 0 18 38 51 61 36 38 44 48 46 47 43 39 25 34 25 59 26 34 40 4202251 17 65478 49 180355215 53 32645 58 4202432 44 
+87 18 46 49 47 12 18 0 54 62 74 53 31 60 45 45 60 30 25 41 24 39 71 41 50 50 4202248 31 65475 66 180355212 47 32627 54 4202429 29 
+75 45 89 34 89 66 38 54 0 67 74 9 55 49 84 81 63 66 78 14 73 46 71 45 6 62 4202232 23 65459 51 180355196 91 32679 94 4202413 72 
+29 45 51 32 51 64 51 62 67 0 11 58 89 21 45 40 4 93 67 57 57 26 9 25 61 12 4202298 61 65525 23 180355262 55 32665 51 4202479 91 
+20 56 60 40 60 75 61 74 74 11 0 65 100 25 54 49 13 104 78 65 68 36 3 35 68 24 4202306 71 65533 25 180355270 64 32673 59 4202487 102 
+66 42 84 25 84 64 36 53 9 58 65 0 59 40 79 75 54 69 76 12 70 39 62 37 4 55 4202241 24 65468 42 180355205 86 32680 89 4202422 74 
+111 44 76 67 77 39 38 31 55 89 100 59 0 82 76 76 86 12 49 48 53 64 98 65 55 78 4202217 36 65444 87 180355181 76 32626 84 4202398 21 
+29 42 65 15 65 66 44 60 49 21 25 40 82 0 59 54 17 88 73 41 64 22 22 19 43 24 4202281 49 65508 5 180355245 68 32678 67 4202462 89 
+74 40 6 59 6 38 48 45 84 45 54 79 76 59 0 5 46 73 32 70 24 42 53 44 79 35 4202293 66 65520 63 180355257 10 32620 10 4202474 67 
+69 38 11 55 11 38 46 45 81 40 49 75 76 54 5 0 41 73 34 67 26 37 49 40 75 30 4202293 64 65520 58 180355257 15 32625 13 4202474 68 
+29 42 52 28 52 62 47 60 63 4 13 54 86 17 46 41 0 90 66 53 56 22 11 21 57 11 4202294 57 65521 20 180355258 56 32666 52 4202475 89 
+116 48 73 74 74 35 43 30 66 93 104 69 12 88 73 73 90 0 43 57 49 68 101 70 65 81 4202220 45 65447 93 180355184 72 32614 81 4202401 9 
+96 35 30 66 31 12 39 25 78 67 78 76 49 73 32 34 66 43 0 64 10 50 77 53 74 55 4202263 55 65490 78 180355227 29 32607 38 4202443 36 
+69 31 74 25 75 52 25 41 14 57 65 12 48 41 70 67 53 57 64 0 59 33 62 32 9 50 4202241 12 65468 44 180355205 77 32668 80 4202422 62 
+86 28 24 58 25 14 34 24 73 57 68 70 53 64 24 26 56 49 10 59 0 42 67 45 69 45 4202269 52 65496 69 180355233 23 32615 32 4202450 42 
+48 20 47 17 47 43 25 39 46 26 36 39 64 22 42 37 22 68 50 33 42 0 34 3 40 17 4202273 36 65500 27 180355237 50 32657 51 4202454 67 
+20 53 59 37 59 73 59 71 71 9 3 62 98 22 53 49 11 101 77 62 67 34 0 32 65 22 4202303 68 65530 22 180355267 63 32673 59 4202484 100 
+46 22 50 14 50 46 26 41 45 25 35 37 65 19 44 40 21 70 53 32 45 3 32 0 38 17 4202273 36 65500 25 180355237 53 32660 53 4202454 70 
+69 40 83 28 84 62 34 50 6 61 68 4 55 43 79 75 57 65 74 9 69 40 65 38 0 56 4202238 21 65465 45 180355202 86 32677 89 4202419 70 
+41 33 41 30 41 51 40 50 62 12 24 55 78 24 35 30 11 81 55 50 45 17 22 17 56 0 4202290 53 65517 28 180355254 45 32655 42 4202471 79 
+4202306 4202259 4202293 4202266 4202294 4202255 4202251 4202248 4202232 4202298 4202306 4202241 4202217 4202281 4202293 4202293 4202294 4202220 4202263 4202241 4202269 4202273 4202303 4202273 4202238 4202290 0 4202237 4136773 4202283 176152964 4202292 4202434 4202301 32767 4202227 
+78 26 70 33 70 42 17 31 23 61 71 24 36 49 66 64 57 45 55 12 52 36 68 36 21 53 4202237 0 65464 53 180355201 71 32656 76 4202418 50 
+65533 65486 65520 65493 65521 65482 65478 65475 65459 65525 65533 65468 65444 65508 65520 65520 65521 65447 65490 65468 65496 65500 65530 65500 65465 65517 4136773 65464 0 65510 180289737 65519 73241 65528 4136956 65454 
+25 47 69 19 69 71 49 66 51 23 25 42 87 5 63 58 20 93 78 44 69 27 22 25 45 28 4202283 53 65510 0 180355247 73 32683 71 4202464 94 
+180355270 180355223 180355257 180355230 180355258 180355219 180355215 180355212 180355196 180355262 180355270 180355205 180355181 180355245 180355257 180355257 180355258 180355184 180355227 180355205 180355233 180355237 180355267 180355237 180355202 180355254 176152964 180355201 180289737 180355247 0 180355256 180355273 180355265 176152913 180355191 
+84 45 4 68 4 37 53 47 91 55 64 86 76 68 10 15 56 72 29 77 23 50 63 53 86 45 4202292 71 65519 73 180355256 0 32610 9 4202472 65 
+32693 32642 32614 32673 32614 32617 32645 32627 32679 32665 32673 32680 32626 32678 32620 32625 32666 32614 32607 32668 32615 32657 32673 32660 32677 32655 4202434 32656 73241 32683 180355273 32610 0 32614 4202361 32607 
+79 50 8 68 7 46 58 54 94 51 59 89 84 67 10 13 52 81 38 80 32 51 59 53 89 42 4202301 76 65528 71 180355265 9 32614 0 4202482 74 
+4202487 4202440 4202474 4202447 4202475 4202436 4202432 4202429 4202413 4202479 4202487 4202422 4202398 4202462 4202474 4202474 4202475 4202401 4202443 4202422 4202450 4202454 4202484 4202454 4202419 4202471 32767 4202418 4136956 4202464 176152913 4202472 4202361 4202482 0 4202407 
+116 47 66 76 67 29 44 29 72 91 102 74 21 89 67 68 89 9 36 62 42 67 100 70 70 79 4202227 50 65454 94 180355191 65 32607 74 4202407 0 
 next is 0
 updating for i= 1 with 69
 updating for i= 2 with 80
@@ -102,9 +102,9 @@ updating for i= 26 with 4202306
 updating for i= 27 with 78
 updating for i= 28 with 65533
 updating for i= 29 with 25
-updating for i= 30 with 2111193018
+updating for i= 30 with 180355270
 updating for i= 31 with 84
-updating for i= 32 with 32639
+updating for i= 32 with 32693
 updating for i= 33 with 79
 updating for i= 34 with 4202487
 updating for i= 35 with 116
@@ -135,7 +135,7 @@ updating for i= 24 with 68
 updating for i= 25 with 24
 updating for i= 27 with 71
 updating for i= 31 with 64
-updating for i= 32 with 32619
+updating for i= 32 with 32673
 updating for i= 33 with 59
 updating for i= 35 with 102
 next is 22
@@ -165,6 +165,7 @@ updating for i= 26 with 4202303
 updating for i= 27 with 68
 updating for i= 28 with 65530
 updating for i= 29 with 22
+updating for i= 30 with 180355267
 updating for i= 31 with 63
 updating for i= 34 with 4202484
 updating for i= 35 with 100
@@ -194,8 +195,9 @@ updating for i= 25 with 12
 updating for i= 26 with 4202298
 updating for i= 27 with 61
 updating for i= 28 with 65525
+updating for i= 30 with 180355262
 updating for i= 31 with 55
-updating for i= 32 with 32611
+updating for i= 32 with 32665
 updating for i= 33 with 51
 updating for i= 34 with 4202479
 updating for i= 35 with 91
@@ -221,6 +223,7 @@ updating for i= 26 with 4202294
 updating for i= 27 with 57
 updating for i= 28 with 65521
 updating for i= 29 with 20
+updating for i= 30 with 180355258
 updating for i= 34 with 4202475
 updating for i= 35 with 89
 next is 25
@@ -244,8 +247,9 @@ updating for i= 24 with 56
 updating for i= 26 with 4202290
 updating for i= 27 with 53
 updating for i= 28 with 65517
+updating for i= 30 with 180355254
 updating for i= 31 with 45
-updating for i= 32 with 32601
+updating for i= 32 with 32655
 updating for i= 33 with 42
 updating for i= 34 with 4202471
 updating for i= 35 with 79
@@ -259,6 +263,7 @@ updating for i= 26 with 4202281
 updating for i= 27 with 49
 updating for i= 28 with 65508
 updating for i= 29 with 5
+updating for i= 30 with 180355245
 updating for i= 34 with 4202462
 next is 29
 next is 3
@@ -275,6 +280,7 @@ updating for i= 24 with 28
 updating for i= 26 with 4202266
 updating for i= 27 with 33
 updating for i= 28 with 65493
+updating for i= 30 with 180355230
 updating for i= 34 with 4202447
 updating for i= 35 with 76
 next is 23
@@ -308,7 +314,8 @@ updating for i= 20 with 28
 updating for i= 26 with 4202259
 updating for i= 27 with 26
 updating for i= 28 with 65486
-updating for i= 32 with 32588
+updating for i= 30 with 180355223
+updating for i= 32 with 32642
 updating for i= 34 with 4202440
 updating for i= 35 with 47
 next is 6
@@ -317,6 +324,7 @@ updating for i= 17 with 43
 updating for i= 26 with 4202251
 updating for i= 27 with 17
 updating for i= 28 with 65478
+updating for i= 30 with 180355215
 updating for i= 34 with 4202432
 updating for i= 35 with 44
 next is 27
@@ -327,6 +335,7 @@ updating for i= 19 with 12
 updating for i= 24 with 21
 updating for i= 26 with 4202237
 updating for i= 28 with 65464
+updating for i= 30 with 180355201
 updating for i= 34 with 4202418
 next is 19
 updating for i= 8 with 14
@@ -339,6 +348,7 @@ next is 11
 next is 8
 updating for i= 26 with 4202232
 updating for i= 28 with 65459
+updating for i= 30 with 180355196
 updating for i= 34 with 4202413
 next is 7
 updating for i= 5 with 12
@@ -346,7 +356,7 @@ updating for i= 12 with 31
 updating for i= 17 with 30
 updating for i= 18 with 25
 updating for i= 20 with 24
-updating for i= 32 with 32573
+updating for i= 32 with 32627
 updating for i= 35 with 29
 next is 5
 updating for i= 2 with 38
@@ -354,14 +364,14 @@ updating for i= 4 with 39
 updating for i= 18 with 12
 updating for i= 20 with 14
 updating for i= 31 with 37
-updating for i= 32 with 32563
+updating for i= 32 with 32617
 next is 18
 updating for i= 2 with 30
 updating for i= 4 with 31
 updating for i= 14 with 32
 updating for i= 20 with 10
 updating for i= 31 with 29
-updating for i= 32 with 32553
+updating for i= 32 with 32607
 updating for i= 33 with 38
 next is 20
 updating for i= 2 with 24
@@ -392,25 +402,30 @@ updating for i= 12 with 21
 updating for i= 17 with 9
 updating for i= 26 with 4202227
 updating for i= 28 with 65454
+updating for i= 30 with 180355191
 updating for i= 34 with 4202407
 next is 17
 updating for i= 12 with 12
 updating for i= 26 with 4202220
 updating for i= 28 with 65447
+updating for i= 30 with 180355184
 updating for i= 34 with 4202401
 next is 12
 updating for i= 26 with 4202217
 updating for i= 28 with 65444
+updating for i= 30 with 180355181
 updating for i= 34 with 4202398
 next is 32
-updating for i= 30 with 2111193017
 updating for i= 34 with 4202361
 next is 28
 updating for i= 26 with 4136773
+updating for i= 30 with 180289737
 updating for i= 34 with 4136956
 next is 26
+updating for i= 30 with 176152964
 updating for i= 34 with 32767
 next is 34
+updating for i= 30 with 176152913
 next is 30
  the adjacency matrix for the minimum spanning tree looks like 
 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
@@ -443,11 +458,11 @@ next is 30
 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 
 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 
 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 
 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
  the minimum spanning tree looks like 
 0 X X X X X X X X X 20 X X X X X X X X X X X X X X X X X X X X X X X X X 
@@ -468,7 +483,7 @@ X X 6 X X X X X X X X X X X 0 5 X X X X X X X X X X X X X X X X X X X X
 X X X X X X X X X X X X X X 5 0 X X X X X X X X X X X X X X X X X X X X 
 X X X X X X X X X 4 X X X 17 X X 0 X X X X X X X X 11 X X X X X X X X X X 
 X X X X X X X X X X X X 12 X X X X 0 X X X X X X X X X X X X X X X X X 9 
-X X X X X 12 X X X X X X X X X X X X 0 X 10 X X X X X X X X X X X 32553 X X X 
+X X X X X 12 X X X X X X X X X X X X 0 X 10 X X X X X X X X X X X 32607 X X X 
 X X X X X X X X X X X X X X X X X X X 0 X X X X 9 X X 12 X X X X X X X X 
 X X X X X X X X X X X X X X X X X X 10 X 0 X X X X X X X X X X 23 X X X X 
 X 20 X X X X X X X X X X X X X X X X X X X 0 X 3 X X X X X X X X X X X X 
@@ -480,11 +495,11 @@ X X X X X X X X X X X X X X X X X X X X X X X X X X 0 X 4136773 X X X X X 32767 
 X X X X X X 17 X X X X X X X X X X X X 12 X X X X X X X 0 X X X X X X X X 
 X X X X X X X X X X X X 65444 X X X X X X X X X X X X X 4136773 X 0 X X X X X X X 
 X X X X X X X X X X X X X 5 X X X X X X X X X X X X X X X 0 X X X X X X 
-X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X 0 X 2111193017 X X X 
+X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X 0 X X X 176152913 X 
 X X 4 X X X X X X X X X X X X X X X X X 23 X X X X X X X X X X 0 X X X X 
-X X X X X X X X X X X X X X X X X X 32553 X X X X X X X X X X X 2111193017 X 0 X X X 
+X X X X X X X X X X X X X X X X X X 32607 X X X X X X X X X X X X X 0 X X X 
 X X X X 7 X X X X X X X X X X X X X X X X X X X X X X X X X X X X 0 X X 
-X X X X X X X X X X X X X X X X X X X X X X X X X X 32767 X X X X X X X 0 X 
+X X X X X X X X X X X X X X X X X X X X X X X X X X 32767 X X X 176152913 X X X 0 X 
 X X X X X X X 29 X X X X X X X X X 9 X X X X X X X X X X X X X X X X X 0 
 now we are finding the MST for the following nodes
 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 newCity is 35 j = 0 and their distance is 66
@@ -515,9 +530,9 @@ newCity is 35 j = 24 and their distance is 4202227
 newCity is 35 j = 25 and their distance is 50
 newCity is 35 j = 26 and their distance is 65454
 newCity is 35 j = 27 and their distance is 94
-newCity is 35 j = 28 and their distance is 2111193097
+newCity is 35 j = 28 and their distance is 180355191
 newCity is 35 j = 29 and their distance is 65
-newCity is 35 j = 30 and their distance is 32553
+newCity is 35 j = 30 and their distance is 32607
 newCity is 35 j = 31 and their distance is 74
 newCity is 35 j = 32 and their distance is 4202407
 length right now  is 9
@@ -549,9 +564,9 @@ newCity is 17 j = 24 and their distance is 4202220
 newCity is 17 j = 25 and their distance is 45
 newCity is 17 j = 26 and their distance is 65447
 newCity is 17 j = 27 and their distance is 93
-newCity is 17 j = 28 and their distance is 2111193104
+newCity is 17 j = 28 and their distance is 180355184
 newCity is 17 j = 29 and their distance is 72
-newCity is 17 j = 30 and their distance is 32560
+newCity is 17 j = 30 and their distance is 32614
 newCity is 17 j = 31 and their distance is 81
 length right now  is 21
 newCity is 12 j = 0 and their distance is 76
@@ -582,14 +597,14 @@ newCity is 12 j = 24 and their distance is 4202217
 newCity is 12 j = 25 and their distance is 36
 newCity is 12 j = 26 and their distance is 65444
 newCity is 12 j = 27 and their distance is 87
-newCity is 12 j = 28 and their distance is 2111193107
+newCity is 12 j = 28 and their distance is 180355181
 newCity is 12 j = 29 and their distance is 76
-newCity is 12 j = 30 and their distance is 32572
+newCity is 12 j = 30 and their distance is 32626
 length right now  is 50
 newCity is 5 j = 0 and their distance is 38
 newCity is 5 j = 1 and their distance is 57
 newCity is 5 j = 2 and their distance is 39
-newCity is 5 j = 3 and their distance is 32563
+newCity is 5 j = 3 and their distance is 32617
 newCity is 5 j = 4 and their distance is 28
 newCity is 5 j = 5 and their distance is 12
 newCity is 5 j = 6 and their distance is 66
@@ -614,13 +629,13 @@ newCity is 5 j = 24 and their distance is 4202255
 newCity is 5 j = 25 and their distance is 42
 newCity is 5 j = 26 and their distance is 65482
 newCity is 5 j = 27 and their distance is 71
-newCity is 5 j = 28 and their distance is 2111193069
+newCity is 5 j = 28 and their distance is 180355219
 newCity is 5 j = 29 and their distance is 37
 length right now  is 62
 newCity is 7 j = 0 and their distance is 46
 newCity is 7 j = 1 and their distance is 49
 newCity is 7 j = 2 and their distance is 47
-newCity is 7 j = 3 and their distance is 32573
+newCity is 7 j = 3 and their distance is 32627
 newCity is 7 j = 4 and their distance is 18
 newCity is 7 j = 5 and their distance is 47
 newCity is 7 j = 6 and their distance is 54
@@ -645,12 +660,12 @@ newCity is 7 j = 24 and their distance is 4202248
 newCity is 7 j = 25 and their distance is 31
 newCity is 7 j = 26 and their distance is 65475
 newCity is 7 j = 27 and their distance is 66
-newCity is 7 j = 28 and their distance is 2111193076
+newCity is 7 j = 28 and their distance is 180355212
 length right now  is 74
 newCity is 18 j = 0 and their distance is 30
 newCity is 18 j = 1 and their distance is 66
 newCity is 18 j = 2 and their distance is 31
-newCity is 18 j = 3 and their distance is 32553
+newCity is 18 j = 3 and their distance is 32607
 newCity is 18 j = 4 and their distance is 39
 newCity is 18 j = 5 and their distance is 29
 newCity is 18 j = 6 and their distance is 78
@@ -663,7 +678,7 @@ newCity is 18 j = 12 and their distance is 32
 newCity is 18 j = 13 and their distance is 34
 newCity is 18 j = 14 and their distance is 66
 newCity is 18 j = 15 and their distance is 4202443
-newCity is 18 j = 16 and their distance is 2111193061
+newCity is 18 j = 16 and their distance is 180355227
 newCity is 18 j = 17 and their distance is 64
 newCity is 18 j = 18 and their distance is 10
 newCity is 18 j = 19 and their distance is 50
@@ -679,7 +694,7 @@ length right now  is 84
 newCity is 20 j = 0 and their distance is 24
 newCity is 20 j = 1 and their distance is 58
 newCity is 20 j = 2 and their distance is 25
-newCity is 20 j = 3 and their distance is 32561
+newCity is 20 j = 3 and their distance is 32615
 newCity is 20 j = 4 and their distance is 34
 newCity is 20 j = 5 and their distance is 23
 newCity is 20 j = 6 and their distance is 73
@@ -692,7 +707,7 @@ newCity is 20 j = 12 and their distance is 24
 newCity is 20 j = 13 and their distance is 26
 newCity is 20 j = 14 and their distance is 56
 newCity is 20 j = 15 and their distance is 4202450
-newCity is 20 j = 16 and their distance is 2111193055
+newCity is 20 j = 16 and their distance is 180355233
 newCity is 20 j = 17 and their distance is 59
 newCity is 20 j = 18 and their distance is 69
 newCity is 20 j = 19 and their distance is 42
@@ -707,7 +722,7 @@ length right now  is 102
 newCity is 6 j = 0 and their distance is 52
 newCity is 6 j = 1 and their distance is 31
 newCity is 6 j = 2 and their distance is 53
-newCity is 6 j = 3 and their distance is 32591
+newCity is 6 j = 3 and their distance is 32645
 newCity is 6 j = 4 and their distance is 65478
 newCity is 6 j = 5 and their distance is 53
 newCity is 6 j = 6 and their distance is 38
@@ -720,7 +735,7 @@ newCity is 6 j = 12 and their distance is 48
 newCity is 6 j = 13 and their distance is 46
 newCity is 6 j = 14 and their distance is 47
 newCity is 6 j = 15 and their distance is 4202432
-newCity is 6 j = 16 and their distance is 2111193073
+newCity is 6 j = 16 and their distance is 180355215
 newCity is 6 j = 17 and their distance is 25
 newCity is 6 j = 18 and their distance is 49
 newCity is 6 j = 19 and their distance is 25
@@ -734,7 +749,7 @@ length right now  is 119
 newCity is 27 j = 0 and their distance is 70
 newCity is 27 j = 1 and their distance is 33
 newCity is 27 j = 2 and their distance is 70
-newCity is 27 j = 3 and their distance is 32602
+newCity is 27 j = 3 and their distance is 32656
 newCity is 27 j = 4 and their distance is 65464
 newCity is 27 j = 5 and their distance is 71
 newCity is 27 j = 6 and their distance is 23
@@ -747,7 +762,7 @@ newCity is 27 j = 12 and their distance is 66
 newCity is 27 j = 13 and their distance is 64
 newCity is 27 j = 14 and their distance is 57
 newCity is 27 j = 15 and their distance is 4202418
-newCity is 27 j = 16 and their distance is 2111193087
+newCity is 27 j = 16 and their distance is 180355201
 newCity is 27 j = 17 and their distance is 12
 newCity is 27 j = 18 and their distance is 53
 newCity is 27 j = 19 and their distance is 36
@@ -760,7 +775,7 @@ length right now  is 131
 newCity is 19 j = 0 and their distance is 74
 newCity is 19 j = 1 and their distance is 25
 newCity is 19 j = 2 and their distance is 75
-newCity is 19 j = 3 and their distance is 32614
+newCity is 19 j = 3 and their distance is 32668
 newCity is 19 j = 4 and their distance is 65468
 newCity is 19 j = 5 and their distance is 77
 newCity is 19 j = 6 and their distance is 14
@@ -773,7 +788,7 @@ newCity is 19 j = 12 and their distance is 70
 newCity is 19 j = 13 and their distance is 67
 newCity is 19 j = 14 and their distance is 53
 newCity is 19 j = 15 and their distance is 4202422
-newCity is 19 j = 16 and their distance is 2111193083
+newCity is 19 j = 16 and their distance is 180355205
 newCity is 19 j = 17 and their distance is 4202241
 newCity is 19 j = 18 and their distance is 44
 newCity is 19 j = 19 and their distance is 33
@@ -785,7 +800,7 @@ length right now  is 140
 newCity is 24 j = 0 and their distance is 83
 newCity is 24 j = 1 and their distance is 28
 newCity is 24 j = 2 and their distance is 84
-newCity is 24 j = 3 and their distance is 32623
+newCity is 24 j = 3 and their distance is 32677
 newCity is 24 j = 4 and their distance is 65465
 newCity is 24 j = 5 and their distance is 86
 newCity is 24 j = 6 and their distance is 6
@@ -798,7 +813,7 @@ newCity is 24 j = 12 and their distance is 79
 newCity is 24 j = 13 and their distance is 75
 newCity is 24 j = 14 and their distance is 57
 newCity is 24 j = 15 and their distance is 4202419
-newCity is 24 j = 16 and their distance is 2111193086
+newCity is 24 j = 16 and their distance is 180355202
 newCity is 24 j = 17 and their distance is 4202238
 newCity is 24 j = 18 and their distance is 45
 newCity is 24 j = 19 and their distance is 40
@@ -809,7 +824,7 @@ length right now  is 144
 newCity is 11 j = 0 and their distance is 84
 newCity is 11 j = 1 and their distance is 25
 newCity is 11 j = 2 and their distance is 84
-newCity is 11 j = 3 and their distance is 32626
+newCity is 11 j = 3 and their distance is 32680
 newCity is 11 j = 4 and their distance is 65468
 newCity is 11 j = 5 and their distance is 86
 newCity is 11 j = 6 and their distance is 9
@@ -822,7 +837,7 @@ newCity is 11 j = 12 and their distance is 79
 newCity is 11 j = 13 and their distance is 75
 newCity is 11 j = 14 and their distance is 54
 newCity is 11 j = 15 and their distance is 4202422
-newCity is 11 j = 16 and their distance is 2111193083
+newCity is 11 j = 16 and their distance is 180355205
 newCity is 11 j = 17 and their distance is 4202241
 newCity is 11 j = 18 and their distance is 42
 newCity is 11 j = 19 and their distance is 39
@@ -832,7 +847,7 @@ length right now  is 150
 newCity is 8 j = 0 and their distance is 89
 newCity is 8 j = 1 and their distance is 34
 newCity is 8 j = 2 and their distance is 89
-newCity is 8 j = 3 and their distance is 32625
+newCity is 8 j = 3 and their distance is 32679
 newCity is 8 j = 4 and their distance is 65459
 newCity is 8 j = 5 and their distance is 91
 newCity is 8 j = 6 and their distance is 45
@@ -845,7 +860,7 @@ newCity is 8 j = 12 and their distance is 84
 newCity is 8 j = 13 and their distance is 81
 newCity is 8 j = 14 and their distance is 63
 newCity is 8 j = 15 and their distance is 4202413
-newCity is 8 j = 16 and their distance is 2111193092
+newCity is 8 j = 16 and their distance is 180355196
 newCity is 8 j = 17 and their distance is 4202232
 newCity is 8 j = 18 and their distance is 51
 newCity is 8 j = 19 and their distance is 46
@@ -854,7 +869,7 @@ length right now  is 173
 newCity is 31 j = 0 and their distance is 4
 newCity is 31 j = 1 and their distance is 68
 newCity is 31 j = 2 and their distance is 4
-newCity is 31 j = 3 and their distance is 32556
+newCity is 31 j = 3 and their distance is 32610
 newCity is 31 j = 4 and their distance is 65519
 newCity is 31 j = 5 and their distance is 63
 newCity is 31 j = 6 and their distance is 53
@@ -867,7 +882,7 @@ newCity is 31 j = 12 and their distance is 10
 newCity is 31 j = 13 and their distance is 15
 newCity is 31 j = 14 and their distance is 56
 newCity is 31 j = 15 and their distance is 4202472
-newCity is 31 j = 16 and their distance is 2111193032
+newCity is 31 j = 16 and their distance is 180355256
 newCity is 31 j = 17 and their distance is 4202292
 newCity is 31 j = 18 and their distance is 73
 newCity is 31 j = 19 and their distance is 50
@@ -875,7 +890,7 @@ length right now  is 177
 newCity is 2 j = 0 and their distance is 47
 newCity is 2 j = 1 and their distance is 64
 newCity is 2 j = 2 and their distance is 1
-newCity is 2 j = 3 and their distance is 32560
+newCity is 2 j = 3 and their distance is 32614
 newCity is 2 j = 4 and their distance is 65520
 newCity is 2 j = 5 and their distance is 59
 newCity is 2 j = 6 and their distance is 50
@@ -888,14 +903,14 @@ newCity is 2 j = 12 and their distance is 6
 newCity is 2 j = 13 and their distance is 11
 newCity is 2 j = 14 and their distance is 52
 newCity is 2 j = 15 and their distance is 4202474
-newCity is 2 j = 16 and their distance is 2111193031
+newCity is 2 j = 16 and their distance is 180355257
 newCity is 2 j = 17 and their distance is 4202293
 newCity is 2 j = 18 and their distance is 69
 length right now  is 178
 newCity is 4 j = 0 and their distance is 47
 newCity is 4 j = 1 and their distance is 65
 newCity is 4 j = 2 and their distance is 69
-newCity is 4 j = 3 and their distance is 32560
+newCity is 4 j = 3 and their distance is 32614
 newCity is 4 j = 4 and their distance is 65521
 newCity is 4 j = 5 and their distance is 59
 newCity is 4 j = 6 and their distance is 50
@@ -908,13 +923,13 @@ newCity is 4 j = 12 and their distance is 6
 newCity is 4 j = 13 and their distance is 11
 newCity is 4 j = 14 and their distance is 52
 newCity is 4 j = 15 and their distance is 4202475
-newCity is 4 j = 16 and their distance is 2111193030
+newCity is 4 j = 16 and their distance is 180355258
 newCity is 4 j = 17 and their distance is 4202294
 length right now  is 184
 newCity is 14 j = 0 and their distance is 42
 newCity is 14 j = 1 and their distance is 59
 newCity is 14 j = 2 and their distance is 63
-newCity is 14 j = 3 and their distance is 32566
+newCity is 14 j = 3 and their distance is 32620
 newCity is 14 j = 4 and their distance is 65520
 newCity is 14 j = 5 and their distance is 53
 newCity is 14 j = 6 and their distance is 44
@@ -927,12 +942,12 @@ newCity is 14 j = 12 and their distance is 4202293
 newCity is 14 j = 13 and their distance is 5
 newCity is 14 j = 14 and their distance is 46
 newCity is 14 j = 15 and their distance is 4202474
-newCity is 14 j = 16 and their distance is 2111193031
+newCity is 14 j = 16 and their distance is 180355257
 length right now  is 189
 newCity is 15 j = 0 and their distance is 37
 newCity is 15 j = 1 and their distance is 55
 newCity is 15 j = 2 and their distance is 58
-newCity is 15 j = 3 and their distance is 32571
+newCity is 15 j = 3 and their distance is 32625
 newCity is 15 j = 4 and their distance is 65520
 newCity is 15 j = 5 and their distance is 49
 newCity is 15 j = 6 and their distance is 40
@@ -942,14 +957,14 @@ newCity is 15 j = 9 and their distance is 30
 newCity is 15 j = 10 and their distance is 13
 newCity is 15 j = 11 and their distance is 54
 newCity is 15 j = 12 and their distance is 4202293
-newCity is 15 j = 13 and their distance is 2111193031
+newCity is 15 j = 13 and their distance is 180355257
 newCity is 15 j = 14 and their distance is 41
 newCity is 15 j = 15 and their distance is 4202474
 length right now  is 196
 newCity is 33 j = 0 and their distance is 51
 newCity is 33 j = 1 and their distance is 68
 newCity is 33 j = 2 and their distance is 71
-newCity is 33 j = 3 and their distance is 32560
+newCity is 33 j = 3 and their distance is 32614
 newCity is 33 j = 4 and their distance is 65528
 newCity is 33 j = 5 and their distance is 59
 newCity is 33 j = 6 and their distance is 53
@@ -959,13 +974,13 @@ newCity is 33 j = 9 and their distance is 42
 newCity is 33 j = 10 and their distance is 4202482
 newCity is 33 j = 11 and their distance is 67
 newCity is 33 j = 12 and their distance is 4202301
-newCity is 33 j = 13 and their distance is 2111193023
+newCity is 33 j = 13 and their distance is 180355265
 newCity is 33 j = 14 and their distance is 52
 length right now  is 221
 newCity is 21 j = 0 and their distance is 22
 newCity is 21 j = 1 and their distance is 17
 newCity is 21 j = 2 and their distance is 27
-newCity is 21 j = 3 and their distance is 32603
+newCity is 21 j = 3 and their distance is 32657
 newCity is 21 j = 4 and their distance is 65500
 newCity is 21 j = 5 and their distance is 34
 newCity is 21 j = 6 and their distance is 3
@@ -975,15 +990,15 @@ newCity is 21 j = 9 and their distance is 17
 newCity is 21 j = 10 and their distance is 4202454
 newCity is 21 j = 11 and their distance is 22
 newCity is 21 j = 12 and their distance is 4202273
-newCity is 21 j = 13 and their distance is 2111193051
+newCity is 21 j = 13 and their distance is 180355237
 length right now  is 224
 newCity is 23 j = 0 and their distance is 21
 newCity is 23 j = 1 and their distance is 14
 newCity is 23 j = 2 and their distance is 25
-newCity is 23 j = 3 and their distance is 32606
+newCity is 23 j = 3 and their distance is 32660
 newCity is 23 j = 4 and their distance is 65500
 newCity is 23 j = 5 and their distance is 32
-newCity is 23 j = 6 and their distance is 2111193051
+newCity is 23 j = 6 and their distance is 180355237
 newCity is 23 j = 7 and their distance is 25
 newCity is 23 j = 8 and their distance is 35
 newCity is 23 j = 9 and their distance is 17
@@ -994,10 +1009,10 @@ length right now  is 238
 newCity is 3 j = 0 and their distance is 28
 newCity is 3 j = 1 and their distance is 4202266
 newCity is 3 j = 2 and their distance is 19
-newCity is 3 j = 3 and their distance is 32619
+newCity is 3 j = 3 and their distance is 32673
 newCity is 3 j = 4 and their distance is 65493
 newCity is 3 j = 5 and their distance is 37
-newCity is 3 j = 6 and their distance is 2111193058
+newCity is 3 j = 6 and their distance is 180355230
 newCity is 3 j = 7 and their distance is 32
 newCity is 3 j = 8 and their distance is 40
 newCity is 3 j = 9 and their distance is 30
@@ -1007,10 +1022,10 @@ length right now  is 253
 newCity is 13 j = 0 and their distance is 17
 newCity is 13 j = 1 and their distance is 4202281
 newCity is 13 j = 2 and their distance is 5
-newCity is 13 j = 3 and their distance is 32624
+newCity is 13 j = 3 and their distance is 32678
 newCity is 13 j = 4 and their distance is 65508
 newCity is 13 j = 5 and their distance is 22
-newCity is 13 j = 6 and their distance is 2111193043
+newCity is 13 j = 6 and their distance is 180355245
 newCity is 13 j = 7 and their distance is 21
 newCity is 13 j = 8 and their distance is 25
 newCity is 13 j = 9 and their distance is 24
@@ -1019,10 +1034,10 @@ length right now  is 258
 newCity is 29 j = 0 and their distance is 20
 newCity is 29 j = 1 and their distance is 4202283
 newCity is 29 j = 2 and their distance is 4202464
-newCity is 29 j = 3 and their distance is 32629
+newCity is 29 j = 3 and their distance is 32683
 newCity is 29 j = 4 and their distance is 65510
 newCity is 29 j = 5 and their distance is 22
-newCity is 29 j = 6 and their distance is 2111193041
+newCity is 29 j = 6 and their distance is 180355247
 newCity is 29 j = 7 and their distance is 23
 newCity is 29 j = 8 and their distance is 25
 newCity is 29 j = 9 and their distance is 28
@@ -1030,56 +1045,56 @@ length right now  is 275
 newCity is 16 j = 0 and their distance is 11
 newCity is 16 j = 1 and their distance is 4202294
 newCity is 16 j = 2 and their distance is 4202475
-newCity is 16 j = 3 and their distance is 32612
+newCity is 16 j = 3 and their distance is 32666
 newCity is 16 j = 4 and their distance is 65521
 newCity is 16 j = 5 and their distance is 11
-newCity is 16 j = 6 and their distance is 2111193030
+newCity is 16 j = 6 and their distance is 180355258
 newCity is 16 j = 7 and their distance is 4
 newCity is 16 j = 8 and their distance is 13
 length right now  is 279
 newCity is 9 j = 0 and their distance is 12
 newCity is 9 j = 1 and their distance is 4202298
 newCity is 9 j = 2 and their distance is 4202479
-newCity is 9 j = 3 and their distance is 32611
+newCity is 9 j = 3 and their distance is 32665
 newCity is 9 j = 4 and their distance is 65525
 newCity is 9 j = 5 and their distance is 9
-newCity is 9 j = 6 and their distance is 2111193026
+newCity is 9 j = 6 and their distance is 180355262
 newCity is 9 j = 7 and their distance is 11
 length right now  is 288
 newCity is 22 j = 0 and their distance is 22
 newCity is 22 j = 1 and their distance is 4202303
 newCity is 22 j = 2 and their distance is 4202484
-newCity is 22 j = 3 and their distance is 32619
+newCity is 22 j = 3 and their distance is 32673
 newCity is 22 j = 4 and their distance is 65530
 newCity is 22 j = 5 and their distance is 3
-newCity is 22 j = 6 and their distance is 2111193021
+newCity is 22 j = 6 and their distance is 180355267
 length right now  is 291
 newCity is 10 j = 0 and their distance is 24
 newCity is 10 j = 1 and their distance is 4202306
 newCity is 10 j = 2 and their distance is 4202487
-newCity is 10 j = 3 and their distance is 32619
+newCity is 10 j = 3 and their distance is 32673
 newCity is 10 j = 4 and their distance is 65533
-newCity is 10 j = 5 and their distance is 2111193018
+newCity is 10 j = 5 and their distance is 180355270
 length right now  is 302
-newCity is 25 j = 0 and their distance is 2111193034
+newCity is 25 j = 0 and their distance is 180355254
 newCity is 25 j = 1 and their distance is 4202290
 newCity is 25 j = 2 and their distance is 4202471
-newCity is 25 j = 3 and their distance is 32601
+newCity is 25 j = 3 and their distance is 32655
 newCity is 25 j = 4 and their distance is 65517
-length right now  is 32855
-newCity is 32 j = 0 and their distance is 2111193017
-newCity is 32 j = 1 and their distance is 4202433
+length right now  is 32909
+newCity is 32 j = 0 and their distance is 180355273
+newCity is 32 j = 1 and their distance is 4202434
 newCity is 32 j = 2 and their distance is 4202361
-newCity is 32 j = 3 and their distance is 73217
-length right now  is 98299
-newCity is 28 j = 0 and their distance is 2111258551
+newCity is 32 j = 3 and their distance is 73241
+length right now  is 98353
+newCity is 28 j = 0 and their distance is 180289737
 newCity is 28 j = 1 and their distance is 4136773
 newCity is 28 j = 2 and their distance is 4136956
-length right now  is 4235072
-newCity is 26 j = 0 and their distance is 2115395324
+length right now  is 4235126
+newCity is 26 j = 0 and their distance is 176152964
 newCity is 26 j = 1 and their distance is 32767
-length right now  is 4267839
-newCity is 34 j = 0 and their distance is 2115395378
-length right now  is 2115460856
+length right now  is 4267893
+newCity is 34 j = 0 and their distance is 176152913
+length right now  is 180420806
 
- the length of the MST is 2115460856
+ the length of the MST is 180420806
