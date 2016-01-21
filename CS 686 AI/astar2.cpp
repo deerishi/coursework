@@ -222,14 +222,21 @@ int calculateHeuristic(vector<int> vertices,vector<char> nodesLeft,int currentCi
         i++;
     }
     int mst=buildMinimumSpanningTree2(vertices,nodesLeft);
-    int nearestUnvisitedCity=INT_MAX,nearestToSource=INT_MAX,thisDistance1,thisDistance2;
+    int nearestUnvisitedCityDistance=INT_MAX,nearestToSource=INT_MAX,thisDistance1,thisDistance2;
     for(i=0;i<size;i++)
     {
-        thisDistance1=distance(pcity[i],currentCityForExpansion);
+        thisDistance1=distance(pcity[i],currentCityForExpansion);// this is the distancefrom the unvisited city to the currentCityForExpansion
         thisDistance2=distance(pcity[i],0); //this is the distance from the source
+        if(thisDistance1<nearestUnvisitedCityDistance) nearestUnvisitedCityDistance=thisDistance1;
+        
+        if(thisDistance2<nearestToSource) nearestToSource=thisDistance2;
+        
     }
-    
+    int hn=mst+nearestToSource+nearestUnvisitedCityDistance;
+    return hn;
 }
+
+
 int buildMinimumSpanningTree(TSP problem) //change to only nodes in the graph
 {
     int i,j;
