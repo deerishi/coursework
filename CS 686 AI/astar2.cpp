@@ -185,13 +185,13 @@ int buildMinimumSpanningTree2(vector<int> vertices,vector<char> nodesLeft)
         for(int j=0;j<m;j++)
         {
             thisDistance=distance(pcity[j],newCity);
-            cout<<"newCity is "<<newCity<<" j = "<<j<<" and their distance is "<<thisDistance<<"\n";
+            //cout<<"newCity is "<<newCity<<" j = "<<j<<" and their distance is "<<thisDistance<<"\n";
             if(thisDistance < pdist[j]) pdist[j]=thisDistance;
             if(pdist[j]<minDistance) minDistance=pdist[j],minIndex=j;
         }
         newCity=pcity[minIndex];
         length+=minDistance;
-        cout<<"length right now  is "<<length<<"\n";
+        //cout<<"length right now  is "<<length<<"\n";
         pcity[minIndex]=pcity[m-1];
         pdist[minIndex]=pdist[m-1];   
     }
