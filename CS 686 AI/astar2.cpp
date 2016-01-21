@@ -331,6 +331,10 @@ int main()
     for( i=2;i<numCities;i++)
     {
         v1.push_back(i);
+        if(i>25)
+        {
+            v2.push_back('a'+i);
+        }
         v2.push_back('A'+i);
         cout<<i<<" ";
     }
