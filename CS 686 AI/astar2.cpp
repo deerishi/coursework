@@ -340,7 +340,7 @@ int main()
         cout<<*it<<" ";
     }
     int initialHeuristic=calculateHeuristic(v1,v2,0);
-    Node A=new Node(0,"A",numCities-1,'A',initialHeuristic,v1);
+    //Node A=new Node(0,"A",numCities-1,'A',initialHeuristic,v1);
     
     int lengthMst = buildMinimumSpanningTree2(v1,v2);
     cout<<"\n the length of the MST is "<<lengthMst<<"\n";
