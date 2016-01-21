@@ -1,5 +1,6 @@
 #include "bits/stdc++.h"
 using namespace std;
+using namespace boost;
 class ai
 {
     public: 
