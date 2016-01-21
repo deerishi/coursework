@@ -41,7 +41,7 @@ class TSP
 {
     public:
     
-     char node;
+     char node[3];
      int points[40][2],numCities;
      //TSP(int i,int j) : x(i),y(j){}
      
@@ -54,7 +54,7 @@ class TSP
         //double distance;
         while(i<numCities)
         {
-            scanf("%c%d%d ",&node,&points[i][0],&points[i][1]);
+            scanf("%s%d%d ",&node,&points[i][0],&points[i][1]);
             i++;
         }
         cout<<"n the data entered is \n";
