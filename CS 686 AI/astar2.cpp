@@ -315,7 +315,7 @@ int startSearch()
     while(!astar.empty())
     {
         current=astar.top();
-        cout<<"current heuristic is "<<current.cost<<"\n";
+        cout<<"current heuristic is "<<current->cost<<"\n";
         astar.pop();
     }
 }
