@@ -50,6 +50,7 @@ int main()
     v1.push_back("B");
     v1.push_back("A");
     v1.push_back("b");
+    vector<s
     sort(v1.begin(),v1.end());
     vector<string> v2;
     v2=v1;
