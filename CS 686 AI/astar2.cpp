@@ -333,7 +333,11 @@ int main()
         }
         cout<<i<<" ";
     }
-    vector<char>:: iterator it=v2
+    vector<char>:: iterator it=v2.begin();
+    for(it=v2.begin();it!=v2.end();it++)
+    {
+        cout<<*it<<" ";
+    }
     int initialHeuristic=calculateHeuristic(v1,v2,0);
     Node A=new A(0,'A',numCities-1,'A',initialHeuristic,v1);
     
