@@ -39,10 +39,10 @@ int main()
 	q1.push(ob3);
 	ai ob4;
 	ob4.a=10;
-	//cout<<"\nchecking for a=10 "<<q1.find(&ob4).a<<"\n";
+
 	
 	cout<<"the original array is \n";
-   // vector<pair<int,int> >::iterator it;    
+
     while(!q1.empty())
     {
         cout<<q1.top().a<<" "<<q1.top().b<<"\n";
@@ -57,4 +57,4 @@ int main()
     
     
 	return 0;
-}
+}   // vector<pair<int,int> >::iterator it;    
