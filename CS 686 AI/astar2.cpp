@@ -322,6 +322,7 @@ int main()
     {
         vertices.push_back(i);
     }
+    vector<char> v2;
     int initialHeuristic=
     Node A=new A(0,'A',numCities-1,'A',)
     vector<int> v1;
