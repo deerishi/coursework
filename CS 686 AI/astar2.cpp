@@ -311,18 +311,20 @@ int buildMinimumSpanningTree(TSP problem) //change to only nodes in the graph
 int main()
 {
     TSP prob1;
+    int i;
     prob1.inputData();
     prob1.createOriginalDistanceGraph();// Till now we have the orginal Distance Graph
     int numCities=prob1.numCities;
     buildMinimumSpanningTree(prob1);
     //Now we have the number of cities and the orignal graph
-    vector<int> vertices
+    vector<int> vertices;
+    for(i=1;i<numCities;i++)
     int initialHeuristic=
     Node A=new A(0,'A',numCities-1,'A',)
     vector<int> v1;
     vector<char> v2;
     cout<<"now we are finding the MST for the following nodes\n";
-    for(int i=2;i<numCities;i++)
+    for( i=2;i<numCities;i++)
     {
         v1.push_back(i);
         v2.push_back('A'+i);
