@@ -18,7 +18,7 @@ class Regression():
     def mse_loss(self,predicted,goldset):
         diff=goldset-predicted
         #print 'diff returning ',0.5* (sum([i**2 for i in diff]))
-        return 0.5* (sum([i**2 for i in diff]))
+        return 0.5* (sum([i**2 for i in diff]))/diff.shape[0]
             
     def total_loss(self,predicted,goldset,weights,lamda):
         return self.mse_loss(predicted,goldset) #+ self.regularization_loss(weights,lamda)
