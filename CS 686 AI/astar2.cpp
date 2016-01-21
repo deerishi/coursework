@@ -317,14 +317,6 @@ int main()
     int numCities=prob1.numCities;
     buildMinimumSpanningTree(prob1);
     //Now we have the number of cities and the orignal graph
-    vector<int> vertices;
-    for(i=1;i<numCities;i++)
-    {
-        vertices.push_back(i);
-    }
-    vector<char> v2;
-    int initialHeuristic=
-    Node A=new A(0,'A',numCities-1,'A',)
     vector<int> v1;
     vector<char> v2;
     cout<<"now we are finding the MST for the following nodes\n";
@@ -341,6 +333,10 @@ int main()
         }
         cout<<i<<" ";
     }
+    vector<char> v2;
+    int initialHeuristic=
+    Node A=new A(0,'A',numCities-1,'A',)
+    
     int lengthMst = buildMinimumSpanningTree2(v1,v2);
     cout<<"\n the length of the MST is "<<lengthMst<<"\n";
     return 0;   
