@@ -358,13 +358,13 @@ string startSearch()
         pathSoFar=current.pathSoFar;
         state=current.state;
         
-        cout<<"the vertices are \n";
+        //cout<<"the vertices are \n";
         
         vertices=current.citiesLeft;
         for(it=vertices.begin();it!=vertices.end();it++)
         {
             int next=*it;
-            cout<<"vertice  is "<<next<<"\n";
+           // cout<<"vertice  is "<<next<<"\n";
          }
         // the state is the entire path + in the closed list with a lesser cost then no need to expand this node at all
         // test for goal state
@@ -372,7 +372,7 @@ string startSearch()
         {
             //i.e. all cities have been visited, just the tour back to the starting city is left.
             int tcost=current.actualCost + distance(current.citynum,0);
-            cout<<" goal state reached with cost of "<<tcost<<" and with a path of "<<current.pathSoFar<<"\n";
+           // cout<<" goal state reached with cost of "<<tcost<<" and with a path of "<<current.pathSoFar<<"\n";
             if(tcost< optimumCost )
             {
                 optimumCost=tcost;
@@ -393,7 +393,7 @@ string startSearch()
         for(it=vertices.begin();it!=vertices.end();it++)
         {
             int next=*it;
-            cout<<"next is "<<next<<"\n";
+            //cout<<"next is "<<next<<"\n";
             nextUnvisitedCities.clear();
             namesOfCitiesYettoVisit.clear();
    
@@ -416,7 +416,7 @@ string startSearch()
             }
             //for(it4=nextUnvisitedCities.begin();it4!=nextUnvisitedCities.end();it4++)
             //cout<<*it4<<" ";
-            cout<<"\n";
+            //cout<<"\n";
             for(it4=vertices.begin();it4!=vertices.end();it4++)
             {
                 int city3=*it4;
@@ -434,7 +434,7 @@ string startSearch()
             //cout<<"hn for "<<next<<" is "<<hn<<"\n";
             aCost=current.actualCost + distance(current.citynum,next);
             tCost=hn+ aCost;
-            cout<<"totalCost for next= "<<next<<" is "<<tCost<<"\n";
+            //cout<<"totalCost for next= "<<next<<" is "<<tCost<<"\n";
             if( next>25)
             {
                 name='a'+ next-26;
@@ -448,7 +448,7 @@ string startSearch()
             sort(temps.begin(),temps.end());
             nstate=temps+name;
             //City[nodeTrack++]=createNode(next,npathSoFar,current.citiesNotVisited-1,name,hn,aCost,tCost,nstate,nextUnvisitedCities);
-            cout<<"pushing next= "<<next<<" current.citiesNotVisited-1 ="<<current.citiesNotVisited-1<<"\n";
+            //cout<<"pushing next= "<<next<<" current.citiesNotVisited-1 ="<<current.citiesNotVisited-1<<"\n";
             astar.push(createNode(next,npathSoFar,current.citiesNotVisited-1,name,hn,aCost,tCost,nstate,nextUnvisitedCities));
             
             
@@ -471,7 +471,7 @@ int main()
     //Now we have the number of cities and the orignal graph
     vector<int> v1;
     vector<char> v2;
-    cout<<"now we are finding the MST for the following nodes\n";
+    //cout<<"now we are finding the MST for the following nodes\n";
     for( i=1;i<numCities;i++)
     {
         v1.push_back(i);
@@ -492,7 +492,7 @@ int main()
         cout<<*it<<" ";
     }
     int initialHeuristic=calculateHeuristic(v1,v2,0);
-    cout<<"initialHeuristic is "<<initialHeuristic<<" n nnumCities is "<<numCities<<"\n";
+    //cout<<"initialHeuristic is "<<initialHeuristic<<" n nnumCities is "<<numCities<<"\n";
     
     
     City[nodeTrack++]=createNode(0,"A",numCities-1,'A',initialHeuristic,0,initialHeuristic,"A",v1);
