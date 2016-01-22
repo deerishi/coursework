@@ -42,7 +42,7 @@ int main()
 	q1.push(ob3);
 	ai ob4;
 	ob4.a=10;
-    priority_queue<char> q2;
+    priority_queue<char,compare2> q2;
     q2.push('A');
     q2.push('a');
     q2.push('B');
