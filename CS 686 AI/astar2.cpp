@@ -221,7 +221,7 @@ int calculateHeuristic(vector<int> vertices,int currentCityForExpansion)
     //vector<char>::iterator it2;
     int i=0;
     string cities;
-    sort(nodesLeft.begin(),nodesLeft.end());
+
     for(it1=vertices.begin();it1!=vertices.end();it1++)
     {
         pcity[i]=*it1; //parent city 
