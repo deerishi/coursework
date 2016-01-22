@@ -342,7 +342,7 @@ int startSearch()
     while(!astar.empty() and astar.top().totalCost < optimumCost)
     {
         current=astar.top();
-        cout<<"current is "<<current.citynum<<"\n";
+        cout<<"current is "<<current.citynum<<"with cost "<<current.totalCost<<"\n";
         pathSoFar=current.pathSoFar;
         state=current.state;
         
