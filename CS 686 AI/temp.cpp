@@ -52,7 +52,7 @@ int main()
     while(!q1.empty())
     {
         cout<<q1.top().a<<" "<<q1.top().b<<"\n";
-        qq.pop();
+        q1.pop();
     }
     
     sort(v1.begin(),v1.end());
