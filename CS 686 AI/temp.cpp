@@ -40,7 +40,9 @@ int main()
 	ai ob4;
 	ob4.a=10;
     priority_queue<char> q2;
-    q2.push
+    q2.push('A');
+    q2.push('a');
+    q2.push('B');
 	
 	cout<<"the original array is \n";
 
