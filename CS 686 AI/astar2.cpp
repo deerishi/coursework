@@ -372,6 +372,7 @@ int startSearch()
             nstate=temps+name;
             City[nodeTrack++]=createNode(next,npathSoFar,current.citiesNotVisited-1,name,hn,aCost,tCost,nstate,nextUnvisitedCities);
             
+            
         }
         astar.pop();
     }
