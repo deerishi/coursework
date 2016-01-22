@@ -330,7 +330,7 @@ int startSearch()
         vector<int>::iterator it;
         for(it=vertices.begin();it!=vertices.end();it++)
         {
-            
+            09090900990090909090900
         }
         astar.pop();
     }
