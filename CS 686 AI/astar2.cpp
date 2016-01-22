@@ -328,7 +328,7 @@ int startSearch()
     {
         current=astar.top();
         string pathSoFar=current.pathSoFar;
-        string state=pathSoFar+pathSoFar[pathSoFar.length()-1];
+        string state=current.state;
         // the state is the entire path + in the closed list with a lesser cost then no need to expand this node at all
         // test for goal state
         if(current.citiesNotVisited==0)
