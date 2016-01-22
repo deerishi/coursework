@@ -207,7 +207,7 @@ int buildMinimumSpanningTree2(vector<int> vertices,vector<char> nodesLeft)
     
 }
 
-int calculateHeuristic(vector<int> vertices,vector<char> nodesLeft,int currentCityForExpansion)
+int calculateHeuristic(vector<int> vertices,int currentCityForExpansion)
 {
     int size=vertices.size();
     if(size==1)
