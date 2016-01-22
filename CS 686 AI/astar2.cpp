@@ -393,13 +393,13 @@ string startSearch()
         for(it=vertices.begin();it!=vertices.end();it++)
         {
             int next=*it;
-            //cout<<"next is "<<next<<"\n";
+            cout<<"next is "<<next<<"\n";
             nextUnvisitedCities.clear();
             namesOfCitiesYettoVisit.clear();
    
 
 
-            //cout<<"calling hn for next= "<<next<<" and vertices are\n";
+            cout<<"calling hn for next= "<<next<<" and vertices are\n";
             vector<int>:: iterator it4;
             //nextUnvisitedCities.push_back(123);
             for(it3=vertices.begin();it3!=vertices.end();it3++)
