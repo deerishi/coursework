@@ -210,7 +210,12 @@ int buildMinimumSpanningTree2(vector<int> vertices,vector<char> nodesLeft)
 int calculateHeuristic(vector<int> vertices,vector<char> nodesLeft,int currentCityForExpansion)
 {
     int size=vertices.size();
+    if(size==1)
+    {
+        vector<int>:: iterator
     
+        return distance[currentCityForExpansion][]
+    }
     
     
     int pcity[40],pdist[40],minDistance=INT_MAX;
@@ -218,7 +223,7 @@ int calculateHeuristic(vector<int> vertices,vector<char> nodesLeft,int currentCi
     //vector<char>::iterator it2;
     int i=0;
     string cities;
-
+    
     for(it1=vertices.begin();it1!=vertices.end();it1++)
     {
         pcity[i]=*it1; //parent city 
