@@ -332,7 +332,7 @@ int startSearch()
     Node current;
     int hn,tCost,aCost;
     char name;
-    vector<int> vertices=current.citiesLeft;
+    vector<int> vertices;
     vector<int>::iterator it,it3;
     vector<int> nextUnvisitedCities;
     vector<char> namesOfCitiesYettoVisit,namesOfCitiesYettoVisit2;
@@ -345,6 +345,7 @@ int startSearch()
         cout<<"current is "<<current.citiesNotVisited<<"\n";
         pathSoFar=current.pathSoFar;
         state=current.state;
+        vertices=current.citiesLeft;
         // the state is the entire path + in the closed list with a lesser cost then no need to expand this node at all
         // test for goal state
         if(current.citiesNotVisited==0)
