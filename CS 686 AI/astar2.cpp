@@ -25,7 +25,7 @@ class Node
         
         bool operator <(Node  other) const
         {
-            return  this->totalCost < other.totalCost;
+            return  this->totalCost > other.totalCost;
         }
         
         Node(){};
