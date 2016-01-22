@@ -318,7 +318,7 @@ int optimumCost=INT_MAX;
 
 Node createNode(int citynum,string pathSoFar,int citiesNotVisited,char name,int hCost,int totalCost,int totalCost,string state,vector<int> citiesLeft)
 {
-    Node temp( citynum, pathSoFar, citiesNotVisited, name, hcost,totalCost,totalCost,state, citiesLeft);
+    Node temp( citynum, pathSoFar, citiesNotVisited, name, hcost,totalCost,state, citiesLeft);
     return temp;
 }
 
