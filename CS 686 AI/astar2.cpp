@@ -378,14 +378,14 @@ int startSearch()
         {
             int next=*it;
             cout<<"next is "<<next<<"\n";
-            for(it3=nextUnvisitedCities.begin();it3!=nextUnvisitedCities.end();it3++)
+            for(it3=vertices.begin();it3!=vertices.end();it3++)
             {
-                nextUnvisitedCities
+                nextUnvisitedCities.push_back(*it3);
             }
-            nextUnvisitedCities=vertices;
+            //nextUnvisitedCities=vertices;
             namesOfCitiesYettoVisit2=namesOfCitiesYettoVisit;
             namesOfCitiesYettoVisit2.erase(it2);
-            nextUnvisitedCities.erase(it);// remove the current city from the next city of expansion
+            //nextUnvisitedCities.erase(it);// remove the current city from the next city of expansion
             cout<<"calling hn for next= "<<next<<" and vertices are\n";
             for(it3=nextUnvisitedCities.begin();it3!=nextUnvisitedCities.end();it3++)
             cout<<*it3<<" ";
