@@ -144,7 +144,7 @@ int updateAdjacentWeights(int addedVertex,int numOfCities)
         if(originalGraph[addedVertex][i]<verticesMinimumSpanningTree[i] and visited[i]==false)
         {
             //Now we update that adjacent edge and also we update the parents of the adjacent edge to the addedVertex
-            cout<<"updating for i= "<<i<<" with "<<originalGraph[addedVertex][i]<<"\n";
+            //cout<<"updating for i= "<<i<<" with "<<originalGraph[addedVertex][i]<<"\n";
             verticesMinimumSpanningTree[i]=originalGraph[addedVertex][i];
             parentsMinimumSpanningTree[i]=addedVertex;
         }
