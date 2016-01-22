@@ -321,7 +321,7 @@ int optimumCost=INT_MAX;
 int startSearch()
 {
     Node current;
-    int hn,tcost;
+    int hn,tCost;
     
     while(!astar.empty() and astar.top().cost < optimumCost)
     {
@@ -356,7 +356,7 @@ int startSearch()
             nextUnvisitedCities=vertices;
             nextUnvisitedCities.erase(it);// remove the current city from the next city of expansion
             hn=calculateHeuristic(nextUnvisitedCities);//this will return the 
-            
+            tCost
         }
         astar.pop();
     }
