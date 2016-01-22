@@ -17,13 +17,14 @@ class Node
         string pathSoFar;
         int citiesNotVisited;
         char name;
-        int cost;
+        int hcost;
         int actualCost;
+        int totalCost;
         vector<int> citiesLeft;
         
         bool operator <(Node  other) const
         {
-            return  this->cost > other.cost;
+            return  this->totalCost > other.totalCost;
         }
         
         Node(){};
