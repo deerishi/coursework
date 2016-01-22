@@ -207,7 +207,7 @@ int buildMinimumSpanningTree2(vector<int> vertices,vector<char> nodesLeft)
     
 }
 
-int calculateHeuristic(vector<int> vertices,int currentCityForExpansion)
+int calculateHeuristic(vector<int> vertices,vector<char> nodesLeft,int currentCityForExpansion)
 {
     int size=vertices.size();
     if(size==1)
@@ -416,7 +416,7 @@ int main()
     {
         cout<<*it<<" ";
     }
-    int initialHeuristic=calculateHeuristic(v1,0);
+    int initialHeuristic=calculateHeuristic(v1,v2,0);
     cout<<"initialHeuristic is "<<initialHeuristic<<"\n";
     
     
