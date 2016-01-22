@@ -364,9 +364,9 @@ int startSearch()
             if(tcost< optimumCost )
             {
                 optimumCost=tcost;
-                continue;
+
             }
-     
+                     continue;
         }
         if(closedList.find(state)!=closedList.end() and closedList[state] < current.totalCost)
         {
