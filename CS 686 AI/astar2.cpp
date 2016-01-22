@@ -212,9 +212,9 @@ int calculateHeuristic(vector<int> vertices,vector<char> nodesLeft,int currentCi
     int size=vertices.size();
     if(size==1)
     {
-        vector<int>:: iterator
+        vector<int>:: iterator itt=vertices.begin();
     
-        return distance[currentCityForExpansion][]
+        return distance[currentCityForExpansion][*it]
     }
     
     
