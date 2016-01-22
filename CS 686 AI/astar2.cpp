@@ -218,7 +218,7 @@ int calculateHeuristic(vector<int> vertices,vector<char> nodesLeft,int currentCi
     
     int pcity[40],pdist[40],minDistance=INT_MAX;
     vector<int>::iterator it1;
-    vector<char>::iterator it2;
+    //vector<char>::iterator it2;
     int i=0;
     string cities;
     sort(nodesLeft.begin(),nodesLeft.end());
