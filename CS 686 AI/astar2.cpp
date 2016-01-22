@@ -371,7 +371,7 @@ int startSearch()
             namesOfCitiesYettoVisit2=namesOfCitiesYettoVisit;
             namesOfCitiesYettoVisit2.erase(it2);
             nextUnvisitedCities.erase(it);// remove the current city from the next city of expansion
-            hn=calculateHeuristic(nextUnvisitedCities,next);//this will return the 
+            hn=calculateHeuristic(nextUnvisitedCities,namesOfCitiesYettoVisit2,next);//this will return the 
             aCost=current.actualCost + distance(current.citynum,next);
             tCost=hn+ aCost;
             if( next>25)
