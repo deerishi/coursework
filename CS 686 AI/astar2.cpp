@@ -376,6 +376,7 @@ int startSearch()
             if(tcost< optimumCost )
             {
                 optimumCost=tcost;
+                res=current.pathSoFar;
 
             }
            
