@@ -18,6 +18,7 @@ class Node
         int citiesNotVisited;
         char name;
         int cost;
+        int actualCost;
         vector<int> citiesLeft;
         
         bool operator <(Node  other) const
