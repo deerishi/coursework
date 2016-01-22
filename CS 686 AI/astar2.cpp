@@ -421,7 +421,7 @@ int startSearch()
             //cout<<"hn for "<<next<<" is "<<hn<<"\n";
             aCost=current.actualCost + distance(current.citynum,next);
             tCost=hn+ aCost;
-            cout<<"tota"
+            cout<<"totalCost for next= "<<next<<" is "<<tCost<<"\n";
             if( next>25)
             {
                 name='a'+ next-26;
