@@ -20,7 +20,7 @@ class Node
         int hCost;
         int actualCost;
         int totalCost;
-        string state;// t
+        string state;// the state contains the sorted version of pathsofar
         vector<int> citiesLeft;
         
         bool operator <(Node  other) const
