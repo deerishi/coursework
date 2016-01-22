@@ -327,6 +327,7 @@ int startSearch()
         if(current.citiesNotVisited==0)
         {
             //i.e. all cities have been visited, just the tour back to the starting city is left.
+            
                
         }
         if(closedList.find(state)!=closedList.end() and closedList[state].cost < current.cost)
