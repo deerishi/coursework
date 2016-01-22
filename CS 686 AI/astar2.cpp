@@ -503,7 +503,7 @@ int main()
     //astar.push(City[1]);
     //astar.push(City[2]);
     //astar.push(City[3]);
-    startSearch();
+    string res=startSearch();
     
     int lengthMst = buildMinimumSpanningTree2(v1,v2);
     cout<<"\n the length of the MST is "<<lengthMst<<"\n";
