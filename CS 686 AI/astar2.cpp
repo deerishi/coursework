@@ -345,7 +345,14 @@ int startSearch()
         cout<<"current is "<<current.citynum<<"\n";
         pathSoFar=current.pathSoFar;
         state=current.state;
+        
+        cout<<"the vertices are \n";
+        
         vertices=current.citiesLeft;
+        for(it=vertices.begin();it!=vertices.end();it++)
+        {
+            int next=*it;
+            cout<<"next is "<<next<<"\n";
         // the state is the entire path + in the closed list with a lesser cost then no need to expand this node at all
         // test for goal state
         if(current.citiesNotVisited==0)
