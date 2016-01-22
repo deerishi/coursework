@@ -322,6 +322,7 @@ int startSearch()
 {
     Node current;
     int hn,tCost;
+    char name;
     
     while(!astar.empty() and astar.top().cost < optimumCost)
     {
@@ -358,6 +359,7 @@ int startSearch()
             hn=calculateHeuristic(nextUnvisitedCities);//this will return the 
             aCost=current.actualCost + distance(current.citynum,next);
             tCost=hn+ aCost;
+            if()
         }
         astar.pop();
     }
