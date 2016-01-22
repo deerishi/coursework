@@ -321,7 +321,7 @@ int optimumCost=INT_MAX;
 int startSearch()
 {
     Node current;
-    int hn,tCost;
+    int hn,tCost,aCost;
     char name;
     string pathSoFar,state,npathSoFar,nstate;
     while(!astar.empty() and astar.top().totalCost < optimumCost)
