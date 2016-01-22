@@ -353,7 +353,7 @@ string startSearch()
     {
         current=astar.top();
          astar.pop();
-        cout<<"current is "<<current.citynum<<" with cost "<<current.totalCost<<"n path is "<<current.pathSoFar<<"\n";
+        cout<<"current is "<<current.citynum<<" with cost "<<current.totalCost<<"n path is "<<current.state<<"\n";
         cout<<"size of priority_queue is "<<astar.size()<<"\n";
         pathSoFar=current.pathSoFar;
         state=current.state;
@@ -384,10 +384,18 @@ string startSearch()
         }
         if(closedList.find(state)!=closedList.end() and closedList[state] < current.totalCost)
         {
-            
+            cout<<"\n\t\t prunning path closedList is state"<<state<<" "<<closedList[state]<<"n current cost is "<<current.totalCost<<"\n\n";
             continue;
         }
-       
+        if(closedList.find(state)!=closedList.end() and closedList[state] > current.totalCost)
+        {
+            
+            closedList[state]=current.totalCost;
+        }
+        else if(closedList.find(state)==closedList.end())
+        {
+            closedList[state]=current.totalCost;
+        }
        // cout<<"vertices.size is "<<vertices.size()<<"\n";
         
         for(it=vertices.begin();it!=vertices.end();it++)
@@ -448,6 +456,7 @@ string startSearch()
             string temps=npathSoFar;
             sort(temps.begin(),temps.end());
             nstate=temps+name;
+            
             //City[nodeTrack++]=createNode(next,npathSoFar,current.citiesNotVisited-1,name,hn,aCost,tCost,nstate,nextUnvisitedCities);
             cout<<"pushing next= "<<next<<" current.citiesNotVisited-1 ="<<current.citiesNotVisited-1<<"\n";
             astar.push(createNode(next,npathSoFar,current.citiesNotVisited-1,name,hn,aCost,tCost,nstate,nextUnvisitedCities));
@@ -496,7 +505,7 @@ int main()
     //cout<<"initialHeuristic is "<<initialHeuristic<<" n nnumCities is "<<numCities<<"\n";
     
     
-    City[nodeTrack++]=createNode(0,"A",numCities-1,'A',initialHeuristic,0,initialHeuristic,"A",v1);
+    City[nodeTrack++]=createNode(0,"A",numCities-1,'A',initialHeuristic,0,initialHeuristic,"AA",v1);
     
   
 
