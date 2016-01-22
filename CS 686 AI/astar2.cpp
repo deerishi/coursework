@@ -383,13 +383,7 @@ int startSearch()
             int next=*it;
             cout<<"next is "<<next<<"\n";
             nextUnvisitedCities.clear();
-            for(it3=vertices.begin();it3!=vertices.end();it3++)
-            {
-                int x=*it3;
-                cout<<"*it3 is "<<x<<" ";
-                
-                nextUnvisitedCities.push_back(x);
-            }
+            
            // nextUnvisitedCities=vertices;
             namesOfCitiesYettoVisit2=namesOfCitiesYettoVisit;
             namesOfCitiesYettoVisit2.erase(it2);
@@ -397,6 +391,13 @@ int startSearch()
             cout<<"calling hn for next= "<<next<<" and vertices are\n";
             vector<int>:: iterator it4;
             nextUnvisitedCities.push_back(123);
+            for(it3=vertices.begin();it3!=vertices.end();it3++)
+            {
+                int x=*it3;
+                cout<<"*it3 is "<<x<<" ";
+                
+                nextUnvisitedCities.push_back(x);
+            }
             for(it4=nextUnvisitedCities.begin();it4!=nextUnvisitedCities.end();it4++)
             cout<<*it4<<" ";
             
