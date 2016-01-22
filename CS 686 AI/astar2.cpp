@@ -390,12 +390,12 @@ int startSearch()
             //nextUnvisitedCities.erase(it);// remove the current city from the next city of expansion
             cout<<"calling hn for next= "<<next<<" and vertices are\n";
             vector<int>:: iterator it4;
-            nextUnvisitedCities.push_back(123);
+            //nextUnvisitedCities.push_back(123);
             for(it3=vertices.begin();it3!=vertices.end();it3++)
             {
                 int x=*it3;
                 cout<<"*it3 is "<<x<<" ";
-                
+                if(x==next) continue;
                 nextUnvisitedCities.push_back(x);
             }
             for(it4=nextUnvisitedCities.begin();it4!=nextUnvisitedCities.end();it4++)
