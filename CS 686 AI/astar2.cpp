@@ -332,6 +332,11 @@ int startSearch()
     Node current;
     int hn,tCost,aCost;
     char name;
+    vector<int> vertices=current.citiesLeft;
+    vector<int>::iterator it,it3;
+    vector<int> nextUnvisitedCities;
+    vector<char> namesOfCitiesYettoVisit,namesOfCitiesYettoVisit2;
+    vector<char>::iterator it2;
     string pathSoFar,state,npathSoFar,nstate;
     while(!astar.empty() and astar.top().totalCost < optimumCost)
     {
@@ -348,6 +353,7 @@ int startSearch()
             if(tcost< optimumCost )
             {
                 optimumCost=tcost;
+                continue;
             }
      
         }
@@ -357,11 +363,7 @@ int startSearch()
             continue;
         }
         cout<<"current heuristic is "<<current.hCost<<" last path is "<<current.pathSoFar[current.pathSoFar.length()-1]<<"\n";
-        vector<int> vertices=current.citiesLeft;
-        vector<int>::iterator it,it3;
-        vector<int> nextUnvisitedCities;
-        vector<char> namesOfCitiesYettoVisit,namesOfCitiesYettoVisit2;
-        vector<char>::iterator it2;
+   
         for(it=vertices.begin();it!=vertices.end();it++)
         {
             int city3=*it;
@@ -379,19 +381,20 @@ int startSearch()
             int next=*it;
             cout<<"next is "<<next<<"\n";
             nextUnvisitedCities.clear();
-            for(it3=vertices.begin();it3!=vertices.end();it3++)
+           /* for(it3=vertices.begin();it3!=vertices.end();it3++)
             {
                 int x=*it3;
                 cout<<"*it3 is "<<x<<" ";
                 
                 nextUnvisitedCities.push_back(x);
-            }
-            //nextUnvisitedCities=vertices;
+            }*/
+            nextUnvisitedCities=vertices;
             namesOfCitiesYettoVisit2=namesOfCitiesYettoVisit;
             namesOfCitiesYettoVisit2.erase(it2);
-            //nextUnvisitedCities.erase(it);// remove the current city from the next city of expansion
+            nextUnvisitedCities.erase(it);// remove the current city from the next city of expansion
             cout<<"calling hn for next= "<<next<<" and vertices are\n";
             vector<int>:: iterator it4;
+            nextUnvisitedCities.push_back(123);
             for(it4=nextUnvisitedCities.begin();it4!=nextUnvisitedCities.end();it4++)
             cout<<*it4<<" ";
             
