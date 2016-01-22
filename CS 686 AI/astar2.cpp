@@ -321,7 +321,10 @@ int startSearch()
         string state=pathSoFar+pathSoFar[pathSoFar.length()-1];
         // the state is the entire path + in the closed list with a lesser cost then no need to expand this node at all
         // test for goal state
-        
+        if(current.citiesNotVisited==0)
+        {
+            //i.e. all cities have been visited, just the tour back to the starting city is left   
+        }
         if(closedList.find(state)!=closedList.end() and closedList[state].cost < current.cost)
         {
             astar.pop();
