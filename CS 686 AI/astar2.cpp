@@ -390,7 +390,7 @@ int startSearch()
                 
                 nextUnvisitedCities.push_back(x);
             }
-            nextUnvisitedCities=vertices;
+           // nextUnvisitedCities=vertices;
             namesOfCitiesYettoVisit2=namesOfCitiesYettoVisit;
             namesOfCitiesYettoVisit2.erase(it2);
             //nextUnvisitedCities.erase(it);// remove the current city from the next city of expansion
