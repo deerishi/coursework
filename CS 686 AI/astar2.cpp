@@ -377,7 +377,7 @@ int startSearch()
    
 
 
-            cout<<"calling hn for next= "<<next<<" and vertices are\n";
+            //cout<<"calling hn for next= "<<next<<" and vertices are\n";
             vector<int>:: iterator it4;
             //nextUnvisitedCities.push_back(123);
             for(it3=vertices.begin();it3!=vertices.end();it3++)
