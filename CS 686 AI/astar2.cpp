@@ -353,8 +353,8 @@ string startSearch()
     {
         current=astar.top();
          astar.pop();
-        cout<<"current is "<<current.citynum<<" with cost "<<current.totalCost<<"\n";
-        cout<<"size of priority_queue is "<<astar.size()<<"\n";
+        //cout<<"current is "<<current.citynum<<" with cost "<<current.totalCost<<"\n";
+        //cout<<"size of priority_queue is "<<astar.size()<<"\n";
         pathSoFar=current.pathSoFar;
         state=current.state;
         
@@ -372,7 +372,7 @@ string startSearch()
         {
             //i.e. all cities have been visited, just the tour back to the starting city is left.
             int tcost=current.actualCost + distance(current.citynum,0);
-           // cout<<" goal state reached with cost of "<<tcost<<" and with a path of "<<current.pathSoFar<<"\n";
+            cout<<" goal state reached with cost of "<<tcost<<" and with a path of "<<current.pathSoFar<<"\n";
             if(tcost< optimumCost )
             {
                 optimumCost=tcost;
