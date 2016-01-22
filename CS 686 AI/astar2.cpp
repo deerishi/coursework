@@ -20,6 +20,7 @@ class Node
         int hCost;
         int actualCost;
         int totalCost;
+        string state;// t
         vector<int> citiesLeft;
         
         bool operator <(Node  other) const
