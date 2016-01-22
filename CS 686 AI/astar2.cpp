@@ -420,7 +420,7 @@ int main()
     cout<<"initialHeuristic is "<<initialHeuristic<<"\n";
     
     
-    City[nodeTrack++]=createNode(0,"A",numCities-1,'A',initialHeuristic,v1);
+    City[nodeTrack++]=createNode(0,"A",numCities-1,'A',initialHeuristic,0,initialHeuristic,v1);
     
   
     City[nodeTrack++]=createNode(0,"AB",numCities-1,'B',initialHeuristic+400,v1);
