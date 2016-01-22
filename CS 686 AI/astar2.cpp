@@ -367,7 +367,7 @@ int startSearch()
         cout<<"current heuristic is "<<current.hCost<<" last path is "<<current.pathSoFar[current.pathSoFar.length()-1]<<"\n";
         cout<<"vertices.size is "<<vertices.size()<<"\n";
         
-        for(it=vertices.begin(),it2=namesOfCitiesYettoVisit.begin();it!=vertices.end(),it2!=namesOfCitiesYettoVisit.end();it++,it2++)
+        for(it=vertices.begin();it!=vertices.end();it++)
         {
             int next=*it;
             cout<<"next is "<<next<<"\n";
