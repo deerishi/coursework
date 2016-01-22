@@ -226,8 +226,9 @@ int calculateHeuristic(vector<int> vertices,vector<char> nodesLeft,int currentCi
     {
         pcity[i]=*it1; //parent city 
         pdist[i]=INT_MAX; //parent distance;
+                cout<<"pcity["<<i<<"] is "<<pcity[i]<<"\n";
         i++;
-        cout<<"pcity["<<i<<"] is "<<pcity[i]<<"\n";
+
     }
     int mst=buildMinimumSpanningTree2(vertices,nodesLeft);
     int nearestUnvisitedCityDistance=INT_MAX,nearestToSource=INT_MAX,thisDistance1,thisDistance2;
