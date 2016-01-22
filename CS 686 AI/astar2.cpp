@@ -385,7 +385,7 @@ int startSearch()
                 
                 if(x==next)
                 {
-                    cout<<"x==next";
+                    cout<<"x==next\n";
                     continue;
                 } 
                 //cout<<"*it3 is "<<x<<" ";
