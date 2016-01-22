@@ -363,6 +363,11 @@ int startSearch()
             {
                 name='a'+ next-26;
             }
+            else
+            {
+                name='A'+next;
+            }
+            
         }
         astar.pop();
     }
