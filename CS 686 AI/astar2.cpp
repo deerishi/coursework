@@ -359,7 +359,10 @@ int startSearch()
             hn=calculateHeuristic(nextUnvisitedCities);//this will return the 
             aCost=current.actualCost + distance(current.citynum,next);
             tCost=hn+ aCost;
-            if()
+            if( next>25)
+            {
+                name='a'+ next-26;
+            }
         }
         astar.pop();
     }
