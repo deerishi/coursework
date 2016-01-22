@@ -337,7 +337,7 @@ Node createNode(int citynum,string pathSoFar,int citiesNotVisited,char name,int 
 }
 
 
-int startSearch()
+string startSearch()
 {
     Node current;
     int hn,tCost,aCost;
