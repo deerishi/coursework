@@ -354,7 +354,15 @@ int startSearch()
         vector<char>::iterator it2;
         for(it=vertices.begin();it!=vertices.end();it++)
         {
-            int city3=
+            int city3=*it;
+            if( city3>25)
+            {
+                namesOfCitiesYettoVisit.push_back('a'+ city3-26);
+            }
+            else
+            {
+                namesOfCitiesYettoVisit.push_back('A'+city3);
+            }
         for(it=vertices.begin();it!=vertices.end();it++)
         {
             int next=*it;
