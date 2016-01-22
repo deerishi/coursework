@@ -388,6 +388,7 @@ int startSearch()
             }
             for(it4=nextUnvisitedCities.begin();it4!=nextUnvisitedCities.end();it4++)
             cout<<*it4<<" ";
+            cout<<"\n";
             for(it=vertices.begin();it!=vertices.end();it++)
             {
                 int city3=*it;
