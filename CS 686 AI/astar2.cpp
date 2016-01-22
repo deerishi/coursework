@@ -393,7 +393,7 @@ int startSearch()
             nextUnvisitedCities=vertices;
             namesOfCitiesYettoVisit2=namesOfCitiesYettoVisit;
             namesOfCitiesYettoVisit2.erase(it2);
-            nextUnvisitedCities.erase(it);// remove the current city from the next city of expansion
+            //nextUnvisitedCities.erase(it);// remove the current city from the next city of expansion
             cout<<"calling hn for next= "<<next<<" and vertices are\n";
             vector<int>:: iterator it4;
             nextUnvisitedCities.push_back(123);
