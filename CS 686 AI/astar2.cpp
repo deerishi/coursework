@@ -446,7 +446,7 @@ int startSearch()
             
             
         }
-        astar.pop();
+
     }
 }
 
