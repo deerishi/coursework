@@ -416,7 +416,7 @@ int main()
     {
         cout<<*it<<" ";
     }
-    int initialHeuristic=calculateHeuristic(v1,v2,0);
+    int initialHeuristic=calculateHeuristic(v1,0);
     cout<<"initialHeuristic is "<<initialHeuristic<<"\n";
     
     
