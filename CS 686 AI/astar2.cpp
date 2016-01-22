@@ -363,7 +363,8 @@ int startSearch()
             {
                 namesOfCitiesYettoVisit.push_back('A'+city3);
             }
-        for(it=vertices.begin();it!=vertices.end();it++)
+        }
+        for(it=vertices.begin(),it2=namesOfCitiesYettoVisit.begin();it!=vertices.end(),it2!=namesOfCitiesYettoVisit.end();it++,it2++)
         {
             int next=*it;
             nextUnvisitedCities=vertices;
