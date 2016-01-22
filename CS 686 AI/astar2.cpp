@@ -384,7 +384,10 @@ int startSearch()
                 int x=*it3;
                 cout<<"*it3 is "<<x<<" ";
                 if(x==next)
-                 continue;
+                {
+                    cout<<"x==next";
+                    continue;
+                } 
                 nextUnvisitedCities.push_back(x);
             }
             for(it4=nextUnvisitedCities.begin();it4!=nextUnvisitedCities.end();it4++)
