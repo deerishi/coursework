@@ -382,12 +382,13 @@ int startSearch()
             for(it3=vertices.begin();it3!=vertices.end();it3++)
             {
                 int x=*it3;
-                cout<<"*it3 is "<<x<<" ";
+                
                 if(x==next)
                 {
                     cout<<"x==next";
                     continue;
                 } 
+                //cout<<"*it3 is "<<x<<" ";
                 nextUnvisitedCities.push_back(x);
             }
             for(it4=nextUnvisitedCities.begin();it4!=nextUnvisitedCities.end();it4++)
