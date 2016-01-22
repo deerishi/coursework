@@ -46,7 +46,7 @@ int main()
     q2.push('A');
     q2.push('a');
     q2.push('B');
-	
+	ob3.b=15;
 	cout<<"the original array is \n";
 
     while(!q2.empty())
