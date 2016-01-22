@@ -352,7 +352,7 @@ int startSearch()
         {
             //i.e. all cities have been visited, just the tour back to the starting city is left.
             int tcost=current.actualCost + distance(current.citynum,0);
-            cout<<" goal state reached with cost of "<<cost<<"\n";
+            cout<<" goal state reached with cost of "<<tcost<<"\n";
             if(tcost< optimumCost )
             {
                 optimumCost=tcost;
