@@ -383,7 +383,8 @@ int startSearch()
             namesOfCitiesYettoVisit2.erase(it2);
             nextUnvisitedCities.erase(it);// remove the current city from the next city of expansion
             cout<<"calling hn for next= "<<next<<" and vertices are\n";
-            
+            for(it3=nextUnvisitedCities.begin();it3!=nextUnvisitedCities.end();it3++)
+            cout<<*it3<<" ";
             
             hn=calculateHeuristic(nextUnvisitedCities,namesOfCitiesYettoVisit2,next);//this will return the 
             cout<<"hn for "<<next<<" is "<<hn<<"\n";
