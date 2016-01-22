@@ -316,9 +316,9 @@ int buildMinimumSpanningTree(TSP problem) //change to only nodes in the graph
 }
 int optimumCost=INT_MAX;
 
-Node createNode(int citynum,string pathSoFar,int citiesNotVisited,char name,int hCost,int totalCost,string state,vector<int> citiesLeft)
+Node createNode(int citynum,string pathSoFar,int citiesNotVisited,char name,int hCost,int aCost,int totalCost,string state,vector<int> citiesLeft)
 {
-    Node temp( citynum, pathSoFar, citiesNotVisited, name, hcost,totalCost,state, citiesLeft);
+    Node temp( citynum, pathSoFar, citiesNotVisited, name, hCost,aCost,totalCost,state, citiesLeft);
     return temp;
 }
 
