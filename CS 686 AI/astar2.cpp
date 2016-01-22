@@ -356,7 +356,8 @@ int startSearch()
             nextUnvisitedCities=vertices;
             nextUnvisitedCities.erase(it);// remove the current city from the next city of expansion
             hn=calculateHeuristic(nextUnvisitedCities);//this will return the 
-            tCost
+            aCost=current.actualCost + distance(current.citynum,next);
+            
         }
         astar.pop();
     }
