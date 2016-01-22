@@ -22,7 +22,10 @@ bool compare( ai v1,  ai v2)
 }
 #include <queue>
 
-
+bool compare2(char a,char b)
+{
+    return a> b;
+}
 int main()
 {
 	vector<int>  v1;
