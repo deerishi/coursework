@@ -214,7 +214,7 @@ int calculateHeuristic(vector<int> vertices,vector<char> nodesLeft,int currentCi
     {
         vector<int>:: iterator itt=vertices.begin();
     
-        return distance(currentCityForExpansion,*itt)+ 
+        return distance(currentCityForExpansion,*itt)+ distance(*itt,0);
     }
     
     
