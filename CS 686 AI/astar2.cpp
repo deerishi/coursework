@@ -350,7 +350,7 @@ int startSearch()
         vector<int> vertices=current.citiesLeft;
         vector<int>::iterator it;
         vector<int> nextUnvisitedCities;
-        vector<char>
+        vector<char> namesOfCitiesYettoVisit;
         for(it=vertices.begin();it!=vertices.end();it++)
         {
             int next=*it;
