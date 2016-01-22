@@ -54,7 +54,7 @@ int main()
         cout<<q1.top().a<<" "<<q1.top().b<<"\n";
         q1.pop();
     }
-    
+    cout<<"ob3 is "<<ob3.a<<" "<<ob3.b<<"\n";
     sort(v1.begin(),v1.end());
     //unordered_map<vector<int>,int,container_hash<vector<int> >> m1;
     //m1[v1]=10;
