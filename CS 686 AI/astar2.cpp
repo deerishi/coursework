@@ -455,6 +455,7 @@ int startSearch()
         }
 
     }
+    return res;
 }
 
 
