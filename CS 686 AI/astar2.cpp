@@ -358,7 +358,7 @@ int startSearch()
         }
         cout<<"current heuristic is "<<current.hCost<<" last path is "<<current.pathSoFar[current.pathSoFar.length()-1]<<"\n";
         vector<int> vertices=current.citiesLeft;
-        vector<int>::iterator it,it2;
+        vector<int>::iterator it,it3;
         vector<int> nextUnvisitedCities;
         vector<char> namesOfCitiesYettoVisit,namesOfCitiesYettoVisit2;
         vector<char>::iterator it2;
