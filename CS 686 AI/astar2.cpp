@@ -373,6 +373,7 @@ int startSearch()
         for(it=vertices.begin(),it2=namesOfCitiesYettoVisit.begin();it!=vertices.end(),it2!=namesOfCitiesYettoVisit.end();it++,it2++)
         {
             int next=*it;
+            cout<<"next is "<<next<<"\n";
             nextUnvisitedCities=vertices;
             namesOfCitiesYettoVisit2=namesOfCitiesYettoVisit;
             namesOfCitiesYettoVisit2.erase(it2);
