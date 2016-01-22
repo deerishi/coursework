@@ -391,6 +391,7 @@ int startSearch()
             for(it=vertices.begin();it!=vertices.end();it++)
             {
                 int city3=*it;
+                if(city3==next) continue;
                 if( city3>25)
                 {
                     namesOfCitiesYettoVisit.push_back('a'+ city3-26);
