@@ -474,9 +474,7 @@ int main()
     City[nodeTrack++]=createNode(0,"A",numCities-1,'A',initialHeuristic,0,initialHeuristic,"A",v1);
     
   
-    City[nodeTrack++]=createNode(0,"AB",numCities-1,'B',initialHeuristic+400,0,initialHeuristic,"AB",v1);
-    City[nodeTrack++]=createNode(0,"AB",numCities-1,'B',initialHeuristic+200,0,initialHeuristic,"AB",v1);
-    City[nodeTrack++]=createNode(0,"AB",numCities-1,'B',initialHeuristic+300,0,initialHeuristic,"AB",v1);
+
     astar.push(City[0]);
     //astar.push(City[1]);
     //astar.push(City[2]);
