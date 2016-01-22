@@ -366,18 +366,7 @@ int startSearch()
         }
         cout<<"current heuristic is "<<current.hCost<<" last path is "<<current.pathSoFar[current.pathSoFar.length()-1]<<"\n";
         cout<<"vertices.size is "<<vertices.size()<<"\n";
-        for(it=vertices.begin();it!=vertices.end();it++)
-        {
-            int city3=*it;
-            if( city3>25)
-            {
-                namesOfCitiesYettoVisit.push_back('a'+ city3-26);
-            }
-            else
-            {
-                namesOfCitiesYettoVisit.push_back('A'+city3);
-            }
-        }
+        
         for(it=vertices.begin(),it2=namesOfCitiesYettoVisit.begin();it!=vertices.end(),it2!=namesOfCitiesYettoVisit.end();it++,it2++)
         {
             int next=*it;
@@ -399,7 +388,18 @@ int startSearch()
             }
             for(it4=nextUnvisitedCities.begin();it4!=nextUnvisitedCities.end();it4++)
             cout<<*it4<<" ";
-            
+            for(it=vertices.begin();it!=vertices.end();it++)
+            {
+                int city3=*it;
+                if( city3>25)
+                {
+                    namesOfCitiesYettoVisit.push_back('a'+ city3-26);
+                }
+                else
+                {
+                    namesOfCitiesYettoVisit.push_back('A'+city3);
+                }
+            }
             hn=calculateHeuristic(nextUnvisitedCities,namesOfCitiesYettoVisit2,next);//this will return the 
             cout<<"hn for "<<next<<" is "<<hn<<"\n";
             aCost=current.actualCost + distance(current.citynum,next);
