@@ -378,6 +378,7 @@ int startSearch()
             namesOfCitiesYettoVisit2=namesOfCitiesYettoVisit;
             namesOfCitiesYettoVisit2.erase(it2);
             nextUnvisitedCities.erase(it);// remove the current city from the next city of expansion
+            cout<<"hi\n";
             hn=calculateHeuristic(nextUnvisitedCities,namesOfCitiesYettoVisit2,next);//this will return the 
             cout<<"hn for "<<next<<" is "<<hn<<"\n";
             aCost=current.actualCost + distance(current.citynum,next);
