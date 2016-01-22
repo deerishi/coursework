@@ -346,7 +346,7 @@ int startSearch()
             }
      
         }
-        if(closedList.find(state)!=closedList.end() and closedList[state].totalCost < current.totalCost)
+        if(closedList.find(state)!=closedList.end() and closedList[state].second < current.totalCost)
         {
             astar.pop();
             continue;
