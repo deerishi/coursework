@@ -1,12 +1,13 @@
 #include "bits/stdc++.h"
 using namespace std;
-
+  
 int originalGraph[40][40],minimumSpanningTree[40][40];
 int adjacencyMatrixForMinimumSpanningTree[40][40];
 bool visited[40];
 int parentsMinimumSpanningTree[40];
 int verticesMinimumSpanningTree[40];
-unordered_map<string,int> mstMap;
+unordered_map<string,int> mstMap;//path, cost for that particular mst
+unordered_map<string,int> closedList; // this is our closed List which we have kept to keep track of nodes that have been extended , and can be used to prune away the paths. full state and cost for that 
 //Each time we update the vertices , we update their parents too
 
 class Node
@@ -16,32 +17,38 @@ class Node
         string pathSoFar;
         int citiesNotVisited;
         char name;
-        int cost;
+        int hCost;
+        int actualCost;
+        int totalCost;
+        string state;// the state contains the sorted version of pathsofar+ the last city visited
         vector<int> citiesLeft;
-        bool operator <(Node other) const
+        
+        bool operator <(Node  other) const
         {
-            return  this->cost > other.cost;
+            return  this->totalCost > other.totalCost;
         }
         
-        Node(int citynum,string pathSoFar,int citiesNotVisited,int cost,vector<int> citiesLeft)
-        {
+        Node(){};
+        Node(int citynum,string pathSoFar,int citiesNotVisited,char name,int hCost,int actualCost,int totalCost,string state,vector<int> citiesLeft):citynum(citynum),pathSoFar(pathSoFar),citiesNotVisited(citiesNotVisited),name(name),hCost(hCost),actualCost(actualCost),totalCost(totalCost),state(state),citiesLeft(citiesLeft){}
+        /*{
             this->citynum=citynum;
             this->pathSoFar+=pathSoFar;
             this->citiesLeft=citiesLeft;
             this->cost=cost;
             this->name=name;
             this->citiesLeft=citiesLeft;
-        }
+        }*/
         
     
-};
+}City[50000];
+int nodeTrack=0;
 
-
+priority_queue<Node> astar;
 class TSP 
 {
     public:
     
-     char node;
+     char node[3];
      int points[40][2],numCities;
      //TSP(int i,int j) : x(i),y(j){}
      
@@ -54,7 +61,7 @@ class TSP
         //double distance;
         while(i<numCities)
         {
-            scanf("%c%d%d ",&node,&points[i][0],&points[i][1]);
+            scanf("%s%d%d ",node,&points[i][0],&points[i][1]);
             i++;
         }
         cout<<"n the data entered is \n";
@@ -137,7 +144,7 @@ int updateAdjacentWeights(int addedVertex,int numOfCities)
         if(originalGraph[addedVertex][i]<verticesMinimumSpanningTree[i] and visited[i]==false)
         {
             //Now we update that adjacent edge and also we update the parents of the adjacent edge to the addedVertex
-            cout<<"updating for i= "<<i<<" with "<<originalGraph[addedVertex][i]<<"\n";
+            //cout<<"updating for i= "<<i<<" with "<<originalGraph[addedVertex][i]<<"\n";
             verticesMinimumSpanningTree[i]=originalGraph[addedVertex][i];
             parentsMinimumSpanningTree[i]=addedVertex;
         }
@@ -185,19 +192,69 @@ int buildMinimumSpanningTree2(vector<int> vertices,vector<char> nodesLeft)
         for(int j=0;j<m;j++)
         {
             thisDistance=distance(pcity[j],newCity);
-            cout<<"newCity is "<<newCity<<" j = "<<j<<" and their distance is "<<thisDistance<<"\n";
+            //cout<<"newCity is "<<newCity<<" j = "<<j<<" and their distance is "<<thisDistance<<"\n";
             if(thisDistance < pdist[j]) pdist[j]=thisDistance;
             if(pdist[j]<minDistance) minDistance=pdist[j],minIndex=j;
         }
         newCity=pcity[minIndex];
         length+=minDistance;
-        cout<<"length right now  is "<<length<<"\n";
+        //cout<<"length right now  is "<<length<<"\n";
         pcity[minIndex]=pcity[m-1];
         pdist[minIndex]=pdist[m-1];   
     }
     mstMap[cities]=length;
     return length;
     
+}
+
+int calculateHeuristic(vector<int> vertices,vector<char> nodesLeft,int currentCityForExpansion)
+{
+    int size=vertices.size();
+    cout<<" the heuristic vector size is "<<size<<"\n";
+    if(size==1)
+    {
+        vector<int>:: iterator itt=vertices.begin();
+    
+        return distance(currentCityForExpansion,*itt)+ distance(*itt,0);
+    }
+    if(size==0)
+    {
+        
+        return distance(currentCityForExpansion,0);
+    }
+    
+    int pcity[40],pdist[40],minDistance=INT_MAX;
+    vector<int>::iterator it1;
+    //vector<char>::iterator it2;
+    int i=0;
+    string cities;
+    
+    for(it1=vertices.begin();it1!=vertices.end();it1++)
+    {
+        pcity[i]=*it1; //parent city 
+        pdist[i]=INT_MAX; //parent distance;
+                //cout<<"pcity["<<i<<"] is "<<pcity[i]<<"\n";
+        i++;
+
+    }
+    int mst;
+  
+        mst=buildMinimumSpanningTree2(vertices,nodesLeft);
+   
+    int nearestUnvisitedCityDistance=INT_MAX,nearestToSource=INT_MAX,thisDistance1,thisDistance2;
+
+    for(i=0;i<size;i++)
+    {
+       
+        thisDistance1=distance(pcity[i],currentCityForExpansion);// this is the distancefrom the unvisited city to the currentCityForExpansion
+        thisDistance2=distance(pcity[i],0); //this is the distance from the source
+        if(thisDistance1<nearestUnvisitedCityDistance) nearestUnvisitedCityDistance=thisDistance1;
+        
+        if(thisDistance2<nearestToSource) nearestToSource=thisDistance2;
+        
+    }
+    int hn=mst+nearestToSource+nearestUnvisitedCityDistance;
+    return hn;
 }
 
 
@@ -226,7 +283,7 @@ int buildMinimumSpanningTree(TSP problem) //change to only nodes in the graph
     {
         //1) find the minimum vertex
         next=findMinimumVertex(problem.numCities);
-        cout<<"next is "<<next<<"\n";
+        //cout<<"next is "<<next<<"\n";
         //2)add that vertex to the he MST and update its weights
         visited[next]=true;
         updateAdjacentWeights( next,problem.numCities);
@@ -271,30 +328,187 @@ int buildMinimumSpanningTree(TSP problem) //change to only nodes in the graph
         cout<<"\n";
     }
 }
+int optimumCost=INT_MAX;
+
+Node createNode(int citynum,string pathSoFar,int citiesNotVisited,char name,int hCost,int aCost,int totalCost,string state,vector<int> citiesLeft)
+{
+    Node temp( citynum, pathSoFar, citiesNotVisited, name, hCost,aCost,totalCost,state, citiesLeft);
+    return temp;
+}
+
+
+int startSearch()
+{
+    Node current;
+    int hn,tCost,aCost;
+    char name;
+    vector<int> vertices;
+    vector<int>::iterator it,it3;
+    vector<int> nextUnvisitedCities;
+    vector<char> namesOfCitiesYettoVisit,namesOfCitiesYettoVisit2;
+    vector<char>::iterator it2;
+    string pathSoFar,state,npathSoFar,nstate;
+    string res;
+    while(!astar.empty() and astar.top().totalCost < optimumCost)
+    {
+        current=astar.top();
+         astar.pop();
+        cout<<"current is "<<current.citynum<<" with cost "<<current.totalCost<<"\n";
+        cout<<"size of priority_queue is "<<astar.size()<<"\n";
+        pathSoFar=current.pathSoFar;
+        state=current.state;
+        
+        cout<<"the vertices are \n";
+        
+        vertices=current.citiesLeft;
+        for(it=vertices.begin();it!=vertices.end();it++)
+        {
+            int next=*it;
+            cout<<"vertice  is "<<next<<"\n";
+         }
+        // the state is the entire path + in the closed list with a lesser cost then no need to expand this node at all
+        // test for goal state
+        if(current.citiesNotVisited==0)
+        {
+            //i.e. all cities have been visited, just the tour back to the starting city is left.
+            int tcost=current.actualCost + distance(current.citynum,0);
+            cout<<" goal state reached with cost of "<<tcost<<" and with a path of "<<current.pathSoFar<<"\n";
+            if(tcost< optimumCost )
+            {
+                optimumCost=tcost;
+                res=current.pathSoFar;
+
+            }
+           
+                     continue;
+        }
+        if(closedList.find(state)!=closedList.end() and closedList[state] < current.totalCost)
+        {
+            
+            continue;
+        }
+       
+        //cout<<"vertices.size is "<<vertices.size()<<"\n";
+        
+        for(it=vertices.begin();it!=vertices.end();it++)
+        {
+            int next=*it;
+            cout<<"next is "<<next<<"\n";
+            nextUnvisitedCities.clear();
+            namesOfCitiesYettoVisit.clear();
+   
+
+
+            //cout<<"calling hn for next= "<<next<<" and vertices are\n";
+            vector<int>:: iterator it4;
+            //nextUnvisitedCities.push_back(123);
+            for(it3=vertices.begin();it3!=vertices.end();it3++)
+            {
+                int x=*it3;
+                
+                if(x==next)
+                {
+                    //cout<<"x==next\n";
+                    continue;
+                } 
+                //cout<<"*it3 is "<<x<<" ";
+                nextUnvisitedCities.push_back(x);
+            }
+            //for(it4=nextUnvisitedCities.begin();it4!=nextUnvisitedCities.end();it4++)
+            //cout<<*it4<<" ";
+            cout<<"\n";
+            for(it4=vertices.begin();it4!=vertices.end();it4++)
+            {
+                int city3=*it4;
+                if(city3==next) continue;
+                if( city3>25)
+                {
+                    namesOfCitiesYettoVisit.push_back('a'+ city3-26);
+                }
+                else
+                {
+                    namesOfCitiesYettoVisit.push_back('A'+city3);
+                }
+            }
+            hn=calculateHeuristic(nextUnvisitedCities,namesOfCitiesYettoVisit,next);//this will return the 
+            //cout<<"hn for "<<next<<" is "<<hn<<"\n";
+            aCost=current.actualCost + distance(current.citynum,next);
+            tCost=hn+ aCost;
+            cout<<"totalCost for next= "<<next<<" is "<<tCost<<"\n";
+            if( next>25)
+            {
+                name='a'+ next-26;
+            }
+            else
+            {
+                name='A'+next;
+            }
+            npathSoFar=pathSoFar+name;
+            string temps=npathSoFar;
+            sort(temps.begin(),temps.end());
+            nstate=temps+name;
+            //City[nodeTrack++]=createNode(next,npathSoFar,current.citiesNotVisited-1,name,hn,aCost,tCost,nstate,nextUnvisitedCities);
+            cout<<"pushing next= "<<next<<" current.citiesNotVisited-1 ="<<current.citiesNotVisited-1<<"\n";
+            astar.push(createNode(next,npathSoFar,current.citiesNotVisited-1,name,hn,aCost,tCost,nstate,nextUnvisitedCities));
+            
+            
+        }
+
+    }
+    return res;
+}
+
+
 
 int main()
 {
     TSP prob1;
+    int i;
     prob1.inputData();
     prob1.createOriginalDistanceGraph();// Till now we have the orginal Distance Graph
     int numCities=prob1.numCities;
     buildMinimumSpanningTree(prob1);
     //Now we have the number of cities and the orignal graph
-    
-    //Node A(1,'A',)
     vector<int> v1;
     vector<char> v2;
     cout<<"now we are finding the MST for the following nodes\n";
-    for(int i=2;i<numCities;i++)
+    for( i=1;i<numCities;i++)
     {
         v1.push_back(i);
-        v2.push_back('A'+i);
+        if(i>25)
+        {
+            v2.push_back('a'+i-26);
+        }
+        else
+        {
+            v2.push_back('A'+i);
+        }
         cout<<i<<" ";
     }
+    vector<char>:: iterator it=v2.begin();
+    cout<<"\n v2 is \n";
+    for(it=v2.begin();it!=v2.end();it++)
+    {
+        cout<<*it<<" ";
+    }
+    int initialHeuristic=calculateHeuristic(v1,v2,0);
+    cout<<"initialHeuristic is "<<initialHeuristic<<" n nnumCities is "<<numCities<<"\n";
+    
+    
+    City[nodeTrack++]=createNode(0,"A",numCities-1,'A',initialHeuristic,0,initialHeuristic,"A",v1);
+    
+  
+
+    astar.push(City[0]);
+    //astar.push(City[1]);
+    //astar.push(City[2]);
+    //astar.push(City[3]);
+    string res=startSearch();
+    
     int lengthMst = buildMinimumSpanningTree2(v1,v2);
     cout<<"\n the length of the MST is "<<lengthMst<<"\n";
-    return 0;
-    
+    cout<<"\n the optimumCost is "<<optimumCost<<" with path "<<res<<"\n";
+    return 0;   
 }
      
      
