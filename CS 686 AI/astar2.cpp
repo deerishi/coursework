@@ -366,6 +366,7 @@ int startSearch()
                 optimumCost=tcost;
 
             }
+            astar.pop();
                      continue;
         }
         if(closedList.find(state)!=closedList.end() and closedList[state] < current.totalCost)
