@@ -364,7 +364,7 @@ int startSearch()
             continue;
         }
         cout<<"current heuristic is "<<current.hCost<<" last path is "<<current.pathSoFar[current.pathSoFar.length()-1]<<"\n";
-   
+        cout<<"vertices.size is "<<vertices.size()<<"\n";
         for(it=vertices.begin();it!=vertices.end();it++)
         {
             int city3=*it;
