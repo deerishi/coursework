@@ -316,11 +316,7 @@ int buildMinimumSpanningTree(TSP problem) //change to only nodes in the graph
 }
 int optimumCost=INT_MAX;
 
-string createState(string pathSoFar)
-{
-    set<char> str;
-    
-}
+
 
 int startSearch()
 {
