@@ -414,9 +414,9 @@ string startSearch()
                 //cout<<"*it3 is "<<x<<" ";
                 nextUnvisitedCities.push_back(x);
             }
-            //for(it4=nextUnvisitedCities.begin();it4!=nextUnvisitedCities.end();it4++)
-            //cout<<*it4<<" ";
-            //cout<<"\n";
+            for(it4=nextUnvisitedCities.begin();it4!=nextUnvisitedCities.end();it4++)
+            cout<<*it4<<" ";
+            cout<<"\n";
             for(it4=vertices.begin();it4!=vertices.end();it4++)
             {
                 int city3=*it4;
