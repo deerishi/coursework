@@ -318,6 +318,7 @@ int optimumCost=INT_MAX;
 
 string createState(string pathSoFar)
 {
+    set<char> str;
     
 }
 
