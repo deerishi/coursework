@@ -341,7 +341,7 @@ int startSearch()
     while(!astar.empty() and astar.top().totalCost < optimumCost)
     {
         current=astar.top();
-        cout<<"current is "<<current.citynum<<"\n";
+        cout<<"current is "<<current.citiesNotVisited<<"\n";
         pathSoFar=current.pathSoFar;
         state=current.state;
         // the state is the entire path + in the closed list with a lesser cost then no need to expand this node at all
@@ -457,7 +457,7 @@ int main()
         cout<<*it<<" ";
     }
     int initialHeuristic=calculateHeuristic(v1,v2,0);
-    cout<<"initialHeuristic is "<<initialHeuristic<<"\n";
+    cout<<"initialHeuristic is "<<initialHeuristic<<" n nnumCities is "<<numCities<<"\n";
     
     
     City[nodeTrack++]=createNode(0,"A",numCities-1,'A',initialHeuristic,0,initialHeuristic,"A",v1);
