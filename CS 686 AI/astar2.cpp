@@ -393,7 +393,7 @@ int startSearch()
                 nextUnvisitedCities.push_back(x);
             }
             for(it4=nextUnvisitedCities.begin();it4!=nextUnvisitedCities.end();it4++)
-            cout<<*it4<<" ";
+            //cout<<*it4<<" ";
             cout<<"\n";
             for(it=vertices.begin();it!=vertices.end();it++)
             {
