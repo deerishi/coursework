@@ -507,7 +507,7 @@ int main()
     
     int lengthMst = buildMinimumSpanningTree2(v1,v2);
     cout<<"\n the length of the MST is "<<lengthMst<<"\n";
-    cout<<"\n the optimumCost is "<<optimumCost<<"\n";
+    cout<<"\n the optimumCost is "<<optimumCost<<" with path "<<res<<"\n";
     return 0;   
 }
      
