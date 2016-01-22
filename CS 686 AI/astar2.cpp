@@ -379,9 +379,9 @@ int startSearch()
     }
 }
 
-Node createNode(int citynum,string pathSoFar,int citiesNotVisited,char name,int hCost,,int actualCost,int totalCost,string state,vector<int> citiesLeft)
+Node createNode(int citynum,string pathSoFar,int citiesNotVisited,char name,int hCost,int totalCost,int totalCost,string state,vector<int> citiesLeft)
 {
-    Node temp( citynum, pathSoFar, citiesNotVisited, name, cost, citiesLeft);
+    Node temp( citynum, pathSoFar, citiesNotVisited, name, hcost,totalCost,totalCost,state, citiesLeft);
     return temp;
 }
 
