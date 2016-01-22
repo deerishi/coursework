@@ -347,6 +347,7 @@ int startSearch()
     while(!astar.empty() and astar.top().totalCost < optimumCost)
     {
         current=astar.top();
+         astar.pop();
         cout<<"current is "<<current.citynum<<"with cost "<<current.totalCost<<"\n";
         pathSoFar=current.pathSoFar;
         state=current.state;
@@ -371,12 +372,12 @@ int startSearch()
                 optimumCost=tcost;
 
             }
-            astar.pop();
+           
                      continue;
         }
         if(closedList.find(state)!=closedList.end() and closedList[state] < current.totalCost)
         {
-            astar.pop();
+            
             continue;
         }
        
