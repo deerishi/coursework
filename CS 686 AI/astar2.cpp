@@ -339,8 +339,7 @@ int startSearch()
             {
                 optimumCost=tcost;
             }
-            
-               
+     
         }
         if(closedList.find(state)!=closedList.end() and closedList[state].cost < current.cost)
         {
