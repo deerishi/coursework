@@ -220,7 +220,7 @@ int calculateHeuristic(vector<int> vertices,vector<char> nodesLeft,int currentCi
     if(size==0)
     {
         
-        return 
+        return distance(currentCityForExpansion,0);
     }
     
     int pcity[40],pdist[40],minDistance=INT_MAX;
