@@ -373,7 +373,7 @@ int startSearch()
             int next=*it;
             cout<<"next is "<<next<<"\n";
             nextUnvisitedCities.clear();
-            
+            namesOfCitiesYettoVisit.clear();
    
 
 
