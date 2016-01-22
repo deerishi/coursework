@@ -340,6 +340,7 @@ int startSearch()
         vector<int>::iterator it;
         for(it=vertices.begin();it!=vertices.end();it++)
         {
+            int next=*it;
             
         }
         astar.pop();
