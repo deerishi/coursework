@@ -388,7 +388,7 @@ string startSearch()
             continue;
         }
        
-        //cout<<"vertices.size is "<<vertices.size()<<"\n";
+        cout<<"vertices.size is "<<vertices.size()<<"\n";
         
         for(it=vertices.begin();it!=vertices.end();it++)
         {
