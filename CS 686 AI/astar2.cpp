@@ -323,7 +323,7 @@ int startSearch()
     Node current;
     int hn,tCost;
     char name;
-    
+    string pathSoFar,state;
     while(!astar.empty() and astar.top().cost < optimumCost)
     {
         current=astar.top();
@@ -367,6 +367,7 @@ int startSearch()
             {
                 name='A'+next;
             }
+            
             
         }
         astar.pop();
