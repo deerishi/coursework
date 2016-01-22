@@ -409,7 +409,7 @@ int startSearch()
                 }
             }
             hn=calculateHeuristic(nextUnvisitedCities,namesOfCitiesYettoVisit,next);//this will return the 
-            cout<<"hn for "<<next<<" is "<<hn<<"\n";
+            //cout<<"hn for "<<next<<" is "<<hn<<"\n";
             aCost=current.actualCost + distance(current.citynum,next);
             tCost=hn+ aCost;
             if( next>25)
