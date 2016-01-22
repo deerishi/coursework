@@ -353,8 +353,8 @@ string startSearch()
     {
         current=astar.top();
          astar.pop();
-        //cout<<"current is "<<current.citynum<<" with cost "<<current.totalCost<<"\n";
-        //cout<<"size of priority_queue is "<<astar.size()<<"\n";
+        cout<<"current is "<<current.citynum<<" with cost "<<current.totalCost<<"n path is "<<current.pathSoFar<<"\n";
+        cout<<"size of priority_queue is "<<astar.size()<<"\n";
         pathSoFar=current.pathSoFar;
         state=current.state;
         
@@ -388,7 +388,7 @@ string startSearch()
             continue;
         }
        
-        cout<<"vertices.size is "<<vertices.size()<<"\n";
+       // cout<<"vertices.size is "<<vertices.size()<<"\n";
         
         for(it=vertices.begin();it!=vertices.end();it++)
         {
@@ -434,7 +434,7 @@ string startSearch()
             //cout<<"hn for "<<next<<" is "<<hn<<"\n";
             aCost=current.actualCost + distance(current.citynum,next);
             tCost=hn+ aCost;
-            //cout<<"totalCost for next= "<<next<<" is "<<tCost<<"\n";
+            cout<<"totalCost for next= "<<next<<" is "<<tCost<<"\n";
             if( next>25)
             {
                 name='a'+ next-26;
