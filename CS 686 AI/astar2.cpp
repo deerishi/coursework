@@ -320,7 +320,7 @@ int startSearch()
         string pathSoFar=current.pathSoFar;
         string state=pathSoFar+pathSoFar[pathSoFar.length()-1];
         // the state is the entire path + in the closed list with a lesser cost then no need to expand this node at all
-        
+        if(closedList.find(state)!=closedList.end() and closedList[state].cost)
         cout<<"current heuristic is "<<current.cost<<" last path is "<<current.pathSoFar[current.pathSoFar.length()-1]<<"\n";
         astar.pop();
     }
