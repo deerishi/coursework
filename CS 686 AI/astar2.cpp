@@ -324,7 +324,7 @@ int startSearch()
     int hn,tCost;
     char name;
     string pathSoFar,state,npathSoFar,nstate;
-    while(!astar.empty() and astar.top().cost < optimumCost)
+    while(!astar.empty() and astar.top().totalCost < optimumCost)
     {
         current=astar.top();
         pathSoFar=current.pathSoFar;
