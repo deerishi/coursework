@@ -403,9 +403,9 @@ int startSearch()
             for(it4=nextUnvisitedCities.begin();it4!=nextUnvisitedCities.end();it4++)
             //cout<<*it4<<" ";
             cout<<"\n";
-            for(it=vertices.begin();it!=vertices.end();it++)
+            for(it4=vertices.begin();it4!=vertices.end();it4++)
             {
-                int city3=*it;
+                int city3=*it4;
                 if(city3==next) continue;
                 if( city3>25)
                 {
