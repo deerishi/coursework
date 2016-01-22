@@ -39,7 +39,8 @@ int main()
 	q1.push(ob3);
 	ai ob4;
 	ob4.a=10;
-
+    priority_queue<char> q2;
+    q2.push
 	
 	cout<<"the original array is \n";
 
