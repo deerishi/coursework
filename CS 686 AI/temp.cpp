@@ -49,10 +49,10 @@ int main()
 	ob3.b=15;
 	cout<<"the original array is \n";
 
-    while(!q2.empty())
+    while(!q1.empty())
     {
-        cout<<" "<<q2.top()<<"\n";
-        q2.pop();
+        cout<<q1.top().a<<" "<<q1.top().b<<"\n";
+        qq.pop();
     }
     
     sort(v1.begin(),v1.end());
