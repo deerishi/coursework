@@ -351,7 +351,10 @@ int startSearch()
         vector<int>::iterator it;
         vector<int> nextUnvisitedCities;
         vector<char> namesOfCitiesYettoVisit;
-        vectpr
+        vector<char>::iterator it2;
+        for(it=vertices.begin();it!=vertices.end();it++)
+        {
+            int city3=
         for(it=vertices.begin();it!=vertices.end();it++)
         {
             int next=*it;
