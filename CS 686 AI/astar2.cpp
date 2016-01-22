@@ -366,10 +366,11 @@ int startSearch()
             {
                 name='A'+next;
             }
-            pathSoFarn=pathSoFar+name;
-            string temps=pathSoFarn;
+            npathSoFar=pathSoFar+name;
+            string temps=npathSoFar;
             sort(temps.begin(),temps.end());
-            staten
+            nstate=temps+name;
+            
             
         }
         astar.pop();
