@@ -75,7 +75,7 @@ class TSP
      
      int CalculateDistance(int x1,int y1,int x2,int y2)
      {
-        return int(sqrt(pow(x1-x2,2)+pow(y1-y2,2)));
+        return int(sqrt(pow(x1-x2,2)+pow(y1-y2,2)) + 0.5 );
      }
      void createOriginalDistanceGraph()
      {
@@ -337,7 +337,7 @@ Node createNode(int citynum,string pathSoFar,int citiesNotVisited,char name,int 
 }
 
 
-int startSearch()
+string startSearch()
 {
     Node current;
     int hn,tCost,aCost;
