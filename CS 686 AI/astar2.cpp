@@ -400,7 +400,7 @@ int startSearch()
                     namesOfCitiesYettoVisit.push_back('A'+city3);
                 }
             }
-            hn=calculateHeuristic(nextUnvisitedCities,namesOfCitiesYettoVisit2,next);//this will return the 
+            hn=calculateHeuristic(nextUnvisitedCities,namesOfCitiesYettoVisit,next);//this will return the 
             cout<<"hn for "<<next<<" is "<<hn<<"\n";
             aCost=current.actualCost + distance(current.citynum,next);
             tCost=hn+ aCost;
