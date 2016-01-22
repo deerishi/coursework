@@ -320,6 +320,8 @@ int startSearch()
         string pathSoFar=current.pathSoFar;
         string state=pathSoFar+pathSoFar[pathSoFar.length()-1];
         // the state is the entire path + in the closed list with a lesser cost then no need to expand this node at all
+        // test for goal state
+        
         if(closedList.find(state)!=closedList.end() and closedList[state].cost < current.cost)
         {
             astar.pop();
