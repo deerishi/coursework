@@ -46,10 +46,10 @@ int main()
 	
 	cout<<"the original array is \n";
 
-    while(!q1.empty())
+    while(!q2.empty())
     {
-        cout<<q1.top().a<<" "<<q1.top().b<<"\n";
-        q1.pop();
+        cout<<" "<<q2.top()<<"\n";
+        q2.pop();
     }
     
     sort(v1.begin(),v1.end());
