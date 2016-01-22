@@ -217,7 +217,11 @@ int calculateHeuristic(vector<int> vertices,vector<char> nodesLeft,int currentCi
     
         return distance(currentCityForExpansion,*itt)+ distance(*itt,0);
     }
-    
+    if(size==0)
+    {
+        
+        return 
+    }
     
     int pcity[40],pdist[40],minDistance=INT_MAX;
     vector<int>::iterator it1;
