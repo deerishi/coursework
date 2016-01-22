@@ -351,6 +351,8 @@ int startSearch()
         for(it=vertices.begin();it!=vertices.end();it++)
         {
             int next=*it;
+            nextUnvisitedCities=vertices;
+            nextUnvisitedCities.erase(it);// remove the current city from the next city of expansion
             
             
         }
