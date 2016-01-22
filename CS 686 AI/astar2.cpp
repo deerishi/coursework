@@ -425,6 +425,7 @@ int startSearch()
             sort(temps.begin(),temps.end());
             nstate=temps+name;
             //City[nodeTrack++]=createNode(next,npathSoFar,current.citiesNotVisited-1,name,hn,aCost,tCost,nstate,nextUnvisitedCities);
+            cout<<"pushing next= "<<next<<" current.citiesNotVisited-1 ="<<current.citiesNotVisited-1<<"\n";
             astar.push(createNode(next,npathSoFar,current.citiesNotVisited-1,name,hn,aCost,tCost,nstate,nextUnvisitedCities));
             
             
