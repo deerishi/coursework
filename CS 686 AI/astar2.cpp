@@ -370,7 +370,7 @@ int startSearch()
             string temps=npathSoFar;
             sort(temps.begin(),temps.end());
             nstate=temps+name;
-            City[nodeTrack++]=
+            City[nodeTrack++]=createNode()
             
         }
         astar.pop();
