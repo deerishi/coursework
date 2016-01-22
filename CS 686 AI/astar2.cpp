@@ -232,6 +232,7 @@ int calculateHeuristic(vector<int> vertices,vector<char> nodesLeft,int currentCi
     int nearestUnvisitedCityDistance=INT_MAX,nearestToSource=INT_MAX,thisDistance1,thisDistance2;
     for(i=0;i<size;i++)
     {
+       "
         thisDistance1=distance(pcity[i],currentCityForExpansion);// this is the distancefrom the unvisited city to the currentCityForExpansion
         thisDistance2=distance(pcity[i],0); //this is the distance from the source
         if(thisDistance1<nearestUnvisitedCityDistance) nearestUnvisitedCityDistance=thisDistance1;
