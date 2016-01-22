@@ -332,7 +332,7 @@ int startSearch()
     while(!astar.empty() and astar.top().totalCost < optimumCost)
     {
         current=astar.top();
-        //cout<<"current is "<<current.pathSoFar<<"\n";
+        cout<<"current is "<<current.citynum<<"\n";
         pathSoFar=current.pathSoFar;
         state=current.state;
         // the state is the entire path + in the closed list with a lesser cost then no need to expand this node at all
