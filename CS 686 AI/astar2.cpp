@@ -374,8 +374,8 @@ int startSearch()
             astar.pop();
             continue;
         }
-        cout<<"current heuristic is "<<current.hCost<<" last path is "<<current.pathSoFar[current.pathSoFar.length()-1]<<"\n";
-        cout<<"vertices.size is "<<vertices.size()<<"\n";
+       
+        //cout<<"vertices.size is "<<vertices.size()<<"\n";
         
         for(it=vertices.begin();it!=vertices.end();it++)
         {
@@ -421,6 +421,7 @@ int startSearch()
             //cout<<"hn for "<<next<<" is "<<hn<<"\n";
             aCost=current.actualCost + distance(current.citynum,next);
             tCost=hn+ aCost;
+            cout<<"tota"
             if( next>25)
             {
                 name='a'+ next-26;
