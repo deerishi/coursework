@@ -444,6 +444,7 @@ string startSearch()
                 name='A'+next;
             }
             npathSoFar=pathSoFar+name;
+            
             string temps=npathSoFar;
             sort(temps.begin(),temps.end());
             nstate=temps+name;
