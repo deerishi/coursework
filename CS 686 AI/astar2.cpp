@@ -349,6 +349,7 @@ int startSearch()
         current=astar.top();
          astar.pop();
         cout<<"current is "<<current.citynum<<"with cost "<<current.totalCost<<"\n";
+        cout<<"size of priority_queue is "<<astar.size();
         pathSoFar=current.pathSoFar;
         state=current.state;
         
