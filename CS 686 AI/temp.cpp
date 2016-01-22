@@ -60,7 +60,9 @@ int main()
     //m1[v1]=10;
     
     //cout<<"v1==v2 "<<m1[v1]<<"\n";
-    
+    string str="CBAda";
+    sort(str.begin(),str.end());
+    cout<<"str now is "<<str<<"\n";
     
 	return 0;
 }   // vector<pair<int,int> >::iterator it;    
