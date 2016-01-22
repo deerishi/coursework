@@ -347,9 +347,11 @@ int startSearch()
         cout<<"current heuristic is "<<current.cost<<" last path is "<<current.pathSoFar[current.pathSoFar.length()-1]<<"\n";
         vector<int> vertices=current.citiesLeft;
         vector<int>::iterator it;
+        vector<int> nextUnvisitedCities;
         for(it=vertices.begin();it!=vertices.end();it++)
         {
             int next=*it;
+            
             
         }
         astar.pop();
