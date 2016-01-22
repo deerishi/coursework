@@ -380,7 +380,7 @@ string startSearch()
 
             }
            
-                     continue;
+            continue;
         }
         if(closedList.find(state)!=closedList.end() and closedList[state] < current.totalCost)
         {
