@@ -342,7 +342,7 @@ int startSearch()
     while(!astar.empty() and astar.top().totalCost < optimumCost)
     {
         current=astar.top();
-        cout<<"current is "<<current.citiesNotVisited<<"\n";
+        cout<<"current is "<<current<<"\n";
         pathSoFar=current.pathSoFar;
         state=current.state;
         vertices=current.citiesLeft;
