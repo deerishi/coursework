@@ -20,7 +20,7 @@ class Node
         int hCost;
         int actualCost;
         int totalCost;
-        string state;// the state contains the sorted version of pathsofar
+        string state;// the state contains the sorted version of pathsofar+ the last city visited
         vector<int> citiesLeft;
         
         bool operator <(Node  other) const
@@ -328,7 +328,12 @@ int startSearch()
         if(current.citiesNotVisited==0)
         {
             //i.e. all cities have been visited, just the tour back to the starting city is left.
-            int tcost=current.actualCost
+            int tcost=current.actualCost + distance(current.citynum,0);
+            if(tcost< optimumCost )
+            {
+                optimumCost=tcost;
+            }
+            
                
         }
         if(closedList.find(state)!=closedList.end() and closedList[state].cost < current.cost)
