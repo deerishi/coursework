@@ -348,7 +348,7 @@ int startSearch()
     vector<char> namesOfCitiesYettoVisit,namesOfCitiesYettoVisit2;
     vector<char>::iterator it2;
     string pathSoFar,state,npathSoFar,nstate;
-    
+    string res;
     while(!astar.empty() and astar.top().totalCost < optimumCost)
     {
         current=astar.top();
